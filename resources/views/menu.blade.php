@@ -25,7 +25,12 @@
   </ul>
   <ul class="navbar-nav">
         <li class="nav-item">
+        @if(Auth::check())
+            <a class="nav-link" href="#"><span class="glyphicon glyphicon-log-in"></span> Se deconnecter</a>
+        @endif
+        @if(!(Auth::check()))
             <a class="nav-link" href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+        @endif
         </li>
 </ul>
 </nav>
