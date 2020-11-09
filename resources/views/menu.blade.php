@@ -31,10 +31,11 @@
         @if(Auth::check())
 
           <!--Erreur-->
-          <form method="POST" action="/logout"
-            <a class="nav-link" href="/logout" onclick="event.preventDefault();this.closest('form').submit();">
-              Se deconnecter
-            </a></form>
+          
+          <form method="POST" action="logout">
+          @csrf
+            <a class="nav-link" href="logout" onclick="event.preventDefault();this.closest('form').submit();">Logout</a>
+          </form>
             
         @endif
         @if(!(Auth::check()))
