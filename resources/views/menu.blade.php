@@ -10,6 +10,9 @@
 </head>
 <body>
 
+<?php
+  $logged=true;?>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand -->
   <div class="navbar-brand">Hveorungr</div>
@@ -26,9 +29,16 @@
   <ul class="navbar-nav">
         <li class="nav-item">
         @if(Auth::check())
-            <a class="nav-link" href="#"><span class="glyphicon glyphicon-log-in"></span> Se deconnecter</a>
+
+          <!--Erreur-->
+          <form method="POST" action="/logout"
+            <a class="nav-link" href="/logout" onclick="event.preventDefault();this.closest('form').submit();">
+              Se deconnecter
+            </a></form>
+            
         @endif
         @if(!(Auth::check()))
+            <?php $logged=true?>
             <a class="nav-link" href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
         @endif
         </li>
