@@ -51,10 +51,7 @@ Route::get('professeur', function() {
 });
 
 //Gestionnaire
-Route::get('professeur/gestion', function() {
-    return view('professeur/gestion');
-});
-
+Route::get('/professeur/gererNotes/nouvelleNote', 'App\Http\Controllers\NotesController@create');
 
 //Listing
 Route::get('professeur/listing', function() {
@@ -62,16 +59,17 @@ Route::get('professeur/listing', function() {
 });
 
 
-/* ROUTES ETUDIANT */
+//**************** ETUDIANT ******************/
+//Route pour voir la liste notes
+//Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
+
 //Accueil de l'etudiant
 Route::get('etudiant', function() {
     return view('etudiant/accueiletudiant');
 });
 
 //Notes de l'etudiant
-Route::get('etudiant/notes', function() {
-    return view('etudiant/notes');
-});
+Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
 
 //Presentiel de l'etudiant
 Route::get('etudiant/presentiel', function() {

@@ -32,9 +32,9 @@
 
           <!--Erreur-->
 
-          <form method="POST" action="/logout">
+          <form method="POST" action="logout">
           @csrf
-            <a class="nav-link" href="/logout" onclick="event.preventDefault();this.closest('form').submit();">Logout</a>
+            <a class="nav-link" href="logout" onclick="event.preventDefault();this.closest('form').submit();">Logout</a>
           </form>
             
         @endif
