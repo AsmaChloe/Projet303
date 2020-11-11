@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateResponsableDeFormationsTable extends Migration
+class CreateECSTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateResponsableDeFormationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('responsable_de_formations', function (Blueprint $table) {
-            $table->id('RefResponsable');
-            $table->string('NomResponsable',50);
-            $table->string('PrenomResponsable',50);
-            $table->datetime('DateNaissanceResp');
+        Schema::create('e_c_s', function (Blueprint $table) {
+            $table->id('idEC');
+            $table->string('intituleEC');
+            $table->integer('nbPoints');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateResponsableDeFormationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('responsable_de_formations');
+        Schema::dropIfExists('e_c_s');
     }
 }

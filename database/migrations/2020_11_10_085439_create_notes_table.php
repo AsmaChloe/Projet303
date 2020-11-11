@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfesseursTable extends Migration
+class CreateNotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateProfesseursTable extends Migration
      */
     public function up()
     {
-        Schema::create('professeurs', function (Blueprint $table) {
-            $table->id('RefProfesseur');
-            $table->string('NomProfesseur',50);
-            $table->string('PrenomProfesseur',50);
-            $table->datetime('DateNaissanceProf');
+        Schema::create('notes', function (Blueprint $table) {
+            $table->id('idNote');
+            $table->integer('valeurNote');
+            $table->integer('maxNote');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateProfesseursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('professeurs');
+        Schema::dropIfExists('notes');
     }
 }

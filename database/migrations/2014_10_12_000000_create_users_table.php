@@ -16,6 +16,9 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->bit('enseignant')->default(0); //Pas de type booleen dans HeidiSQL
+            $table->bit('responsable')->default(0);
+            $table->bit('etudiant')->default(1);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
