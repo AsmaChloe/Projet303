@@ -18,6 +18,8 @@ class EC extends Model
         return $this->hasMany(Notes::class);
     }       
 
-
+    public function groupes(){ //Obtenir les groupes de l'ec
+        return $this->belongsToMany('App\Models\Groupes','groupes_ecs', 'idEC', 'idGroupe');
+    }
 
 }

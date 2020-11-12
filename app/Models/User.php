@@ -58,4 +58,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function groupesEtu(){ //Obtenir les groupes de l'étudiant
+        return $this->belongsToMany('App\Models\Groupes','groupes_etudiants', 'idUser', 'idGroupe');
+    }
+
+    public function groupesEns(){ //Obtenir les groupes de l'enseignant
+        return $this->belongsToMany('App\Models\Groupes','groupes_enseignants', 'idUser', 'idGroupe');
+    }
+
 }

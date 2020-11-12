@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use \App\Models\Notes;
+use \App\Models\EC;
+use \App\Models\User;
 
 class NotesTableSeeder extends Seeder
 {
@@ -16,14 +18,13 @@ class NotesTableSeeder extends Seeder
     public function run()
     {
         /**Remplissage pour le test : a changer :
-         * Faire en sorte que seulement les eleves ont des notes
          * Tous les eleves ont le meme nombre de notes dans les meme matieres
          */
 
-        DB::table('notes')->truncate();
+        Notes::truncate();
 
-        $idUser = DB::table('users')->pluck('id');
-        $idEC = DB::table('e_c_s')->pluck('idEC');
+        $idUser = User::where("etudiant",1)->get()->pluck('id');
+        $idEC = EC::pluck('idEC');
         $faker = \Faker\Factory::create();
         
         for($i=0;$i<10;$i++){
