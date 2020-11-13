@@ -18,9 +18,7 @@ class NotesController extends Controller
      */
     public function liste(Request $request)
     {
-        if(Auth::check() && ((Auth::user()->etudiant)==1 || (Auth::user()->responsable)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
-            //$notes = Notes::where('idUser',Auth::id())->orderBy('idEC', 'asc')->get();  //Les notes de l'utilisateur connecté
-            //$user = Auth::user(); 
+        if(Auth::check() && ((Auth::user()->role)==3 || (Auth::user()->role)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
             $ecs = EC::all(); 
             return view('etudiant/notes',['user' => Auth::user(), 'ecs' => $ecs]);
         }

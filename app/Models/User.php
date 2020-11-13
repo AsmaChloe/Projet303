@@ -27,6 +27,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'etudiant',
+        'enseignant',
+        'responsable',
     ];
 
     /**
@@ -59,17 +62,27 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function groupesEtu(){ //Obtenir les groupes de l'étudiant
-        return $this->belongsToMany('App\Models\Groupes','groupe_etudiants', 'idUser', 'idGroupe');
+
+    /**
+     * Cette fonction retourne les notes de l'étudiant actuel
+     * @return liste de note
+     */
+    public function notes(){
+        return $this->hasMany(Notes::class, 'idUser');
     }
 
-    public function groupesEns(){ //Obtenir les groupes de l'enseignant
-        return $this->belongsToMany('App\Models\Groupes','groupe_enseignants', 'idUser', 'idGroupe');
+    /**
+     * 
+     */
+    public function groupesEtu(){
+        return $this->belongsToMany(Groupes::class,'groupe_etudiants','idUser','idGroupe');
     }
 
-    public function notes() {
-        return $this->hasMany('App\Models\Notes', 'idUser');
+    /**
+     * 
+     */
+    public function groupesEns(){
+        return $this->belongsToMany(Groupes::class,'groupe_enseignants','idUser','idGroupe');
     }
-
 
 }

@@ -23,7 +23,7 @@ class NotesTableSeeder extends Seeder
 
         Notes::truncate();
 
-        $idUser = User::where("etudiant",1)->get()->pluck('id');
+        $idUser = User::where("role",3)->get()->pluck('id'); //Il n'existe pas encore de seeder d'utilisatuer : pour le test encore a la main
         $idEC = EC::pluck('idEC');
         $faker = \Faker\Factory::create();
         

@@ -21,31 +21,31 @@ class GroupeEtudiantTableSeeder extends Seeder
         //Groupe de CM = tout le monde
         Groupe_Etudiants::create([
             'idGroupe' => 1, //1 = S3F, groupe de CM
-            'idUser' => 3 //3 = eleveA
+            'idUser' => 2 //2= eleveA
         ]);
         Groupe_Etudiants::create([
             'idGroupe' => 1, //1 = S3F, groupe de CM
-            'idUser' => 4 //4 = eleveB
+            'idUser' => 3 //3=eveleB
         ]);
         Groupe_Etudiants::create([
             'idGroupe' => 1, //1 = S3F, groupe de CM
-            'idUser' => 5 //5 = eleveC
+            'idUser' => 4 //4=eleveC
         ]);
 
         //Groupe de TD
         Groupe_Etudiants::create([
             'idGroupe' => 2, //1 = S3F3, groupe de TD
-            'idUser' => 3 //3 = eleveA
+            'idUser' => 2 //2= eleveA
         ]);
         Groupe_Etudiants::create([
             'idGroupe' => 2, //1 = S3F3, groupe de TD
-            'idUser' => 4 //4 = eleveB
+            'idUser' => 3 //3=eveleB
         ]);
 
         //Groupe de TP
         Groupe_Etudiants::create([
             'idGroupe' => 3, //1 = S3F3A, groupe de TP
-            'idUser' => 3 //3 = eleveA
+            'idUser' => 2 //2= eleveA
         ]);
     }
 }

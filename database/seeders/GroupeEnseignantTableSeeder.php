@@ -20,15 +20,15 @@ class GroupeEnseignantTableSeeder extends Seeder
         //Test de remplissage
         Groupe_Enseignants::create([
             'idGroupe' => 1, //1 : S3F CM
-            'idUser' => 6 //6 : EnseignantD
+            'idUser' => 5 //5: EnseignantD
         ]);
         Groupe_Enseignants::create([
             'idGroupe' => 2, //2 : S3F3 TD
-            'idUser' => 6 //6 : EnseignantD
+            'idUser' => 5 //5: EnseignantD
         ]);
         Groupe_Enseignants::create([
             'idGroupe' => 3, //3 : S3F3A TP
-            'idUser' => 7 //7 : EnseignantE
+            'idUser' => 6 //6 : EnseignantE
         ]);
     }
 }
