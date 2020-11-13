@@ -27,4 +27,8 @@ class Groupes extends Model
         return $this->belongsToMany('App\Models\EC','groupe_ecs', 'idGroupe', 'idEC'); //Jointure sur les id
     }
 
+    public function seances() {
+        return $this->hasMany(Seance::class);
+    }
+
 }

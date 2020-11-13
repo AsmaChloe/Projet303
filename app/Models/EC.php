@@ -19,7 +19,15 @@ class EC extends Model
     }       
 
     public function groupes(){ //Obtenir les groupes de l'ec
-        return $this->belongsToMany('App\Models\Groupes','groupes_ecs', 'idEC', 'idGroupe');
+        return $this->belongsToMany('App\Models\Groupes','groupe_ecs', 'idEC', 'idGroupe');
+    }
+
+    public function presentiels() {
+        return $this->hasMany(Presentiel::class);
+    }
+
+    public function seances() {
+        return $this->hasMany(Seance::class);
     }
 
 }

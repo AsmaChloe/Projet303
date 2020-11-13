@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         //$this->call(GroupesTableSeeder::class);
         //$this->call(GroupeEtudiantTableSeeder::class);
         //$this->call(GroupeEnseignantTableSeeder::class);
-        $this->call(GroupeECTableSeeder::class);
+        //$this->call(GroupeECTableSeeder::class);
+        //$this->call(TypePresentielTableSeeder::class);
+        $this->call(SeanceTableSeeder::class);
     }
 }

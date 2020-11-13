@@ -85,4 +85,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Groupes::class,'groupe_enseignants','idUser','idGroupe');
     }
 
+    public function presentiels() {
+        return $this->hasMany(Presentiel::class);
+    }
+
+    public function seances() {
+        return $this->hasMany(Seance::class);
+    }
+
 }

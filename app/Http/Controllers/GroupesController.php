@@ -18,11 +18,9 @@ class GroupesController extends Controller
      */
     public function liste(Request $request)
     {
-        if(Auth::check() && ((Auth::user()->etudiant)==1 || (Auth::user()->responsable)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
-            //$groupes=User::find(Auth::id())->groupesEtu()->get(); //Groupes de l'étudiant actuel
-            //$ecs = EC::all(); //Les différents EC, ici elles sont encore toute informatique
-            $ecs = EC::all();
-            $groupes = Groupes::with(['etudiants','ecs'])->distinct()->get();
+        if(Auth::check() && ((Auth::user()->role)==3 || (Auth::user()->role)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
+            $groupes=User::find(Auth::id())->groupesEtu()->get(); //Groupes de l'étudiant actuel
+            $ecs=EC::all();
             return view('etudiant/groupe',['groupes' => $groupes, 'ecs'=>$ecs]);
         }
         else{
