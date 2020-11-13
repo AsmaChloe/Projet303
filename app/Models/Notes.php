@@ -20,7 +20,7 @@ class Notes extends Model
     }
 
     
-    public function ec()
+    public function ec() //obtenur ec du user en question ??
     {
         return $this->belongsTo(EC::class, 'idEC');
     }

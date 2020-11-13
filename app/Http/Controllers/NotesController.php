@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use \App\Models\User;
 use \App\Models\Notes;
 use \App\Models\EC;
 
@@ -17,16 +18,15 @@ class NotesController extends Controller
      */
     public function liste(Request $request)
     {
-        if(Auth::check() && ((Auth::user()->etudiant)==1 || (Auth::user()->responsable)==1) ){
-            $notes = Notes::where('idUser',Auth::id())->orderBy('idEC', 'asc')->get();  //Les notes de l'utilisateur connecté
-            $ecs = EC::all(); //Les différents EC, ici elles sont encore toute informatique
-            return view('etudiant/notes',['notes' => $notes, 'ecs' => $ecs, 'logged' => Auth::check()]);
+        if(Auth::check() && ((Auth::user()->etudiant)==1 || (Auth::user()->responsable)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
+            //$notes = Notes::where('idUser',Auth::id())->orderBy('idEC', 'asc')->get();  //Les notes de l'utilisateur connecté
+            //$user = Auth::user(); 
+            $ecs = EC::all(); 
+            return view('etudiant/notes',['user' => Auth::user(), 'ecs' => $ecs]);
         }
         else{
             return back();
-        }
-        
-        
+        } 
     }
 
     /**
@@ -36,6 +36,7 @@ class NotesController extends Controller
      */
     public function create(Request $request)
     {
+        //NON FONCTIONNEL YET
         $user = $request->user();
         if($user){
             return view('professeur/gererNotes/nouvelleNote');
@@ -53,22 +54,7 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        /*$actualite = new \App\Models\Actualite();
-        $actualite->titre = $request->titre;
-        $actualite->message = $request->message;
-        $actualite->date = $request->date;
-        $actualite->save();*/
-        // Crée l'actualité à partir du formulaire
-        $actualite = \App\Models\Actualite::make($request->all());
-        // Associe l'utilisateur à l'actualité
-        $actualite->user()->associate(\Auth::id());
-        // Crée l'actualité dans la base
-        $actualite->save();
-
-        //Pour les categories
-        $categorie = \App\Models\Categorie::find([$request->categories]);
-        $actualite->categories()->attach($categorie);
-        //Creation d'une note a partir du formulaire
+        //NON FONCTIONNEL YET
         $note=new Notes();
         $note->valeurNote = $request->valeurNote;
         $note->maxNote = $request->maxNote;

@@ -60,8 +60,6 @@ Route::get('professeur/listing', function() {
 
 
 //**************** ETUDIANT ******************/
-//Route pour voir la liste notes
-//Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
 
 //Accueil de l'etudiant
 Route::get('etudiant', function() {
@@ -82,9 +80,10 @@ Route::get('etudiant/absence', function() {
 });
 
 //Groupe de l'etudiant
-Route::get('etudiant/groupe', function() {
+/*Route::get('etudiant/groupe', function() {
     return view('etudiant/groupe');
-});
+});*/
+Route::get('/etudiant/groupe', 'App\Http\Controllers\GroupesController@liste');
 
 //Epreuves de l'etudiant
 Route::get('etudiant/epreuve', function() {

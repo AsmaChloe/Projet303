@@ -11,13 +11,14 @@
 					@foreach($ecs as $ec)
                         <h6 class="display-6">{{$ec->intituleEC}}</h6>
 						<p>
-    					@foreach($notes as $note) 
                             <ul>   
-                            @if($note->ec->intituleEC == $ec->intituleEC)
-					            <li class="list-item">note : {{$note->valeurNote}}/{{$note->maxNote}}</li>
-                            @endif
+								@foreach($user->notes as $note)
+									@if($note->idEC == $ec->idEC)
+					            		<li class="list-item">note : {{$note->valeurNote}}/{{$note->maxNote}}</li>
+									@endif
+								@endforeach
 						    </ul>
-    					@endforeach
+    					
     					</p>
 					@endforeach
                 </div>

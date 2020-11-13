@@ -60,11 +60,16 @@ class User extends Authenticatable
     ];
 
     public function groupesEtu(){ //Obtenir les groupes de l'étudiant
-        return $this->belongsToMany('App\Models\Groupes','groupes_etudiants', 'idUser', 'idGroupe');
+        return $this->belongsToMany('App\Models\Groupes','groupe_etudiants', 'idUser', 'idGroupe');
     }
 
     public function groupesEns(){ //Obtenir les groupes de l'enseignant
-        return $this->belongsToMany('App\Models\Groupes','groupes_enseignants', 'idUser', 'idGroupe');
+        return $this->belongsToMany('App\Models\Groupes','groupe_enseignants', 'idUser', 'idGroupe');
     }
+
+    public function notes() {
+        return $this->hasMany('App\Models\Notes', 'idUser');
+    }
+
 
 }
