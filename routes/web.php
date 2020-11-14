@@ -50,13 +50,13 @@ Route::get('professeur', function() {
     return view('professeur/accueilprofesseur');
 });
 
-//Gestionnaire
+/*Gestionnaire
 Route::get('/professeur/gererNotes/nouvelleNote', 'App\Http\Controllers\NotesController@create');
 
 //Listing
 Route::get('professeur/listing', function() {
     return view('professeur/listing');
-});
+});*/
 
 
 //**************** ETUDIANT ******************/
@@ -69,6 +69,13 @@ Route::get('etudiant', function() {
 //Notes de l'etudiant
 Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
 
+Route::get('/etudiant/groupe', 'App\Http\Controllers\GroupesController@liste');
+
+//Epreuves de l'etudiant
+Route::get('etudiant/epreuve', function() {
+    return view('etudiant/epreuve');
+});
+
 //Presentiel de l'etudiant
 Route::get('etudiant/presentiel', function() {
     return view('etudiant/presentiel');
@@ -79,15 +86,15 @@ Route::get('etudiant/absence', function() {
     return view('etudiant/absence');
 });
 
-//Groupe de l'etudiant
-/*Route::get('etudiant/groupe', function() {
-    return view('etudiant/groupe');
-});*/
-Route::get('/etudiant/groupe', 'App\Http\Controllers\GroupesController@liste');
 
-//Epreuves de l'etudiant
-Route::get('etudiant/epreuve', function() {
-    return view('etudiant/epreuve');
+
+
+
+
+/**********************AUTRE ************************/
+  
+Route::fallback(function () {
+    return view('erreur', ['logged' => Auth::check()]);
 });
 
 
