@@ -11,7 +11,7 @@
 					@foreach($ecs as $ec)
                         <h6 class="display-6">{{$ec->intituleEC}}</h6>
 						<p>
-                            <ul>s
+                            <ul>
 								@foreach($user->notes as $note)
 									
 									@if($note->idEC == $ec->idEC)

@@ -50,13 +50,14 @@ Route::get('professeur', function() {
     return view('professeur/accueilprofesseur');
 });
 
-/*Gestionnaire
-Route::get('/professeur/gererNotes/nouvelleNote', 'App\Http\Controllers\NotesController@create');
+//Ajouter une note
+Route::get('/professeur/gererNotes/nouvelleNote', [\App\Http\Controllers\NotesController::class,'create']);
+Route::get('/professeur/gererNotes/ajout-note', [\App\Http\Controllers\NotesController::class,'store'])->name('note.ajout');
 
 //Listing
 Route::get('professeur/listing', function() {
     return view('professeur/listing');
-});*/
+});
 
 
 //**************** ETUDIANT ******************/
@@ -86,6 +87,10 @@ Route::get('etudiant/absence', function() {
     return view('etudiant/absence');
 });
 
+Route::get('etudiant/accueiletudiant', function() {
+    return view('etudiant/accueiletudiant');
+});
+
 
 
 
@@ -101,4 +106,6 @@ Route::fallback(function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
 

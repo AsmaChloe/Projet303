@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use \App\Models\User;
+
 use \App\Models\Notes;
 use \App\Models\EC;
 
@@ -34,10 +34,11 @@ class NotesController extends Controller
      */
     public function create(Request $request)
     {
-        //NON FONCTIONNEL YET
-        $user = $request->user();
-        if($user){
-            return view('professeur/gererNotes/nouvelleNote');
+        
+        $notes=Notes::orderBy('idNote','asc')->get();
+        if($request->user()){
+            return view('professeur/gererNotes/nouvelleNote',compact('notes'));
+            
         }
         else{
             return back();
@@ -52,16 +53,14 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        //NON FONCTIONNEL YET
         $note=new Notes();
+        $note->idUser = $request->idUser;
+        $note->idEC = $request->idEC;
         $note->valeurNote = $request->valeurNote;
         $note->maxNote = $request->maxNote;
-        $note->idUser = (User::where('name',$request->idUser)->get())->name;
-        $note->idEC = (EC::where('intituleEC',$request->idUser)->get())->intituleEC;
-        //Creation de la note dans la base
         $note->save();
 
-        return liste($request);
+        return response()->json($note);
     }
 
     
