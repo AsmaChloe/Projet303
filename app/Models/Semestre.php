@@ -9,14 +9,14 @@ class Semestre extends Model
 {
     use HasFactory;
 
-    protected $table = 'semestre';
+    protected $table = 'semestres';
     protected $primaryKey = 'idSemestre';
 
     /**
      * Obtenir les parcours ayant ce semestre
      */
     public function parcours(){
-        return $this->belongsToMany(Semestre::class);
+        return $this->belongsToMany(Semestre::class,'ParcoursSemestre');
     }
     
     /**

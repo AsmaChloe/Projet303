@@ -15,5 +15,18 @@ class ParcoursSemestreTableSeeder extends Seeder
     public function run()
     {
         ParcoursSemestre::truncate();
+
+        //Test
+
+        //Licence info
+        for($i=1;$i<=6;$i++){
+            ParcoursSemestre::create(["idParcours"=>1,'idSemestre'=>$i]);
+        }
+
+        //Master maths
+        for($i=7;$i<=10;$i++){
+            ParcoursSemestre::create(["idParcours"=>2,'idSemestre'=>$i]);
+        }
+        
     }
 }

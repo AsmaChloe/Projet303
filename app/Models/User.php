@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    //Remarque : comment différentier ecs() et ip() ?
+    
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -79,14 +79,14 @@ class User extends Authenticatable
      * Obtenir la liste des EC enseignés par cet enseignant
      */
     public function ecs(){
-        return $this->belongsToMany(EC::class);
+        return $this->belongsToMany(EC::class,'Ec_Enseignant');
     }
 
     /**
      * Obtenir la liste des EC où on l'étudiant s'est inscrit
      */
     public function ip(){
-        return $this->belongsToMany(EC::class);
+        return $this->belongsToMany(EC::class,'IP');
     }
 
     /**
@@ -110,26 +110,35 @@ class User extends Authenticatable
         return $this->hasManyThrough(Seance::class,Groupe_Etudiant::class,'idEtudiant','idGroupe','id','idEtudiant');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
     }
 
+    /**
+     * Obtenir les groupes de l'étudiant
+     */
+    public function groupesEtu(){
+        return $this->belongsToMany(Groupe::class,'groupe_etudiants');
+    }
 
+    /**
+     * Obtenir les groupes de l'enseignant
+     */
+    public function groupesEns(){
+        return $this->belongsToMany(Groupe::class,'groupe_enseignants');
+    }
 
 
 
 
 
     
-    /**
-     * 
-     */
+    /*
+     
     public function groupesEtu(){
         return $this->belongsToMany(Groupes::class,'groupe_etudiants','idUser','idGroupe');
     }
 
-    /**
-     * 
-     */
+
     public function groupesEns(){
         return $this->belongsToMany(Groupes::class,'groupe_enseignants','idUser','idGroupe');
-    }
+    }*/
 
     public function presentiels() {
         return $this->hasMany(Presentiel::class);

@@ -14,17 +14,26 @@ class Groupes extends Model
     protected $primaryKey = 'idGroupe';
 
     protected $fillable = ['nomGroupe','typeGroupe'];
-
-    public function etudiants() { //Obtenir les etudiants du groupe
-        return $this->belongsToMany('App\Models\User','groupe_etudiants', 'idGroupe', 'idEtudiant'); //Jointure sur les id
+    
+    /**
+     * Liste des enseignants du groupe
+     */
+    public function enseignant(){
+        return $this->belongsToMany(User::class,'groupe_enseignants')->where('role',2)->get();
     }
 
-    public function enseignants() { //Obtenir l'enseignant du groupe
-        return $this->belongsToMany('App\Models\User','Groupe_Enseignants', 'idGroupe', 'idEnseignant'); //Jointure sur les id
+    /**
+     * Liste des ecs du groupe
+     */
+    public function ecs(){
+        return $this->belongsToMany(EC::class,'groupe_ecs');
     }
 
-    public function ecs() { //Obtenir l'ec du groupe
-        return $this->belongsToMany('App\Models\EC','groupe_ecs', 'idGroupe', 'idEC'); //Jointure sur les id
+    /**
+     * Liste des etudiants du groupe
+     */
+    public function etudiants(){
+        return $this->belongsToMany(User::class,'groupe_etudiants')->where('role',3)->get();
     }
 
     /**

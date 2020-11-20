@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 use \App\Models\User;
-use \App\Models\Formation;
 
 class UserTableSeeder extends Seeder
 {
@@ -18,11 +17,10 @@ class UserTableSeeder extends Seeder
     {
         User::truncate();
         $faker = \Faker\Factory::create();
-        $idFormation = Formation::get()->pluck('idFormation');
 
         //Responsables
-        User::create(['name' => "RespInfo", 'role'=>1, 'email'=>"respinfo@resp.fr", 'password'=> Hash::make(Hash::make("password")), 'idFormation'=>1]);
-        User::create(['name' => "RespMath", 'role'=>1, 'email'=>"respmath@resp.fr", 'password'=>Hash::make(Hash::make("password")), 'idFormation'=>2]);
+        User::create(['name' => "RespInfo", 'role'=>1, 'email'=>"respinfo@resp.fr", 'password'=> Hash::make(Hash::make("password"))]);
+        User::create(['name' => "RespMath", 'role'=>1, 'email'=>"respmath@resp.fr", 'password'=>Hash::make(Hash::make("password"))]);
 
         //Etudiant info
         for($i=1;$i<=5;$i++){
@@ -30,8 +28,7 @@ class UserTableSeeder extends Seeder
                 'name' => "EtuInfo".$i,
                 'role'=>3,
                 'email'=>"etuinfo".$i."@etudiant.fr",
-                'password'=>Hash::make("password"), 
-                'idFormation'=>1
+                'password'=>Hash::make("password") 
             ]);
         }
         
@@ -41,8 +38,7 @@ class UserTableSeeder extends Seeder
                 'name' => "EtuMath".$i,
                 'role'=>3,
                 'email'=>"etumath".$i."@etudiant.fr",
-                'password'=>Hash::make("password"), 
-                'idFormation'=>2
+                'password'=>Hash::make("password")
             ]);
         }
 
@@ -52,8 +48,7 @@ class UserTableSeeder extends Seeder
                 'name' => "Enseignant".$i,
                 'role'=>2,
                 'email'=>"enseignant".$i."@enseignant.fr",
-                'password'=>Hash::make("password"), 
-                'idFormation'=> $faker->randomElement($idFormation)
+                'password'=>Hash::make("password")
             ]);
         }
     }

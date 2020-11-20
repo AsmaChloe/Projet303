@@ -17,8 +17,6 @@ class CreateParcoursTable extends Migration
             $table->id('idParcours');
             $table->string('nomParcours');
             $table->string('sigleParcours');
-            $table->unsignedBigInteger('idResponsable');
-            $table->foreign('idResponsable')->references('id')->on('users');
             $table->unsignedBigInteger('idDiplome');
             $table->foreign('idDiplome')->references('idDiplome')->on('diplomes');
             $table->timestamps();

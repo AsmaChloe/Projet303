@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use \App\Models\Groupes;
-use \App\Models\User;
-use \App\Models\EC;
 use \App\Models\Seance;
 
 class SeanceTableSeeder extends Seeder
@@ -17,15 +15,20 @@ class SeanceTableSeeder extends Seeder
      */
     public function run()
     {
+        //Remarque : fin de seance apres le debut
+        //Test
         Seance::truncate();
         
-        $idGroupe = Groupes::pluck('idGroupe');
         $faker = \Faker\Factory::create();
+        $nbGroupe = Groupes::count();
 
-        Seance::create([
-            'debutSeance' => $faker->dateTimeBetween('now',"+6 months","UTC")->format('Y-m-d'),
-            'finSeance' => $faker->dateTimeBetween('now',"+6 months","UTC")->format('Y-m-d'),
-            'idGroupe' => $faker->randomElement($idGroupe)
+        for($i=1;$i<=$nbGroupe;$i++){
+            Seance::create([
+            'debutSeance' => $faker->dateTimeBetween('now',"+6 months","UTC")->format('Y-m-d H:i:s'),
+            'finSeance' => $faker->dateTimeBetween('now',"+6 months","UTC")->format('Y-m-d H:i:s'),
+            'idGroupe' => $i
         ]);
+        }
+        
     }
 }

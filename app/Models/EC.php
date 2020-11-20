@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EC extends Model
 {
-    //Remarque : Comment différentier enseignants() et etudiants() ??
+
     use HasFactory;
 
     protected $table = 'e_c_s';
@@ -26,14 +26,14 @@ class EC extends Model
      * Liste des enseignants qui enseignent cet EC
      */
     public function enseignants(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'Ec_Enseignant')->where('role',2)->get();
     }
 
     /**
      * Liste des etudiants inscrit à l'EC
      */
     public function etudiants(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'IP')->where('role',3)->get();
     }
 
     /**
@@ -48,5 +48,12 @@ class EC extends Model
      */
     public function seances(){
         return $this->hasManyThrough(Seance::class,Groupe_EC::class,'idEC','idGroupe','idEC','idEC');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+    }
+
+    /**
+     * Obtenir les groupes suivant l'ec
+     */
+    public function groupes(){
+        return $this->belongsToMany(Groupe::class,'groupe_ecs');
     }
 }

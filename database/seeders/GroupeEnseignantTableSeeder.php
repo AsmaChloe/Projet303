@@ -15,9 +15,15 @@ class GroupeEnseignantTableSeeder extends Seeder
      */
     public function run()
     {
+        //test
         Groupe_Enseignants::truncate();
 
-        //a voir
+        for($i=1;$i<=6;$i++){
+            Groupe_Enseignants::create([
+                'idEnseignant' =>$i,
+                'idGroupe'=>$i
+            ]);
+        }
 
     }
 }

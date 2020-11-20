@@ -19,6 +19,8 @@ class CreateEpreuvesTable extends Migration
             $table->integer('dureeEpreuve');
             $table->integer('numSession');
             $table->integer('pourcentage');
+            $table->unsignedBigInteger('idEC');
+            $table->foreign('idEC')->references('idEC')->on('e_c_s');
             $table->timestamps();
         });
     }

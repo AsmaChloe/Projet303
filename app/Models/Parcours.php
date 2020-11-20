@@ -32,7 +32,7 @@ class Parcours extends Model
      * Obtenir les semestres du parcours
      */
     public function semestres(){
-        return $this->belongsToMany(Semestre::class);
+        return $this->belongsToMany(Semestre::class,'ParcoursSemestre');
     }
 
 }

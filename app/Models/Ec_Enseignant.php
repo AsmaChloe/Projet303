@@ -9,7 +9,7 @@ class Ec_Enseignant extends Model
 {
     use HasFactory;
 
-    protected $table = 'ec_enseignants';
+    protected $table = 'ec__enseignants';
     protected $primaryKey = 'idECEnseignant';
 
     protected $fillable = ['idEC','idEnseignant'];

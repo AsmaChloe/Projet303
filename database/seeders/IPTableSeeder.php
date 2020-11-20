@@ -16,6 +16,21 @@ class IPTableSeeder extends Seeder
     {
         IP::truncate();
 
-        //IP::create(['idEC'=>,'idEtudiant'=>]);
+        //Etudiants infos
+        for($i=3;$i<=5;$i++){
+            //Matiere d'info
+            for($j=1;$j<=6;$j++){
+                IP::create(['idEC'=>$j,'idEtudiant'=>$i]);
+            }
+        }
+        
+        //Etudiants maths
+        for($i=8;$i<=12;$i++){
+            //Matiere de maths
+            for($j=7;$j<=11;$j++){
+                IP::create(['idEC'=>$j,'idEtudiant'=>$i]);
+            }
+        }
+
     }
 }

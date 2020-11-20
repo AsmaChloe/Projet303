@@ -17,46 +17,35 @@ class NotesTableSeeder extends Seeder
      */
     public function run()
     {
-        /**Remplissage pour le test : a changer :
-         * Tous les eleves ont le meme nombre de notes dans les meme matieres
-         */
+        
 
         Notes::truncate();
-        
-        /*
-        $ECInfo=EC::where("idFormation",1)->get();
-        $nbECInfo=EC::where("idFormation",1)->count();
 
-        $etuInfo=User::where("idFormation",1)->get();
-        $nbEtuInfo=User::where("idFormation",1)->count();
+        //Pour le test : 1 note dans chaque matiere
 
-        for($j=0;$j<$nbEtuInfo;$j++){
-            for($i=0;$i<$nbECInfo;$i++){
+        //Info
+        for($i=3;$i<=7;$i++){
+            for($j=1;$j<=6;$j++){
                 Notes::create([
                     'valeurNote' => random_int(0,20),
                     'maxNote' => 20,
-                    'idUser' => $etuInfo[$j]->id,
-                    'idEC' => $ECInfo[$i]->idEC
+                    'idEtudiant' => $i,
+                    'idEpreuve' => $j
                 ]);
             }
         }
 
-        $ECMath=EC::where("idFormation",2)->get();
-        $nbECMath=EC::where("idFormation",2)->count();
-
-        $etuMath=User::where("idFormation",2)->get();
-        $nbEtuMath=User::where("idFormation",2)->count();
-
-        for($j=0;$j<$nbEtuMath;$j++){
-            for($i=0;$i<$nbECMath;$i++){
+        //Maths
+        for($i=8;$i<=12;$i++){
+            for($j=7;$j<=11;$j++){
                 Notes::create([
                     'valeurNote' => random_int(0,20),
                     'maxNote' => 20,
-                    'idUser' => $etuMath[$j]->id,
-                    'idEC' => $ECMath[$i]->idEC
+                    'idEtudiant' => $i,
+                    'idEpreuve' => $j
                 ]);
             }
-        }*/
+        }
 
     }
 }
