@@ -16,14 +16,21 @@ class DatabaseSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
+        //$this->call(TypePresentielTableSeeder::class);
+        //$this->call(UserTableSeeder::class);
+        //$this->call(DiplomeTableSeeder::class);
+        //$this->call(ParcoursTableSeeder::class);
+        //$this->call(SemestreTableSeeder::class);
         //$this->call(ECTableSeeder::class);
+        //$this->call(IPTableSeeder::class);
+        //$this->call(EpreuveTableSeeder::class);
         //$this->call(NotesTableSeeder::class);
         //$this->call(GroupesTableSeeder::class);
         //$this->call(GroupeEtudiantTableSeeder::class);
         //$this->call(GroupeEnseignantTableSeeder::class);
         //$this->call(GroupeECTableSeeder::class);
-        //$this->call(TypePresentielTableSeeder::class);
-        $this->call(SeanceTableSeeder::class);
+        //$this->call(SeanceTableSeeder::class);
+        //$this->call(DiplomeResponsableTableSeeder::class);
 
         Schema::enableForeignKeyConstraints();
     }

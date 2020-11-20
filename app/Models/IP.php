@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Groupe_Enseignants extends Pivot
+class IP extends Pivot
 {
     use HasFactory;
+    protected $table = 'i_p_s';
+    protected $primaryKey = 'idIP';
 
-    protected $table = 'groupe_enseignants';
-    protected $primaryKey = 'idGroupeEns';
-
-    protected $fillable = ['idEnseignant','idGroupe'];
+    protected $fillable = ['idEC','idEtudiant'];
 }

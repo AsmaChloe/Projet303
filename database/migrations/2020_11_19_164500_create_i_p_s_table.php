@@ -4,32 +4,32 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupeEtudiantsTable extends Migration
+class CreateIPSTable extends Migration
 {
     /**
-     * Creation de la table groupe_etudiants
+     * Creation de la table i_p_s
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('groupe_etudiants', function (Blueprint $table) {
-            $table->id('idGroupeEtu');
+        Schema::create('i_p_s', function (Blueprint $table) {
+            $table->id('idIP');
+            $table->unsignedBigInteger('idEC');
+            $table->foreign('idEC')->references('idEC')->on('e_c_s');
             $table->unsignedBigInteger('idEtudiant');
             $table->foreign('idEtudiant')->references('id')->on('users');
-            $table->unsignedBigInteger('idGroupe');
-            $table->foreign('idGroupe')->references('idGroupe')->on('groupes');
             $table->timestamps();
         });
     }
 
     /**
-     * Rollback
+     * Inverser la migration
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('groupe_etudiants');
+        Schema::dropIfExists('i_p_s');
     }
 }

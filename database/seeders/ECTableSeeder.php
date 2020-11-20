@@ -2,27 +2,35 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use \App\Models\EC;
 
 class ECTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Peuplement de la table e_c_s
      *
      * @return void
      */
     public function run()
     {
-        //Pour le test//
-        //DB::table('e_c_s')->truncate(); error cannot truncate une table qui a une de ses clé dans une autre table (notes)
+        
+        EC::truncate();
 
-        EC::create(['intituleEC' => 'INFO0301', 'Nbpoints'=>100]);
-        EC::create(['intituleEC' => 'INFO0302', 'Nbpoints'=>17]);
-        EC::create(['intituleEC' => 'INFO0303', 'Nbpoints'=>83]);
-        EC::create(['intituleEC' => 'INFO0304', 'Nbpoints'=>100]);
-        EC::create(['intituleEC' => 'INFO0305', 'Nbpoints'=>100]);
-        EC::create(['intituleEC' => 'INFO0306', 'Nbpoints'=>50]);
+        //EC Informatique
+        EC::create(['nomEC' => "Langage C et outils de développement associés",'sigleEC' => 'INFO0301', 'idSemestre' =>3, 'Nbpoints'=>100]);
+        EC::create(['nomEC' => "Stage UNIX : scripting",'sigleEC' => 'INFO0302', 'idSemestre' =>3, 'Nbpoints'=>17]);
+        EC::create(['nomEC' => "Technologies Web 2",'sigleEC' => 'INFO0303', 'idSemestre' =>3, 'Nbpoints'=>83]);
+        EC::create(['nomEC' => "Bases de données",'sigleEC' => 'INFO0304', 'idSemestre' =>3, 'Nbpoints'=>100]);
+        EC::create(['nomEC' => "Réseaux informatiques avancés ",'sigleEC' => 'INFO0305', 'idSemestre' =>3, 'Nbpoints'=>100]);
+        EC::create(['nomEC' => "Programmation mobile",'sigleEC' => 'INFO0306', 'idSemestre' =>3, 'Nbpoints'=>50]);
+
+        //EC Mathématiques
+
+        EC::create(['nomEC' => 'Probabilités 1','sigleEC'=> "MA0711" ,'idSemestre' =>7,'Nbpoints'=>60]);
+        EC::create(['nomEC' => 'Analyse fonctionnelle','sigleEC'=> 'MA0721' , 'idSemestre' =>7, 'Nbpoints'=>30]);
+        EC::create(['nomEC' => 'Modélisation','sigleEC'=>'MA0723' , 'idSemestre' =>7, 'Nbpoints'=>30]);
+        EC::create(['nomEC' => 'Analyse de Fourier','sigleEC'=>'MA0731' , 'idSemestre' =>7, 'Nbpoints'=>30]);
+        EC::create(['nomEC' => 'Mécanique des Milieux Continus 3','sigleEC'=> 'MA0742', 'idSemestre' =>7, 'Nbpoints'=>60]);
     }
 }

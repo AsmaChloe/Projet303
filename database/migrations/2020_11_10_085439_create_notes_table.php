@@ -17,6 +17,10 @@ class CreateNotesTable extends Migration
             $table->id('idNote');
             $table->integer('valeurNote');
             $table->integer('maxNote');
+            $table->unsignedBigInteger('idEtudiant');
+            $table->foreign('idEtudiant')->references('id')->on('users');
+            $table->unsignedBigInteger('idEpreuve');
+            $table->foreign('idEpreuve')->references('idEpreuve')->on('epreuves');
             $table->timestamps();
         });
     }

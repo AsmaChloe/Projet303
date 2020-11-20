@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateGroupeEnseignantsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Creation de la table groupe_enseignants
      *
      * @return void
      */
@@ -15,8 +15,8 @@ class CreateGroupeEnseignantsTable extends Migration
     {
         Schema::create('groupe_enseignants', function (Blueprint $table) {
             $table->id('idGroupeEns');
-            $table->unsignedBigInteger('idUser');
-            $table->foreign('idUser')->references('id')->on('users');
+            $table->unsignedBigInteger('idEnseignant');
+            $table->foreign('idEnseignant')->references('id')->on('users');
             $table->unsignedBigInteger('idGroupe');
             $table->foreign('idGroupe')->references('idGroupe')->on('groupes');
             $table->timestamps();
@@ -24,14 +24,12 @@ class CreateGroupeEnseignantsTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Rollback
      *
      * @return void
      */
     public function down()
     {
         Schema::dropIfExists('groupe_enseignants');
-        $table->dropForeign('idUser');
-        $table->dropForeign('idGroupe');
     }
 }

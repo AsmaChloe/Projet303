@@ -4,30 +4,28 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupesTable extends Migration
+class CreateSemestresTable extends Migration
 {
     /**
-     * Creation de la table groupes
+     * création de la table semestres
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('groupes', function (Blueprint $table) {
-            $table->id('idGroupe');
-            $table->string('nomGroupe');
-            $table->string('typeGroupe');
+        Schema::create('semestres', function (Blueprint $table) {
+            $table->id('idSemestre');
             $table->timestamps();
         });
     }
 
     /**
-     * Rollback de migration
+     * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('groupes');
+        Schema::dropIfExists('semestres');
     }
 }

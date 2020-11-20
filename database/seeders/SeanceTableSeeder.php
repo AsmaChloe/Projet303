@@ -11,24 +11,21 @@ use \App\Models\Seance;
 class SeanceTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Peuplement de la table seances
      *
      * @return void
      */
     public function run()
     {
-
-        //HEURE PAS BONNE, FAIRE HEURE DE FIN DE SEANCE APRES DEBUT SEANCE
-        $idUser = User::where("role",2)->get()->pluck('id');
-        $idEC = EC::pluck('idEC');
+        Seance::truncate();
+        
         $idGroupe = Groupes::pluck('idGroupe');
         $faker = \Faker\Factory::create();
+
         Seance::create([
             'debutSeance' => $faker->dateTimeBetween('now',"+6 months","UTC")->format('Y-m-d'),
             'finSeance' => $faker->dateTimeBetween('now',"+6 months","UTC")->format('Y-m-d'),
-            'idUser' => $faker->randomElement($idUser),
-            'idGroupe' => $faker->randomElement($idGroupe),
-            'idEC' => $faker->randomElement($idEC)
+            'idGroupe' => $faker->randomElement($idGroupe)
         ]);
     }
 }

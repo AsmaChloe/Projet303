@@ -22,18 +22,41 @@ class NotesTableSeeder extends Seeder
          */
 
         Notes::truncate();
-
-        $idUser = User::where("role",3)->get()->pluck('id'); //Il n'existe pas encore de seeder d'utilisatuer : pour le test encore a la main
-        $idEC = EC::pluck('idEC');
-        $faker = \Faker\Factory::create();
         
-        for($i=0;$i<10;$i++){
-            Notes::create([
-                'valeurNote' => random_int(0,20),
-                'maxNote' => 20,
-                'idUser' => $faker->randomElement($idUser),
-                'idEC' => $faker->randomElement($idEC)
-            ]);
+        /*
+        $ECInfo=EC::where("idFormation",1)->get();
+        $nbECInfo=EC::where("idFormation",1)->count();
+
+        $etuInfo=User::where("idFormation",1)->get();
+        $nbEtuInfo=User::where("idFormation",1)->count();
+
+        for($j=0;$j<$nbEtuInfo;$j++){
+            for($i=0;$i<$nbECInfo;$i++){
+                Notes::create([
+                    'valeurNote' => random_int(0,20),
+                    'maxNote' => 20,
+                    'idUser' => $etuInfo[$j]->id,
+                    'idEC' => $ECInfo[$i]->idEC
+                ]);
+            }
         }
+
+        $ECMath=EC::where("idFormation",2)->get();
+        $nbECMath=EC::where("idFormation",2)->count();
+
+        $etuMath=User::where("idFormation",2)->get();
+        $nbEtuMath=User::where("idFormation",2)->count();
+
+        for($j=0;$j<$nbEtuMath;$j++){
+            for($i=0;$i<$nbECMath;$i++){
+                Notes::create([
+                    'valeurNote' => random_int(0,20),
+                    'maxNote' => 20,
+                    'idUser' => $etuMath[$j]->id,
+                    'idEC' => $ECMath[$i]->idEC
+                ]);
+            }
+        }*/
+
     }
 }

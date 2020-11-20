@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeancesTable extends Migration
+class CreateEpreuvesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateSeancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('seances', function (Blueprint $table) {
-            $table->id('idSeance');
-            $table->datetime('debutSeance');
-            $table->datetime('finSeance');
-            $table->unsignedBigInteger('idGroupe');
-            $table->foreign('idGroupe')->references('idGroupe')->on('groupes');
+        Schema::create('epreuves', function (Blueprint $table) {
+            $table->id('idEpreuve');
+            $table->datetime('dateEpreuve');
+            $table->integer('dureeEpreuve');
+            $table->integer('numSession');
+            $table->integer('pourcentage');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateSeancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seances');
+        Schema::dropIfExists('epreuves');
     }
 }

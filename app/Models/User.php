@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    //Remarque : comment différentier ecs() et ip() ?
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -27,9 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'etudiant',
-        'enseignant',
-        'responsable',
+        'role'
     ];
 
     /**
@@ -62,15 +61,62 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-
     /**
-     * Cette fonction retourne les notes de l'étudiant actuel
-     * @return liste de note
+     * Obtenir le(s) diplome(s) que dirige le responsable 
      */
-    public function notes(){
-        return $this->hasMany(Notes::class, 'idUser');
+    public function diplomes(){
+        return $this->belongsToMany(Diplomes::class);
     }
 
+    /**
+     * Obtenir le(s) parcour(s) que dirige le responsable user->parcours()
+     */
+    public function parcours(){
+        return $this->hasManyThrough(Parcours::class,diplome_responsable::class,'idResponsable','idDiplome','id','idResponsable');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+    }
+
+    /**
+     * Obtenir la liste des EC enseignés par cet enseignant
+     */
+    public function ecs(){
+        return $this->belongsToMany(EC::class);
+    }
+
+    /**
+     * Obtenir la liste des EC où on l'étudiant s'est inscrit
+     */
+    public function ip(){
+        return $this->belongsToMany(EC::class);
+    }
+
+    /**
+     * Obtenir le(s) epreuves(s) de l'étudiant user->epreuves()
+     */
+    public function epreuves(){
+        return $this->hasManyThrough(Epreuve::class,ip::class,'idEtudiant','idEC','id','idEtudiant');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+    }
+
+    /**
+     * Obtenir le(s) seance(s) de l'enseignant user->seancesEns()
+     */
+    public function seancesEns(){
+        return $this->hasManyThrough(Seance::class,Groupe_Enseignants::class,'idEnseignant','idGroupe','id','idEnseignant');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+    }
+
+    /**
+     * Obtenir le(s) seance(s) de l'etudiant user->seancesEtu()
+     */
+    public function seancesEtu(){
+        return $this->hasManyThrough(Seance::class,Groupe_Etudiant::class,'idEtudiant','idGroupe','id','idEtudiant');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+    }
+
+
+
+
+
+
+
+    
     /**
      * 
      */
@@ -92,5 +138,7 @@ class User extends Authenticatable
     public function seances() {
         return $this->hasMany(Seance::class);
     }
+
+    
 
 }

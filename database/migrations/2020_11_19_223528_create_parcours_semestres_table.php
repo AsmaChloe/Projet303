@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateECSTable extends Migration
+class CreateParcoursSemestresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateECSTable extends Migration
      */
     public function up()
     {
-        Schema::create('e_c_s', function (Blueprint $table) {
-            $table->id('idEC');
-            $table->string('nomEC');
-            $table->string('sigleEC');
+        Schema::create('parcours_semestres', function (Blueprint $table) {
+            $table->id('idParcoursSemestre');
+            $table->unsignedBigInteger('idParcours');
+            $table->foreign('idParcours')->references('idParcours')->on('parcours');
             $table->unsignedBigInteger('idSemestre');
             $table->foreign('idSemestre')->references('idSemestre')->on('semestres');
-            $table->integer('nbPoints');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateECSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('e_c_s');
+        Schema::dropIfExists('parcours_semestres');
     }
 }

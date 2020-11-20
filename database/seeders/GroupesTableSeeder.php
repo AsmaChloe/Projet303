@@ -8,7 +8,7 @@ use \App\Models\Groupes;
 class GroupesTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Peuplement de la table groupes
      *
      * @return void
      */
@@ -16,6 +16,7 @@ class GroupesTableSeeder extends Seeder
     {
         Groupes::truncate();
 
+        //Informatique
         Groupes::create([
             'nomGroupe' => "S3F",
             'typeGroupe' => "CM"
@@ -27,7 +28,53 @@ class GroupesTableSeeder extends Seeder
         ]);
 
         Groupes::create([
+            'nomGroupe' => "S3F4",
+            'typeGroupe' => "TD"
+        ]);
+
+        Groupes::create([
             'nomGroupe' => "S3F3A",
+            'typeGroupe' => "TP"
+        ]);
+
+        Groupes::create([
+            'nomGroupe' => "S3F3B",
+            'typeGroupe' => "TP"
+        ]);
+
+        Groupes::create([
+            'nomGroupe' => "S3F4A",
+            'typeGroupe' => "TP"
+        ]);
+
+        //Mathematiques
+        Groupes::create([
+            'nomGroupe' => "B1F",
+            'typeGroupe' => "CM"
+        ]);
+
+        Groupes::create([
+            'nomGroupe' => "B1F1",
+            'typeGroupe' => "TD"
+        ]);
+
+        Groupes::create([
+            'nomGroupe' => "B1F2",
+            'typeGroupe' => "TD"
+        ]);
+
+        Groupes::create([
+            'nomGroupe' => "B1F1A",
+            'typeGroupe' => "TP"
+        ]);
+
+        Groupes::create([
+            'nomGroupe' => "B1F1B",
+            'typeGroupe' => "TP"
+        ]);
+
+        Groupes::create([
+            'nomGroupe' => "B1F2A",
             'typeGroupe' => "TP"
         ]);
     }

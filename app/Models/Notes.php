@@ -12,16 +12,21 @@ class Notes extends Model
     protected $table = 'notes';
     protected $primaryKey = 'idNote';
 
-    protected $fillable = ['valeurNote','maxNote','idUser','idEC'];
+    protected $fillable = ['valeurNote','maxNote','idEtudiant','idEpreuve'];
 
-    public function user()
+    /**
+     * Obtenir l'etudiant ayant la note
+     */
+    public function etudiant()
     {
-        return $this->belongsTo(User::class, 'idUser');
+        return $this->belongsTo(User::class);
     }
 
-    
-    public function ec() //obtenur ec du user en question ??
+    /**
+     * Obtenir l'épreuve correspondante
+     */
+    public function epreuve() 
     {
-        return $this->belongsTo(EC::class, 'idEC');
+        return $this->belongsTo(Epreuve::class);
     }
 }

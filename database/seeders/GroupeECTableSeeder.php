@@ -9,7 +9,7 @@ use \App\Models\Groupe_EC;
 class GroupeECTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Peuplement de la table groupe_ecs
      *
      * @return void
      */
@@ -17,7 +17,7 @@ class GroupeECTableSeeder extends Seeder
     {
         Groupe_EC::truncate();
 
-        //Test de remplissage
+        //Info
 
         //Les CM
         Groupe_EC::create([

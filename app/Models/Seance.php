@@ -16,17 +16,34 @@ class Seance extends Model
     protected $table = 'seances';
     protected $primaryKey = 'idSeance';
 
-    protected $fillable = ['debutSeance','finSeance','idUser','idGroupe','idEC'];
+    protected $fillable = ['debutSeance','finSeance','idGroupe'];
 
-    public function enseignant(){
-        return $this->belongsTo(User::class,'idUser');
-    }
-
+    /**
+     * Obtenir le groupe qui a assité à la séance
+     */
     public function groupe(){
-        return $this->belongsTo(Groupes::class,'idGroupe');
+        return $this->belongsTo(Groupe::class);
     }
 
-    public function EC(){
-        return $this->belongsTo(EC::class,'idEC');
+    /**
+     * Obtenir l'enseignant de la séance : 
+     */
+    public function enseignant(){
+        return $this->groupe->enseignants;
     }
+
+    /**
+     * Obtenir les etudiants de la séance : 
+     */
+    public function etudiants(){
+        return $this->groupe->etudiants;
+    }
+
+    /**
+     * Obtenir l'EC de la séance
+     */
+    public function ec(){
+        return $this->groupe->ecs;
+    }
+
 }

@@ -7,27 +7,46 @@ use Illuminate\Database\Eloquent\Model;
 
 class EC extends Model
 {
+    //Remarque : Comment différentier enseignants() et etudiants() ??
     use HasFactory;
 
     protected $table = 'e_c_s';
     protected $primaryKey = 'idEc';
 
-    protected $fillable = ['intituleEC','Nbpoints'];
+    protected $fillable = ['nomEC','sigleEC','Nbpoints','idSemestre'];
 
-    public function notes() {
-        return $this->hasMany(Notes::class);
-    }       
-
-    public function groupes(){ //Obtenir les groupes de l'ec
-        return $this->belongsToMany('App\Models\Groupes','groupe_ecs', 'idEC', 'idGroupe');
+    /**
+     * Obtenir le semestre qui a l'ec
+     */
+    public function semestre(){
+        return $this->belongsTo(Semestre::class);
     }
 
-    public function presentiels() {
-        return $this->hasMany(Presentiel::class);
+    /**
+     * Liste des enseignants qui enseignent cet EC
+     */
+    public function enseignants(){
+        return $this->belongsToMany(User::class);
     }
 
-    public function seances() {
-        return $this->hasMany(Seance::class);
+    /**
+     * Liste des etudiants inscrit à l'EC
+     */
+    public function etudiants(){
+        return $this->belongsToMany(User::class);
     }
 
+    /**
+     * Obtenir les épreuves de l'EC
+     */
+    public function epreuves(){
+        return $this->hasMany();
+    }
+
+    /**
+     * Obtenir le(s) seance(s) de l'ec user->seances()
+     */
+    public function seances(){
+        return $this->hasManyThrough(Seance::class,Groupe_EC::class,'idEC','idGroupe','idEC','idEC');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+    }
 }

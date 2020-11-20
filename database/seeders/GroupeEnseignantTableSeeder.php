@@ -9,26 +9,15 @@ use \App\Models\Groupe_Enseignants;
 class GroupeEnseignantTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * peuplement de la base de donnée groupe_enseignants
      *
      * @return void
      */
     public function run()
     {
         Groupe_Enseignants::truncate();
-        
-        //Test de remplissage
-        Groupe_Enseignants::create([
-            'idGroupe' => 1, //1 : S3F CM
-            'idUser' => 5 //5: EnseignantD
-        ]);
-        Groupe_Enseignants::create([
-            'idGroupe' => 2, //2 : S3F3 TD
-            'idUser' => 5 //5: EnseignantD
-        ]);
-        Groupe_Enseignants::create([
-            'idGroupe' => 3, //3 : S3F3A TP
-            'idUser' => 6 //6 : EnseignantE
-        ]);
+
+        //a voir
+
     }
 }
