@@ -76,15 +76,15 @@ Route::get('/etudiant/groupes', 'App\Http\Controllers\GroupesController@liste');
 //Epreuves de l'etudiant
 Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@liste');
 
+//Les IP de l'étudiant
+Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste');
+
 //Presentiel de l'etudiant
 Route::get('etudiant/presentiel', function() {
     return view('etudiant/presentiel');
 });
 
-//Justificatif si absence de l'etudiant
-Route::get('etudiant/absence', function() {
-    return view('etudiant/absence');
-});
+
 
 Route::get('etudiant/accueiletudiant', function() {
     return view('etudiant/accueiletudiant');

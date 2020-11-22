@@ -38,6 +38,7 @@
               <a class="dropdown-item" href="/Projet303/public/etudiant/presentiel">Présentiel</a>
               <a class="dropdown-item" href="/Projet303/public/etudiant/groupes">Groupes</a>
               <a class="dropdown-item" href="/Projet303/public/etudiant/epreuves">Epreuves</a>
+              <a class="dropdown-item" href="/Projet303/public/etudiant/ip">IP</a>
             </div>
           </li>
           @endif
