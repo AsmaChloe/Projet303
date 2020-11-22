@@ -22,14 +22,14 @@ class Seance extends Model
      * Obtenir le groupe qui a assité à la séance
      */
     public function groupe(){
-        return $this->belongsTo(Groupe::class);
+        return $this->belongsTo(Groupes::class,'idSeance');
     }
 
     /**
      * Obtenir l'enseignant de la séance : 
      */
     public function enseignant(){
-        return $this->groupe->enseignants;
+        return $this->groupe->enseignant;
     }
 
     /**
@@ -43,7 +43,7 @@ class Seance extends Model
      * Obtenir l'EC de la séance
      */
     public function ec(){
-        return $this->groupe->ecs;
+        return $this->groupe->ec_groupe;
     }
 
 }

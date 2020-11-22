@@ -15,8 +15,6 @@ class IPController extends Controller
     public function liste(Request $request)
     {
         if(Auth::check() && ((Auth::user()->role)==3)){ 
-            
-            
             return view('etudiant/ip',['user' => Auth::user()]);
         }
         else{

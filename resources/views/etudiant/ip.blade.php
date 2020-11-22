@@ -5,12 +5,13 @@
 <div class="container-fluid my-1 border">
     <div class="row">
         <div class="col-md-2">
+
+            
         </div>
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="display-1">Inscriptions Pédagogiques</h1>
-                        
                 </div>
             </div>
             <br><br>

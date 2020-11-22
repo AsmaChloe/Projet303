@@ -40,7 +40,7 @@ class Groupes extends Model
      * Obtenir les séances du groupe
      */
     public function seances() {
-        return $this->hasMany(Seance::class);
+        return $this->hasMany(Seance::class,'idGroupe');
     }
 
 }

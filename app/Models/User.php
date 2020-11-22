@@ -120,42 +120,18 @@ class User extends Authenticatable
         return $this->hasManyThrough(Epreuve::class,IP::class,'idEtudiant','idEC','id','idEC');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo dans pivot
     }
 
-    
-
     /**
      * Obtenir le(s) seance(s) de l'etudiant user->seancesEtu()
      */
     public function seancesEtu(){
-        return $this->hasManyThrough(Seance::class,Groupe_Etudiant::class,'idEtudiant','idGroupe','id','idEtudiant');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+        return $this->hasManyThrough(Seance::class,Groupe_Etudiants::class,'idEtudiant','idGroupe','id','idGroupe');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo du pivot
     }
 
-   
-
-    
-
-
-
-
-    
-    /*
-     
-    public function groupesEtu(){
-        return $this->belongsToMany(Groupes::class,'groupe_etudiants','idUser','idGroupe');
+    /**
+     * Obtenir le(s) seance(s) de l'enseignant user->seancesEns()
+     */
+    public function seancesEns(){
+        return $this->hasManyThrough(Seance::class,Enseignant_Groupe::class,'idEnseignant','idGroupe','id','idGroupe');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo du pivot
     }
-
-
-    public function groupesEns(){
-        return $this->belongsToMany(Groupes::class,'groupe_enseignants','idUser','idGroupe');
-    }*/
-
-    public function presentiels() {
-        return $this->hasMany(Presentiel::class);
-    }
-
-    public function seances() {
-        return $this->hasMany(Seance::class);
-    }
-
-    
 
 }
