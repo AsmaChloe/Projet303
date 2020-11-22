@@ -36,8 +36,8 @@
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/Projet303/public/etudiant/notes">Notes</a>
               <a class="dropdown-item" href="/Projet303/public/etudiant/presentiel">Présentiel</a>
-              <a class="dropdown-item" href="/Projet303/public/etudiant/groupe">Groupes</a>
-              <a class="dropdown-item" href="/Projet303/public/etudiant/epreuve">Epreuves</a>
+              <a class="dropdown-item" href="/Projet303/public/etudiant/groupes">Groupes</a>
+              <a class="dropdown-item" href="/Projet303/public/etudiant/epreuves">Epreuves</a>
             </div>
           </li>
           @endif

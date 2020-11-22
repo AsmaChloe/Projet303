@@ -70,12 +70,11 @@ Route::get('etudiant', function() {
 //Notes de l'etudiant
 Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
 
-Route::get('/etudiant/groupe', 'App\Http\Controllers\GroupesController@liste');
+//Groupes de l'étudiant
+Route::get('/etudiant/groupes', 'App\Http\Controllers\GroupesController@liste');
 
 //Epreuves de l'etudiant
-Route::get('etudiant/epreuve', function() {
-    return view('etudiant/epreuve');
-});
+Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@liste');
 
 //Presentiel de l'etudiant
 Route::get('etudiant/presentiel', function() {

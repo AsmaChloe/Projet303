@@ -17,16 +17,16 @@
                             <thead>
                                 <tr>
                                     <th>Etudiant</th>
-                                    <th>EC</th>
+                                    <th>Epreuve</th>
                                     <th>Note</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($notes as $note)
                                 <tr> 
-                                    <td> {{$note->user->name}} </td>
-                                    <td> {{$note->ec->intituleEC}} </td>
-                                    <td> {{$note->valeurNote}}/{{$note->maxNote }}</td>
+                                    <td> {{$note->idEtudiant}} </td>
+                                    <td> {{$note->idEpreuve}} </td> <!-- a changer ??!!-->
+                                    <td> {{$note->valeurNote}}/{{$note->maxNote}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -53,13 +53,13 @@
         <form id="noteForm">
             @csrf
             <div class="form-group">
-                <label for="idUser">Etudiant</label>
-                <input type="text" class="form-control" id="idUser" placeholder="Saisir le nom de l'élève"/>
+                <label for="idEtudiant">Etudiant</label>
+                <input type="text" class="form-control" id="idEtudiant" placeholder="Saisir le nom de l'élève"/>
             </div>
     
             <div class="form-group">
-                <label for="idEC">EC</label>
-                <input type="text" class="form-control" id="idEC" placeholder="Saisir le nom de la matière"/>
+                <label for="idEpreuve">Epreuve</label>
+                <input type="text" class="form-control" id="idEpreuve" placeholder="Saisir l'id de l'epreuve"/>
             </div>
  
             <div class="form-group">
@@ -82,8 +82,8 @@
     $("#noteForm").submit(function(e){
         e.preventDefault();
 
-        let idUser = $("#idUser").val();
-        let idEC = $("#idEC").val();
+        let idEtudiant = $("#idEtudiant").val();
+        let idEpreuve = $("#idEpreuve").val();
         let valeurNote = $("#valeurNote").val();
         let maxNote = $("#maxNote").val();
         let _token = $("input[name=_token]").val();
@@ -93,8 +93,8 @@
             url: "{{route('note.ajout')}}",
             type: "get",
             data:{
-                idUser:idUser,
-                idEC:idEC,
+                idEtudiant:idEtudiant,
+                idEpreuve:idEpreuve,
                 valeurNote:valeurNote,
                 maxNote:maxNote,
                 _token:_token
@@ -102,7 +102,7 @@
             success:function(response){
 
                 if(response){
-                    $("#noteTable tbody").prepend('<tr><td>'+ response.idUser +'</td><td>'+response.idEC+'</td><td>'+response.valeurNote+'/'+response.noteMax+'</td><td>');
+                    $("#noteTable tbody").prepend('<tr><td>'+ response.idEtudiant +'</td><td>'+response.idEpreuve+'</td><td>'+response.valeurNote+'/ '+response.maxNote+'</td><tr>');
                     $("#noteForm")[0].reset();
                     $("#noteModal").modal('hide');
                 }

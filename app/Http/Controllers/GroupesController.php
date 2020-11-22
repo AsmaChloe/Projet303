@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 use \App\Models\User;
 use \App\Models\EC;
-use \App\Models\Groupe_Enseignants;
 
 class GroupesController extends Controller
 {
@@ -18,11 +17,10 @@ class GroupesController extends Controller
      */
     public function liste(Request $request)
     {
-        if(Auth::check() && ((Auth::user()->role)==3 || (Auth::user()->role)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
-            $groupes=User::find(Auth::id())->groupesEtu()->get(); //Groupes de l'étudiant actuel
+        if(Auth::check() && ((Auth::user()->role)==3) ){ //Il faut être connecté et être un étudiant ou un responsable
             $ecs=EC::all();
-            $groupeens=Groupe_Enseignants::all();
-            return view('etudiant/groupe',['groupes' => $groupes, 'ecs'=>$ecs,'user'=>Auth::user(),'groupeens'=>$groupeens]);
+
+            return view('etudiant/groupes',['user'=>Auth::user(),'ecs'=>$ecs]);
         }
         else{
             return back();

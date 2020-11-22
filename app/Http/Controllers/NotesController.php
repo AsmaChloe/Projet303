@@ -21,7 +21,7 @@ class NotesController extends Controller
     {
         if(Auth::check() && ((Auth::user()->role)==3 || (Auth::user()->role)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
             $ecs=EC::all();
-            return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs]);
+            return view('etudiant/epreuves',['user' => Auth::user(),'ecs'=>$ecs]);
         }
         else{
             return back();
@@ -55,8 +55,8 @@ class NotesController extends Controller
     public function store(Request $request)
     {
         $note=new Notes();
-        $note->idUser = $request->idUser;
-        $note->idEC = $request->idEC;
+        $note->idEtudiant = $request->idEtudiant;
+        $note->idEpreuve = $request->idEpreuve;
         $note->valeurNote = $request->valeurNote;
         $note->maxNote = $request->maxNote;
         $note->save();
