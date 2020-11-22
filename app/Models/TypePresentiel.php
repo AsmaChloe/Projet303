@@ -13,4 +13,11 @@ class TypePresentiel extends Model
     protected $primaryKey = 'idType';
 
     protected $fillable = ['valeurType'];
+
+    /**
+     * Obtenir les presentiels ayant ce type
+     */
+    public function presentiels(){
+        return $this->hasMany(Presentiel::class,'idType');
+    }
 }

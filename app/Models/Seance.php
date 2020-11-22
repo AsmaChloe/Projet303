@@ -46,4 +46,11 @@ class Seance extends Model
         return $this->groupe->ec_groupe;
     }
 
+    /**
+     * Obtenir les presentiels de la séance
+     */
+    public function presentiels(){
+        return $this->hasMany(Presentiel::class,'idSeance');
+    }
+
 }

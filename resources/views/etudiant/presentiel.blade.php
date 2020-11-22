@@ -8,32 +8,19 @@
     		    </div>
 	    	    <div class="col-md-10">
                     <h1 class="display-1">Presentiel</h1>
-					<ul>
-					<li class="list-item">
-						Matiere
-					</li>
-					<li class="list-item">
-						Matiere
-					</li>
-					<li class="list-item">
-						Matiere
-					</li>
-					<li class="list-item">
-						Matiere
-					</li>
-					<li class="list-item">
-						Matiere
-					</li>
-					<li class="list-item">
-						Matiere
-					</li>
-					<li class="list-item">
-						Matiere
-					</li>
-					<li class="list-item">
-						Matiere
-					</li>
-					</ul>
+						@foreach($ecs as $ec)
+						{{$ec->sigleEC}}
+							@foreach($ec->seances as $seance)
+								
+								@foreach($seance->presentiels as $presentiel)
+									@if($presentiel->idEtudiant==$user->id)
+										seance du {{$seance->debutSeance}}
+										{{$presentiel->type->valeurType}}
+									@endif
+								@endforeach
+							@endforeach
+							<br>
+						@endforeach
                 </div>
 	        </div>
         </div>

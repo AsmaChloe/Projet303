@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+use \App\Models\Seance;
+use \App\Models\Presentiel;
+
 class PresentielTableSeeder extends Seeder
 {
     /**
@@ -13,14 +16,24 @@ class PresentielTableSeeder extends Seeder
      */
     public function run()
     {
-        Presentiel::truncate;
+        Presentiel::truncate();
 
-        $nbSeance=Seance::count();
+        //Pour le test : presentiel du groupe S3F3 lors de la seance d'id 2
+        Presentiel::create([
+            'idType' => 2,
+            'idSeance' => 1,
+            'idEtudiant' => 3
+        ]);
 
-        for($i=1;$i<=$nbSeance;$i++){
-            Presentiel::create([
-                'idEtudiant'
-            ])
-        }
+        Presentiel::create([
+            'idType' => 2,
+            'idSeance' => 1,
+            'idEtudiant' => 4
+        ]);
+        Presentiel::create([
+            'idType' => 1,
+            'idSeance' => 1,
+            'idEtudiant' => 5
+        ]);
     }
 }

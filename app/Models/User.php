@@ -134,4 +134,11 @@ class User extends Authenticatable
         return $this->hasManyThrough(Seance::class,Enseignant_Groupe::class,'idEnseignant','idGroupe','id','idGroupe');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo du pivot
     }
 
+    /**
+     * Obtenir le présentiel d'un étudiant
+     */
+    public function presentiel(){
+        return $this->hasMany(Presentiel::class,'idEtudiant');
+    }
+
 }

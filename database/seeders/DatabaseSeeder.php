@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(SeanceTableSeeder::class);
         //$this->call(DiplomeResponsableTableSeeder::class);
         //$this->call(ParcoursSemestreTableSeeder::class);
-        $this->call(PresentielTableSeeder::class);
+        //$this->call(PresentielTableSeeder::class);
 
         Schema::enableForeignKeyConstraints();
     }

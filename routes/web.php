@@ -62,11 +62,6 @@ Route::get('professeur/listing', function() {
 
 //**************** ETUDIANT ******************/
 
-//Accueil de l'etudiant
-Route::get('etudiant', function() {
-    return view('etudiant/accueiletudiant');
-});
-
 //Notes de l'etudiant
 Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
 
@@ -79,12 +74,12 @@ Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@liste'
 //Les IP de l'étudiant
 Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste');
 
-//Presentiel de l'etudiant
-Route::get('etudiant/presentiel', function() {
-    return view('etudiant/presentiel');
+Route::get('/etudiant/presentiel', 'App\Http\Controllers\PresentielController@liste');
+
+//Accueil de l'etudiant
+Route::get('etudiant', function() {
+    return view('etudiant/accueiletudiant');
 });
-
-
 
 Route::get('etudiant/accueiletudiant', function() {
     return view('etudiant/accueiletudiant');
