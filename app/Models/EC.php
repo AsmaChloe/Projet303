@@ -19,41 +19,53 @@ class EC extends Model
      * Obtenir le semestre qui a l'ec
      */
     public function semestre(){
-        return $this->belongsTo(Semestre::class);
+        return $this->belongsTo(Semestre::class,'idSemestre');
     }
 
     /**
-     * Liste des enseignants qui enseignent cet EC
+     * Obtenir les parcours contenant l'ec // ec->parcours()
+     */
+    public function parcours(){
+        return $this->semestre->parcours;
+    }
+    
+     /**
+     * Liste des etudiants inscrit à l'EC MARCHE PAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS
+     */
+    public function ecEtudiant(){
+        return $this->belongsToMany(User::class,IP::class,'idEC','idEtudiant');
+    }
+
+
+    /**
+     * Liste des enseignants qui enseignent cet EC NE RETOURNE RIEN CA NE MARCHE PAS
      */
     public function enseignants(){
-        return $this->belongsToMany(User::class,'Ec_Enseignant')->where('role',2)->get();
+        return $this->belongsToMany(User::class,'ec_enseignants','idEnseignant');
     }
 
+   
+
     /**
-     * Liste des etudiants inscrit à l'EC
+     * Obtenir les groupes suivant l'ec // NE MARCHE PAS PAS PAS PAS 
      */
-    public function etudiants(){
-        return $this->belongsToMany(User::class,'IP')->where('role',3)->get();
+    public function groupes(){
+        return $this->belongsToMany(Groupes::class,'groupe_ecs', 'idEC', 'idGroupe');
     }
 
     /**
-     * Obtenir les épreuves de l'EC
+     * Obtenir les épreuves de l'EC marche pas
      */
     public function epreuves(){
-        return $this->hasMany();
+        return $this->hasMany(Epreuve::class,'idEC','idEC');
     }
 
     /**
-     * Obtenir le(s) seance(s) de l'ec user->seances()
+     * Obtenir le(s) seance(s) de l'ec user->seances() ça marche
      */
     public function seances(){
         return $this->hasManyThrough(Seance::class,Groupe_EC::class,'idEC','idGroupe','idEC','idEC');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
     }
 
-    /**
-     * Obtenir les groupes suivant l'ec
-     */
-    public function groupes(){
-        return $this->belongsToMany(Groupe::class,'groupe_ecs');
-    }
+    
 }

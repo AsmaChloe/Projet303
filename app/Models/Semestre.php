@@ -13,17 +13,17 @@ class Semestre extends Model
     protected $primaryKey = 'idSemestre';
 
     /**
-     * Obtenir les parcours ayant ce semestre
+     * Obtenir les parcours se trouvant sur ce semestre
      */
     public function parcours(){
-        return $this->belongsToMany(Semestre::class,'ParcoursSemestre');
+        return $this->belongsToMany(Parcours::class,'parcours_semestres','idSemestre','idParcours');
     }
     
     /**
      * Obtenir les EC du semestre
      */
     public function ecs(){
-        return $this->hasMany(EC::class);
+        return $this->hasMany(EC::class,'idSemestre','idSemestre');
     }
 
     

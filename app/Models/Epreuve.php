@@ -16,24 +16,24 @@ class Epreuve extends Model
     protected $fillable = ['dateEpreuve','dureeEpreuve','numSession','pourcentage','idEC'];
 
     /**
-     * Obtenir les notes de l'épreuve
-     */
-    public function notes(){
-        return $this->hasMany(Notes::class);
-    }
-
-    /**
      * Obtenir l'ec de l'épreuve
      */
     public function ec(){
-        return $this->belongsTo(EC::class);
+        return $this->belongsTo(EC::class,'idEpreuve');
     }
 
     /**
-     * Obtenir les étudiants participant à l'épreuve 
+     * Obtenir les étudiants participant à l'épreuve //N-fonctionnel a cause de ec-etudiant
      */
-    public function etudiant(){
+    public function etudiants(){
         return $this->ec->etudiants;
     }
-    
+
+    /**
+     * Obtenir les notes de l'épreuve
+     */
+    public function notes(){
+        return $this->hasMany(Notes::class,'idEpreuve');
+    }
+
 }

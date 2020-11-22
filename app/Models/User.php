@@ -65,7 +65,7 @@ class User extends Authenticatable
      * Obtenir le(s) diplome(s) que dirige le responsable 
      */
     public function diplomes(){
-        return $this->belongsToMany(Diplomes::class);
+        return $this->belongsToMany(Diplomes::class,'Diplome_Responsables','idResponsable','idDiplome');
     }
 
     /**
@@ -76,32 +76,49 @@ class User extends Authenticatable
     }
 
     /**
-     * Obtenir la liste des EC enseignés par cet enseignant
+     * Obtenir la liste des EC enseignés par cet enseignant // NE MARCHE PAS !!!!!!!!!!!!!!!!!!!!!!!!!
      */
     public function ecs(){
-        return $this->belongsToMany(EC::class,'Ec_Enseignant');
+        return $this->belongsToMany(EC::class,'ec_enseignants','idEnseignant','idEC');
     }
 
     /**
      * Obtenir la liste des EC où on l'étudiant s'est inscrit
      */
     public function ip(){
-        return $this->belongsToMany(EC::class,'IP');
+        return $this->belongsToMany(EC::class,IP::class,'idEtudiant','idEC');
     }
+    
+    /**
+     * Obtenir les groupes de l'enseignant MARCHE PAS
+     */
+    public function groupesEns(){
+        return $this->belongsToMany(Groupes::class,'groupe_enseignants','idEnseignant','idGroupe');
+    }
+
+     /**
+     * Obtenir les groupes de l'étudiant
+     */
+    public function groupesEtu(){
+        return $this->belongsToMany(Groupes::class,'groupe_etudiants','idEtudiant','idGroupe');
+    }
+
+    /**
+     * Obtenir les notes de l'étudiant
+     */
+    public function notes(){
+        return $this->hasMany(Notes::class,'idEtudiant');
+    }
+
 
     /**
      * Obtenir le(s) epreuves(s) de l'étudiant user->epreuves()
      */
     public function epreuves(){
-        return $this->hasManyThrough(Epreuve::class,ip::class,'idEtudiant','idEC','id','idEtudiant');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+        return $this->hasManyThrough(Epreuve::class,IP::class,'idEtudiant','idEC','id','idEC');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo dans pivot
     }
 
-    /**
-     * Obtenir le(s) seance(s) de l'enseignant user->seancesEns()
-     */
-    public function seancesEns(){
-        return $this->hasManyThrough(Seance::class,Groupe_Enseignants::class,'idEnseignant','idGroupe','id','idEnseignant');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
-    }
+    
 
     /**
      * Obtenir le(s) seance(s) de l'etudiant user->seancesEtu()
@@ -110,20 +127,9 @@ class User extends Authenticatable
         return $this->hasManyThrough(Seance::class,Groupe_Etudiant::class,'idEtudiant','idGroupe','id','idEtudiant');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
     }
 
-    /**
-     * Obtenir les groupes de l'étudiant
-     */
-    public function groupesEtu(){
-        return $this->belongsToMany(Groupe::class,'groupe_etudiants');
-    }
+   
 
-    /**
-     * Obtenir les groupes de l'enseignant
-     */
-    public function groupesEns(){
-        return $this->belongsToMany(Groupe::class,'groupe_enseignants');
-    }
-
+    
 
 
 

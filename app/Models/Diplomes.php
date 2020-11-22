@@ -18,14 +18,14 @@ class Diplomes extends Model
      * Obtenir le(s) responsable(s) du diplome
      */
     public function responsables(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'diplome_responsables','idDiplome','idResponsable');
     }
     
     /**
      * Obtenir les parcours du diplomes
      */
     public function parcours(){
-        return $this->hasMany(Parcours::class);
+        return $this->hasMany(Parcours::class,'idDiplome','idDiplome');
     }
 
 }

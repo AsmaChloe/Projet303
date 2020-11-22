@@ -19,7 +19,7 @@ class Notes extends Model
      */
     public function etudiant()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'idNote');
     }
 
     /**
@@ -27,6 +27,6 @@ class Notes extends Model
      */
     public function epreuve() 
     {
-        return $this->belongsTo(Epreuve::class);
+        return $this->belongsTo(Epreuve::class,'idNote');
     }
 }

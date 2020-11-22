@@ -13,12 +13,12 @@ class CreateEcEnseignantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ec__enseignants', function (Blueprint $table) {
+        Schema::create('ec_enseignants', function (Blueprint $table) {
             $table->id('idECEnseignant');
-            $table->unsignedBigInteger('idEC');
-            $table->foreign('idEC')->references('idEC')->on('e_c_s');
             $table->unsignedBigInteger('idEnseignant');
             $table->foreign('idEnseignant')->references('id')->on('users');
+            $table->unsignedBigInteger('idEC');
+            $table->foreign('idEC')->references('idEC')->on('e_c_s');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateEcEnseignantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ec__enseignants');
+        Schema::dropIfExists('ec_enseignants');
     }
 }

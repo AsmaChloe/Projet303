@@ -19,8 +19,8 @@ class UserTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         //Responsables
-        User::create(['name' => "RespInfo", 'role'=>1, 'email'=>"respinfo@resp.fr", 'password'=> Hash::make(Hash::make("password"))]);
-        User::create(['name' => "RespMath", 'role'=>1, 'email'=>"respmath@resp.fr", 'password'=>Hash::make(Hash::make("password"))]);
+        User::create(['name' => "RespInfo", 'role'=>1, 'email'=>"respinfo@resp.fr", 'password'=> Hash::make("password")]);
+        User::create(['name' => "RespMath", 'role'=>1, 'email'=>"respmath@resp.fr", 'password'=>Hash::make("password")]);
 
         //Etudiant info
         for($i=1;$i<=5;$i++){

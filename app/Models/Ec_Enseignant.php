@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Ec_Enseignant extends Model
-{
+class Ec_Enseignant extends Pivot{
     use HasFactory;
 
-    protected $table = 'ec__enseignants';
+    protected $table = 'ec_enseignants';
     protected $primaryKey = 'idECEnseignant';
 
     protected $fillable = ['idEC','idEnseignant'];

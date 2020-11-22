@@ -18,13 +18,13 @@ class Parcours extends Model
      * Obtenir le diplome du parcours
      */
     public function diplome(){
-        return $this->belongsTo(Diplomes::class);
+        return $this->belongsTo(Diplomes::class,'idDiplome');
     }
 
     /**
-     * Obtenir le(s) parcour(s) que dirige le responsable // avec ou sans () ???
+     * Obtenir le(s) parcour(s) que dirige le responsable // $parcours->responsables()
      */
-    public function parcours(){
+    public function responsables(){
         return $this->diplome->responsables;
     }
 
@@ -32,7 +32,16 @@ class Parcours extends Model
      * Obtenir les semestres du parcours
      */
     public function semestres(){
-        return $this->belongsToMany(Semestre::class,'ParcoursSemestre');
+        return $this->belongsToMany(Semestre::class,'parcours_semestres','idParcours','idSemestre');
+    }
+
+    /**
+     * Obtenir le(s) ec(s) du parcours user->ecs()
+     */
+    public function ecs(){
+        return $this->hasManyThrough(EC::class,ParcoursSemestre::class,'idParcours','idSemestre');
+                        //Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+
     }
 
 }

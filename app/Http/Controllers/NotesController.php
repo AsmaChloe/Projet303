@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 use \App\Models\Notes;
 use \App\Models\EC;
+use \App\Models\User;
+use \App\Models\Epreuve;
+
 
 class NotesController extends Controller
 {
@@ -19,8 +22,11 @@ class NotesController extends Controller
     public function liste(Request $request)
     {
         if(Auth::check() && ((Auth::user()->role)==3 || (Auth::user()->role)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
-            $ecs = EC::all(); 
-            return view('etudiant/notes',['user' => Auth::user(), 'ecs' => $ecs]);
+            $notes=Notes::all();
+            $etudiants=User::where('role',3)->get();
+            $epreuves=Epreuve::all();
+            $ecs=EC::all();
+            return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs]);
         }
         else{
             return back();
