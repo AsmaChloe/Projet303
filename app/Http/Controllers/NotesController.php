@@ -20,8 +20,10 @@ class NotesController extends Controller
     public function liste(Request $request)
     {
         if(Auth::check() && ((Auth::user()->role)==3 || (Auth::user()->role)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
-            $ecs=EC::all();
-            return view('etudiant/epreuves',['user' => Auth::user(),'ecs'=>$ecs]);
+            
+            $ecs=Auth::user()->ip; //IP de l'étudiant
+            
+            return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs]);
         }
         else{
             return back();

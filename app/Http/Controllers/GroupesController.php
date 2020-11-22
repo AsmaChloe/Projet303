@@ -19,8 +19,8 @@ class GroupesController extends Controller
     {
         if(Auth::check() && ((Auth::user()->role)==3) ){ //Il faut être connecté et être un étudiant ou un responsable
             $ecs=EC::all();
-
-            return view('etudiant/groupes',['user'=>Auth::user(),'ecs'=>$ecs]);
+            
+            return view('etudiant/groupes',['user'=>Auth::user()]);
         }
         else{
             return back();

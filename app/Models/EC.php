@@ -9,11 +9,6 @@ class EC extends Model
 {
     use HasFactory;
 
-    /*----------------------------REMARQUE :
-        A revoir : 
-            ec_groupe
-    ----------------------------------------*/
-
     protected $table = 'e_c_s';
     protected $primaryKey = 'idEC';
 
@@ -31,6 +26,13 @@ class EC extends Model
      */
     public function parcours(){
         return $this->semestre->parcours;
+    }
+
+    /**
+     * 
+     */
+    public function epreuves(){
+        return $this->hasMany(Epreuve::class,'idEC');
     }
 
     /**
@@ -63,7 +65,7 @@ class EC extends Model
     }
 
     /**
-     * Les notes de l'élève dans l'EC
+     * Les notes des élèves dans l'EC
      */
     public function notes(){
         return $this->hasManyThrough(Notes::class,IP::class,'idEC','idEtudiant','idEC','idEtudiant');

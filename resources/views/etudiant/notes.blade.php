@@ -8,23 +8,21 @@
     		    </div>
 	    	    <div class="col-md-10">
                     <h1 class="display-1">Mes notes :</h1>
-						@foreach($user->ip as $ec)
-							<h6 class="display-6">{{$ec->sigleEC}}</h6>
-							<p>
-                            <ul>
-							@foreach($user->notes as $note)
-								@if($note->epreuve->idEC == $ec->idEC)
-								<li class="list-item">note : {{$note->valeurNote}}/{{$note->maxNote}}</li>
+					@foreach($ecs as $ec)
+						<h6 class="display-6">{{$ec->sigleEC}}</h6>
+						
+						@foreach($ec->epreuves as $epreuve)
+							<ul>@foreach($epreuve->notes as $note)
+								@if($note->idEtudiant == $user->id)
+									<li class="list-item">note : {{$note->valeurNote}}/{{$note->maxNote}}</li>
+									<br>
 								@endif
-							@endforeach
-							</ul>
-    					
-    					</p>
+							@endforeach</ul>
 						@endforeach
+					@endforeach
 						
 						
                 </div>
-				
 	        </div>
         </div>
 @endsection
