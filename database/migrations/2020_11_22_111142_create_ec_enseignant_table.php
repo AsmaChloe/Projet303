@@ -4,32 +4,32 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupeEnseignantsTable extends Migration
+class CreateEcEnseignantTable extends Migration
 {
     /**
-     * Creation de la table groupe_enseignants
+     * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('groupe_enseignants', function (Blueprint $table) {
-            $table->id('idGroupeEns');
+        Schema::create('ec_enseignant', function (Blueprint $table) {
+            $table->id('idECEnseignant');
+            $table->unsignedBigInteger('idEC');
+            $table->foreign('idEC')->references('idEC')->on('e_c_s');
             $table->unsignedBigInteger('idEnseignant');
             $table->foreign('idEnseignant')->references('id')->on('users');
-            $table->unsignedBigInteger('idGroupe');
-            $table->foreign('idGroupe')->references('idGroupe')->on('groupes');
             $table->timestamps();
         });
     }
 
     /**
-     * Rollback
+     * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('groupe_enseignants');
+        Schema::dropIfExists('ec_enseignant');
     }
 }

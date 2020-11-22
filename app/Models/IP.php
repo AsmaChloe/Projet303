@@ -13,3 +13,4 @@ class IP extends Pivot
 
     protected $fillable = ['idEC','idEtudiant'];
 }
+?>

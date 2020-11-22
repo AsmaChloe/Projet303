@@ -61,6 +61,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+
+
     /**
      * Obtenir le(s) diplome(s) que dirige le responsable 
      */
@@ -72,14 +74,14 @@ class User extends Authenticatable
      * Obtenir le(s) parcour(s) que dirige le responsable user->parcours()
      */
     public function parcours(){
-        return $this->hasManyThrough(Parcours::class,diplome_responsable::class,'idResponsable','idDiplome','id','idResponsable');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+        return $this->hasManyThrough(Parcours::class,diplome_responsable::class,'idResponsable','idDiplome','id','idResponsable');
     }
 
     /**
-     * Obtenir la liste des EC enseignés par cet enseignant // NE MARCHE PAS !!!!!!!!!!!!!!!!!!!!!!!!!
+     * Obtenir les EC d'un enseignant
      */
-    public function ecs(){
-        return $this->belongsToMany(EC::class,'ec_enseignants','idEnseignant','idEC');
+    public function ec_enseignant(){
+        return $this->belongsToMany(EC::class,'EC_Enseignant','idEnseignant','idEC');
     }
 
     /**
@@ -88,12 +90,12 @@ class User extends Authenticatable
     public function ip(){
         return $this->belongsToMany(EC::class,IP::class,'idEtudiant','idEC');
     }
-    
+
     /**
-     * Obtenir les groupes de l'enseignant MARCHE PAS
+     * Obtenir la liste des groupes de l'enseignant 
      */
     public function groupesEns(){
-        return $this->belongsToMany(Groupes::class,'groupe_enseignants','idEnseignant','idGroupe');
+        return $this->belongsToMany(Groupes::class,'enseignant_groupe','idEnseignant','idGroupe');
     }
 
      /**

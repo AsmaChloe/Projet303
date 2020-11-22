@@ -85,6 +85,6 @@ class GroupeEtudiantTableSeeder extends Seeder
         }
         Groupe_Etudiants::create(['idGroupe' => 11, 'idEtudiant' => 10]); //11 = B1F1B, groupe de TP
         Groupe_Etudiants::create(['idGroupe' => 12, 'idEtudiant' => 11]); //12 = B1F2A, groupe de TP
-        Groupe_Etudiants::create(['idGroupe' => 12, 'idEtudiant' => 12]); //12 = B1F2A, groupe de TP*/
+        Groupe_Etudiants::create(['idGroupe' => 12, 'idEtudiant' => 12]); //12 = B1F2A, groupe de TP
     }
 }

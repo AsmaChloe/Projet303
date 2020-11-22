@@ -16,24 +16,24 @@ class Groupes extends Model
     protected $fillable = ['nomGroupe','typeGroupe'];
 
     /**
-     * Liste des ecs du groupe
+     * Liste des EC du groupe
      */
-    public function ecs(){
-        return $this->belongsToMany(EC::class,'groupe_ecs','idGroupe','idEC');
+    public function ec_groupe(){
+        return $this->belongsToMany(EC::class,'ec_groupe','idGroupe','idEC');
     }
 
     /**
      * Liste des enseignants du groupe
      */
     public function enseignant(){
-        return $this->belongsToMany(User::class,'groupe_enseignants','idGroupe','idEnseignant');
+        return $this->belongsToMany(User::class,'enseignant_groupe','idGroupe','idEnseignant');
     }
 
     /**
      * Liste des etudiants du groupe
      */
     public function etudiants(){
-        return $this->belongsToMany(User::class,'groupe_etudiants','idGroupe','idEtudiant')->where('role',3);
+        return $this->belongsToMany(User::class,'groupe_etudiants','idGroupe','idEtudiant');
     }
 
     /**

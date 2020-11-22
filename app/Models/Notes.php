@@ -29,4 +29,5 @@ class Notes extends Model
     {
         return $this->belongsTo(Epreuve::class,'idNote');
     }
+
 }
