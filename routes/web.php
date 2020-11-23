@@ -44,20 +44,24 @@ Route::get('responsable/listing', function() {
 });
 
 
-/* ROUTES PROFESSEUR */
+/*------------------------------------------------------- ROUTES PROFESSEUR */
 //Accueil du professeur
-Route::get('professeur', function() {
-    return view('professeur/accueilprofesseur');
+Route::get('enseignant', function() {
+    return view('enseignant/accueilprofesseur');
 });
+
+//Groupes de l'enseignant
+Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
+
+//Etudiants de groupe de l'enseignant
+Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\GroupesController@listeEtudiant')->name('etudiants');
+
 
 //Ajouter une note
-Route::get('/professeur/gererNotes/nouvelleNote', [\App\Http\Controllers\NotesController::class,'create']);
-Route::get('/professeur/gererNotes/ajout-note', [\App\Http\Controllers\NotesController::class,'store'])->name('note.ajout');
+Route::get('/enseignant/gererNotes/nouvelleNote', [\App\Http\Controllers\NotesController::class,'create']);
+Route::get('/enseignant/gererNotes/ajout-note', [\App\Http\Controllers\NotesController::class,'store'])->name('note.ajout');
 
-//Listing
-Route::get('professeur/listing', function() {
-    return view('professeur/listing');
-});
+
 
 
 //**************** ETUDIANT ******************/
@@ -66,7 +70,7 @@ Route::get('professeur/listing', function() {
 Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
 
 //Groupes de l'étudiant
-Route::get('/etudiant/groupes', 'App\Http\Controllers\GroupesController@liste');
+Route::get('/etudiant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
 
 //Epreuves de l'etudiant
 Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@liste');
@@ -74,12 +78,13 @@ Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@liste'
 //Les IP de l'étudiant
 Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste');
 
+//Presentiel
 Route::get('/etudiant/presentiel', 'App\Http\Controllers\PresentielController@liste');
 
 //Accueil de l'etudiant
 Route::get('etudiant', function() {
     return view('etudiant/accueiletudiant');
-});
+})->name('etudiant');
 
 Route::get('etudiant/accueiletudiant', function() {
     return view('etudiant/accueiletudiant');

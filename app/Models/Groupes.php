@@ -25,7 +25,7 @@ class Groupes extends Model
     /**
      * Liste des enseignants du groupe
      */
-    public function enseignant(){
+    public function enseignants(){
         return $this->belongsToMany(User::class,'enseignant_groupe','idGroupe','idEnseignant');
     }
 

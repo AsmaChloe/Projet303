@@ -17,29 +17,32 @@ class EnseignantGroupeTableSeeder extends Seeder
      */
     public function run()
     {
-        //test
+        //test pour les groupes de CM
         Enseignant_Groupe::truncate();
-        $nbGroupes=Groupes::count();
-        $nbProfs=User::where('role',2)->count();
+        
+        Enseignant_Groupe::create([
+            'idEnseignant'=> 13,
+           'idGroupe'=> 1
+        ]); //CM(S3F) de 301 avec Enseignant 1
 
-        $i=1;
-        $k=13;
-        $nbProfs+=13;
+        Enseignant_Groupe::create([
+            'idEnseignant'=> 15,
+           'idGroupe'=> 1
+        ]); //CM(S3F) de 303 avec Enseignant 3
 
-        while($i<=$nbGroupes){
-            Enseignant_Groupe::create([
-                'idEnseignant' =>$k,
-                'idGroupe'=>$i
-            ]);
+        Enseignant_Groupe::create([
+            'idEnseignant'=> 16,
+           'idGroupe'=> 1
+        ]); //CM(S3F) de 304 avec Enseignant 4
 
-            if($k==$nbProfs-1){
-                $k=13;
-            }
-            else{
-                $k++;
-            }
-            $i++;
-        }
+        Enseignant_Groupe::create([
+            'idEnseignant'=> 17,
+           'idGroupe'=> 1
+        ]); //CM(S3F) de 305 avec Enseignant 5
 
+        Enseignant_Groupe::create([
+            'idEnseignant'=> 13,
+           'idGroupe'=> 1
+        ]); //CM(S3F) de 306 avec Enseignant 1
     }
 }

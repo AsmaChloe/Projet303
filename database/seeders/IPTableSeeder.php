@@ -16,6 +16,8 @@ class IPTableSeeder extends Seeder
     {
         IP::truncate();
 
+        //Pour le test
+
         //Etudiants infos
         for($i=3;$i<=5;$i++){
             //Matiere d'info

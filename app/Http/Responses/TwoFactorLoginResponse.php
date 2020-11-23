@@ -24,7 +24,7 @@ class TwoFactorLoginResponse implements TwoFactorLoginResponseContract
             case 1:
                 return redirect()->intended('responsable');
             case 2:
-                return redirect()->intended('professeur');
+                return redirect()->intended('enseignant');
             case 3 :
                 return redirect()->intended('etudiant');
             default:
