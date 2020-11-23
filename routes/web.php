@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 /* ROUTES RESPONSABLES */
 //Accueil du responsable
-Route::get('responsable/accueilresponsable', function() {
+Route::get('responsable', function() {
     return view('responsable/accueilresponsable');
 });
 
