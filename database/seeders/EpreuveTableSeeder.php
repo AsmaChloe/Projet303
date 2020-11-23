@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use \App\Models\Epreuve;
 
 use \App\Models\EC;
+use \App\Models\TypeEpreuve;
 
 class EpreuveTableSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class EpreuveTableSeeder extends Seeder
         //Remarque : l'horaire de l'épreuve
         Epreuve::truncate();
 
+        $type=TypeEpreuve::all()->pluck('idTypeEpreuve');
         $nbEC=EC::count();
         $faker = \Faker\Factory::create();
 
@@ -28,7 +30,8 @@ class EpreuveTableSeeder extends Seeder
                 'dureeEpreuve'=>120, 
                 'numSession'=>1,
                 'pourcentage'=>100, 
-                'idEC'=>$i
+                'idEC'=>$i,
+                'idTypeEpreuve' => $faker->randomElement($type)
             ]);
         }
         

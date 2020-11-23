@@ -13,7 +13,7 @@ class Epreuve extends Model
     protected $table = 'epreuves';
     protected $primaryKey = 'idEpreuve';
 
-    protected $fillable = ['dateEpreuve','dureeEpreuve','numSession','pourcentage','idEC'];
+    protected $fillable = ['dateEpreuve','dureeEpreuve','numSession','pourcentage','idEC','idTypeEpreuve'];
 
     /**
      * Obtenir l'ec de l'épreuve
@@ -34,6 +34,13 @@ class Epreuve extends Model
      */
     public function notes(){
         return $this->hasMany(Notes::class,'idEpreuve');
+    }
+
+    /**
+     * Obtenir le type de l'épreuve
+     */
+    public function type(){
+        return $this->belongsTo(TypeEpreuve::class,'idTypeEpreuve');
     }
 
 }

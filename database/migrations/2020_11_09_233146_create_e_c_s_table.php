@@ -20,6 +20,7 @@ class CreateECSTable extends Migration
             $table->unsignedBigInteger('idSemestre');
             $table->foreign('idSemestre')->references('idSemestre')->on('semestres');
             $table->integer('nbPoints');
+            $table->integer('nbECTS');
             $table->timestamps();
         });
     }

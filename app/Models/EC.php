@@ -12,7 +12,7 @@ class EC extends Model
     protected $table = 'e_c_s';
     protected $primaryKey = 'idEC';
 
-    protected $fillable = ['nomEC','sigleEC','Nbpoints','idSemestre'];
+    protected $fillable = ['nomEC','sigleEC','Nbpoints','idSemestre','nbECTS'];
 
     /**
      * Obtenir le semestre qui a l'EC

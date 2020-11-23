@@ -40,7 +40,7 @@ class NotesController extends Controller
         
         $notes=Notes::orderBy('idNote','asc')->get();
         if($request->user()){
-            return view('professeur/gererNotes/nouvelleNote',compact('notes'));
+            return view('enseignant/gererNotes/nouvelleNote',compact('notes'));
             
         }
         else{
