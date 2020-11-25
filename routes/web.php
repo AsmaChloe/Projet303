@@ -47,7 +47,7 @@ Route::get('responsable/listing', function() {
 /*------------------------------------------------------- ROUTES PROFESSEUR */
 //Accueil du professeur
 Route::get('enseignant', function() {
-    return view('enseignant/accueilprofesseur');
+    return view('enseignant/accueilenseignant');
 });
 
 //Groupes de l'enseignant

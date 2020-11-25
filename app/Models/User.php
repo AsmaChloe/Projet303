@@ -73,8 +73,15 @@ class User extends Authenticatable
     /**
      * Obtenir le(s) parcour(s) que dirige le responsable user->parcours()
      */
-    public function parcours(){
+    public function parcoursResp(){
         return $this->hasManyThrough(Parcours::class,diplome_responsable::class,'idResponsable','idDiplome','id','idResponsable');
+    }
+
+    /**
+     * Obtenir le(s) parcours de l'étudiant
+     */
+    public function parcoursEtu(){
+        return $this->belongsToMany(Parcours::class,'etudiant_parcours','idEtudiant','idParcours');
     }
 
     /**

@@ -36,6 +36,13 @@ class Parcours extends Model
     }
 
     /**
+     * Obtenir les étudiants du parcours
+     */
+    public function etudiants(){
+        return $this->belongsToMany(User::class,'etudiant_parcours','idParcours','idEtudiant');
+    }
+
+    /**
      * Obtenir le(s) ec(s) du parcours user->ecs()
      */
     public function ecs(){

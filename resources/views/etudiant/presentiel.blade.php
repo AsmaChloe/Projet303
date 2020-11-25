@@ -2,6 +2,7 @@
 @section('titre')Le presentiel @endsection
 @section('contenu')
 
+<!--Header-->
 <div class="container-fluid bg-light">
     <div class="container pt-5 pb-4" >
         <h1 class="display-4 text-center mb-4">Présentiel</h1>
@@ -18,7 +19,8 @@
 
 <div class="container">
   <table class="table table-bordered table-striped text-center">
-    <thead class="thead table-danger">
+	<!--Semestre-->
+    <thead class="thead table-dark">
       <tr>
         <th scope="col" colspan="3" class="policeTaille pt-3 pb-3">Semestre </th>
       </tr>

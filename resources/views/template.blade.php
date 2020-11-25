@@ -78,7 +78,13 @@
     <!--FIN MENU-->
 
     <!--CONTENU-->
-    @yield('contenu')
+    <div class="container-fluid my-1 border">
+    <div class="row">
+  @yield('contenu')
+    
+    </div>
+    </div>
+  
     <!--FIN CONTENU-->
   </body>
 
