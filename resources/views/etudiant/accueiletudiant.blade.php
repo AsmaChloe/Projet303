@@ -1,55 +1,54 @@
 @extends('template')
 @section('titre') Accueil @endsection
 @section('contenu')
-        <div class="container-fluid my-1 border">
-            <br>
-	        <div class="row">
-		        <div class="col-md-6">
-			        <lt>
-				        <lt class="lt-highlighter__wrapper">
-					        <lt class="lt-highlighter__scrollElement">
-					        </lt>
-				        </lt>
-			        </lt>
-			        <div class="jumbotron">
-				        <h2>
-					        Presentiel
-				        </h2>
-				        <p>
-					        <a class="btn btn-primary btn-large" href="gestion.php">Presentiel</a>
-				        </p>
-			        </div>
-		        </div>
-		        <div class="col-md-6">
-			        <div class="jumbotron">
-				        <h2>
-					        Epreuves
-				        </h2>
-				        <p>
-					        <a class="btn btn-primary btn-large" href="listing.php">Epreuves</a>
-				        </p>
-			        </div>
-		        </div>
-				<div class="col-md-6">
-			        <div class="jumbotron">
-				        <h2>
-					        Groupe
-				        </h2>
-				        <p>
-					        <a class="btn btn-primary btn-large" href="listing.php">Groupe</a>
-				        </p>
-			        </div>
-		        </div>
-				<div class="col-md-6">
-			        <div class="jumbotron">
-				        <h2>
-					        Notes
-				        </h2>
-				        <p>
-					        <a class="btn btn-primary btn-large" href="listing.php">Notes</a>
-				        </p>
-			        </div>
-		        </div>
-	        </div>
-        </div>
+<div class="container-fluid my-1 border">
+	<div class="row">
+		<div class="col-md-12">
+		<div class="jumbotron text-center">
+				<h2 class="mb-3">
+				Mes informations
+				</h2>
+				<p>
+					Bienvenue {{\Auth::user()->name}}.<br>
+					xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+				</p>
+			</div>
+			<div class="row">
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td>
+								<h2>Présentiel</h2>
+								<p>
+								xxxxxxxxxxxxxxxx</p>
+								<p>
+									<a class="btn" href="etudiant/presentiel">Voir le présentiel »</a>
+								</p>
+							
+						</td>
+						<td><h2>Notes</h2>
+								<p>
+								xxxxxxxxxxxxxxxx</p>
+								<p>
+									<a class="btn" href="etudiant/notes">Voir les notes »</a>
+								</p></td>
+					</tr>
+					<tr>
+						<td><h2>Groupes</h2>
+								<p>
+								xxxxxxxxxxxxxxxx</p>
+								<p>
+									<a class="btn" href="etudiant/groupes">Voir les groupes »</a>
+								</p></td>
+						<td><h2>Epreuves</h2>
+								<p>
+								xxxxxxxxxxxxxxxx</p>
+								<p>
+									<a class="btn" href="etudiant/epreuves">Voir les épreuves »</a>
+								</p></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 @endsection

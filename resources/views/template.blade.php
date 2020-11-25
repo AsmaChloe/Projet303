@@ -20,7 +20,6 @@
           
         </li>
         <li class="nav-item">
-          <!--<a class="nav-link" href="#">Link 2</a>-->
         </li>
         @if(Auth::check())
 
@@ -68,10 +67,10 @@
         <li class="nav-item">
           @if(Auth::check())
             <form method="POST" action="/Projet303/public/logout">@csrf
-              <a class="nav-link" href="/Projet303/public/logout" onclick="event.preventDefault();this.closest('form').submit();">Deconnexion</a>
+              <a class="btn btn-danger" href="/Projet303/public/logout" onclick="event.preventDefault();this.closest('form').submit();">Deconnexion</a>
             </form> 
           @else
-            <a class="nav-link" href="/Projet303/public/login"><span class="glyphicon glyphicon-log-in"></span>Connexion</a>
+            <a class="btn btn-outline-secondary" href="/Projet303/public/login"><span class="glyphicon glyphicon-log-in"></span>Connexion</a>
           @endif
         </li>
       </ul>

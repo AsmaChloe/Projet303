@@ -17,8 +17,9 @@ class PresentielController extends Controller
     public function liste(Request $request)
     {
         if(Auth::check() && ((Auth::user()->role)==3)){ 
-            $seances=(Auth::user())->seancesEtu;
             $ecs=(Auth::user())->ip;
+
+            $seances=[];
 
             return view('etudiant/presentiel',['user' => Auth::user(),'seances'=>$seances,'ecs'=>$ecs]);
         }

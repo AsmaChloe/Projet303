@@ -66,6 +66,11 @@ Route::get('/enseignant/gererNotes/ajout-note', [\App\Http\Controllers\NotesCont
 
 //**************** ETUDIANT ******************/
 
+//Accueil de l'etudiant
+Route::get('etudiant', function() {
+    return view('etudiant/accueiletudiant');
+})->name('etudiant');
+
 //Notes de l'etudiant
 Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
 
@@ -81,10 +86,7 @@ Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste');
 //Presentiel
 Route::get('/etudiant/presentiel', 'App\Http\Controllers\PresentielController@liste');
 
-//Accueil de l'etudiant
-Route::get('etudiant', function() {
-    return view('etudiant/accueiletudiant');
-})->name('etudiant');
+
 
 Route::get('etudiant/accueiletudiant', function() {
     return view('etudiant/accueiletudiant');

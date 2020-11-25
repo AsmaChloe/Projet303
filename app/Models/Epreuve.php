@@ -19,11 +19,11 @@ class Epreuve extends Model
      * Obtenir l'ec de l'épreuve
      */
     public function ec(){
-        return $this->belongsTo(EC::class,'idEpreuve');
+        return $this->belongsTo(EC::class,'idEC');
     }
 
     /**
-     * Obtenir les étudiants participant à l'épreuve //N-fonctionnel a cause de ec-etudiant
+     * Obtenir les étudiants participant à l'épreuve 
      */
     public function etudiants(){
         return $this->ec->etudiants;
