@@ -1,9 +1,11 @@
 @extends('template')
 @section('titre') Accueil @endsection
 @section('contenu')
+
+<!--Header-->
 <div class="container-fluid bg-light">
     <div class="container pt-5 pb-4" >
-        <h1 class="display-4 text-center mb-4">Mes informations</h1>
+	<h2 class="display-2 text-center mb-4">Mes informations</h2>
 
         <p class="lead text-center mb-4"> 
 		Bienvenue {{\Auth::user()->name}}.<br>

@@ -1,43 +1,57 @@
 @extends('template')
 @section('titre')Liste des groupes @endsection
 @section('contenu')
-    <div class="container-fluid my-1 border">
-        <div class="row">
-            <div class="col-md-2">
-                <!--OK Mais maybe il y a une meilleure maniere d'afficher les EC PUIS les groupes de l'utilisateur ??? A voir, ainsi que le choix de la version-->
-            </div>
-            <div class="col-md-10">
-                <h1 class="display-1">Mes groupes</h1>
-                <p>
 
-                    <h3 class="display-3">VERSION 1</h3>
-                    @foreach($user->ip as $ec)
-                    <h6 class="display-6">{{$ec->sigleEC}} </h6>
-                        @foreach($ec->ec_groupe as $groupe)
-                            @foreach($groupe->etudiants as $etudiant)
-                                
-                                @if($etudiant->id == $user->id)
-                                    {{$groupe->nomGroupe}}({{$groupe->typeGroupe}})<br>
-                                @endif
-                                
-                            @endforeach
-                        @endforeach
-                        <br>
-                    @endforeach
+<!--Header-->
+<div class="container-fluid bg-light">
+    <div class="container pt-5 pb-4" >
+        <h2 class="display-2 text-center mb-4">Groupes</h2>
 
-                    <br><br>
-
-                    <h3 class="display-3">VERSION 2</h3>
-                   @foreach($user->groupesEtu as $groupe )
-                        <h6 class="display-6">{{$groupe->nomGroupe}}({{$groupe->typeGroupe}})</h6>
-                        @foreach($groupe->ec_groupe as $ec)
-                            {{ $ec->sigleEC}}
-                            <br>
-                        @endforeach
-                        <br>
-                   @endforeach
-                </p>
-            </div>
-        </div>
+        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxxxxx</p>
     </div>
+</div>
+
+
+<div class="col-md-2">
+</div>
+<div class="col-md-8">
+
+    <!--Une table par EC-->
+    @foreach($user->ip as $ec)
+    <table class="table table-striped table-bordered">
+
+        <thead>
+            <tr class="thead-dark">
+                <th colspan="2">{{$ec->sigleEC}} - {{$ec->nomEC}}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Groupe</th>
+                <th>Intervenant</th>
+            </tr>
+            <!--Pour chaque groupes de l'EC-->
+            @foreach($ec->ec_groupe as $groupe)
+
+                <!--On regarde si il est un groupe de l'etudiant-->
+                @if($groupe->etudiants->contains($user))
+                    <tr>
+                        <td>{{$groupe->nomGroupe}}({{$groupe->typeGroupe}})</td>
+
+                        <!--Pour chacun des enseignants de l'EC-->
+                        <td>@foreach($ec->enseignants as $enseignant)
+                            <!--On regarde s'il est professeur du groupe actuel-->
+                            @if($groupe->enseignants->contains($enseignant))
+                                {{$enseignant->name}}
+                            @endif
+                        @endforeach</td>
+                    </tr>
+                @endif
+            @endforeach
+        </tbody>
+    </table>
+    @endforeach
+</div>
+
 @endsection

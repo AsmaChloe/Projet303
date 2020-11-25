@@ -72,22 +72,27 @@ Route::get('/etudiant/ajout-presentiel', [\App\Http\Controllers\PresentielContro
 
 //Accueil de l'etudiant
 Route::get('etudiant', function() {
-    return view('etudiant/accueiletudiant');
+    if(Auth::check() && Auth::user()->role==3){
+        return view('etudiant/accueiletudiant');
+    }
+    else{
+        return redirect('/');
+    }
 });
 
-//Notes de l'etudiant
+//Voir ses notes
 Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@voirSesNotes');
 
-//Groupes de l'étudiant
+//Voir ses groupes
 Route::get('/etudiant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
 
-//Epreuves de l'etudiant
+//Voir ses epreuves
 Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@liste');
 
-//Les IP de l'étudiant
+//Voir ses IP
 Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste');
 
-//Presentiel
+//Voir son presentiel
 Route::get('/etudiant/presentiel', 'App\Http\Controllers\PresentielController@voirsonPresentiel');
 
 

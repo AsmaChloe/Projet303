@@ -5,7 +5,7 @@
 <!--Header-->
 <div class="container-fluid bg-light">
     <div class="container pt-5 pb-4" >
-        <h1 class="display-4 text-center mb-4">Présentiel</h1>
+	<h2 class="display-2 text-center mb-4">Présentiel</h2>
 
         <p class="lead text-center mb-4">
 			Résoudre l'affichage lors de l'ajoute :((( <br>

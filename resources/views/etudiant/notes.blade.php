@@ -5,7 +5,7 @@
 <!--Header-->
 <div class="container-fluid bg-light">
     <div class="container pt-5 pb-4" >
-        <h1 class="display-4 text-center mb-4">Notes</h1>
+        <h2 class="display-2 text-center mb-4">Notes</h2>
 
         <p class="lead text-center mb-4"> Quand ajout d'une nouvelle note : pb affichage du type de l'epreuve : il faut refresh pour voir<br>
                 - faire le calcul des totaux <br>
@@ -23,14 +23,6 @@
 <div class="col-md-2">
 </div>
 <div class="col-md-8">
-    <div class="row">
-
-        <div class="col-md-12">
-            <h1 class="display-1"></h1> 
-            <p class="lead">
-        </div>
-
-    </div> 
     <br>
     <table id="noteTable" class="table table-striped table-bordered">
         

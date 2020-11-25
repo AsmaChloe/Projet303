@@ -2,19 +2,21 @@
 @section('titre')Mes IP @endsection
     
 @section('contenu')
-<div class="container-fluid my-1 border">
-    <div class="row">
-        <div class="col-md-2">
 
-            
+<!--Header-->
+<div class="container-fluid bg-light">
+    <div class="container pt-5 pb-4" >
+        <h2 class="display-2 text-center mb-4">Inscriptions Pédagogiques</h2>
+
+        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxxxxx</p>
+    </div>
+</div>
+
+<div class="container-fluid my-1">
+    <div class="row">
+        <div class="col-md-2">    
         </div>
         <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="display-1">Inscriptions Pédagogiques</h1>
-                </div>
-            </div>
-            <br><br>
             <table class="table table-striped">
                 <thead class="thead-dark"> 
                     <tr>
@@ -22,14 +24,17 @@
                         <th scope="col">EC</th>
                     </tr>
                 </thead>
-                <tbody>@foreach($user->ip as $ec)
+
+                <tbody>
+                @foreach($user->ip as $ec)
                     <tr>
                         <td>{{$ec->sigleEC}}</td>
                         <td>{{$ec->nomEC}}</td>
-                    </tr>@endforeach
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
-            <br>
+            
         </div>
         <div class="col-md-2">
         </div>
