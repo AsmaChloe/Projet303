@@ -16,7 +16,7 @@ class Seance extends Model
     protected $table = 'seances';
     protected $primaryKey = 'idSeance';
 
-    protected $fillable = ['debutSeance','finSeance','idGroupe'];
+    protected $fillable = ['debutSeance','finSeance','idGroupe','idEC'];
 
     /**
      * Obtenir le groupe qui a assité à la séance
@@ -43,7 +43,7 @@ class Seance extends Model
      * Obtenir l'EC de la séance
      */
     public function ec(){
-        return $this->groupe->ec_groupe;
+        return $this->belongsTo(EC::class,'idEC');
     }
 
     /**

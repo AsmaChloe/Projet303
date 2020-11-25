@@ -21,7 +21,11 @@
 								<p>
 								xxxxxxxxxxxxxxxx</p>
 								<p>
+									@if(Auth::user()->id==3)
 									<a class="btn" href="etudiant/presentiel">Voir le présentiel »</a>
+									@else
+										<a class="btn" href="#">Voir le présentiel »</a>
+									@endif
 								</p>
 							
 						</td>

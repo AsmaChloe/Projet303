@@ -52,10 +52,10 @@ Route::get('enseignant', function() {
 
 //Groupes de l'enseignant
 Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
-
 //Etudiants de groupe de l'enseignant
 Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\GroupesController@listeEtudiant')->name('etudiants');
-
+//Voir presentiel de etudiant
+Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielController@voirPresentielEtudiant')->name('presentielEtudiant');
 
 //Ajouter une note
 Route::get('/enseignant/gererNotes/nouvelleNote', [\App\Http\Controllers\NotesController::class,'create']);
@@ -69,7 +69,7 @@ Route::get('/enseignant/gererNotes/ajout-note', [\App\Http\Controllers\NotesCont
 //Accueil de l'etudiant
 Route::get('etudiant', function() {
     return view('etudiant/accueiletudiant');
-})->name('etudiant');
+});
 
 //Notes de l'etudiant
 Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
@@ -84,7 +84,7 @@ Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@liste'
 Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste');
 
 //Presentiel
-Route::get('/etudiant/presentiel', 'App\Http\Controllers\PresentielController@liste');
+Route::get('/etudiant/presentiel', 'App\Http\Controllers\PresentielController@voirsonPresentiel');
 
 
 

@@ -76,7 +76,7 @@ class EC extends Model
      * Les seances de l'EC
      */
     public function seances(){
-        return $this->hasManyThrough(Seance::class,EC_Groupe::class,'idEC','idGroupe','idEC','idGroupe');
+        return $this->hasMany(Seance::class,'idEC');
         
     }
     

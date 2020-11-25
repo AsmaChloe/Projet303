@@ -19,6 +19,8 @@ class CreateSeancesTable extends Migration
             $table->datetime('finSeance');
             $table->unsignedBigInteger('idGroupe');
             $table->foreign('idGroupe')->references('idGroupe')->on('groupes');
+            $table->unsignedBigInteger('idEC');
+            $table->foreign('idEC')->references('idEC')->on('e_c_s');
             $table->timestamps();
         });
     }

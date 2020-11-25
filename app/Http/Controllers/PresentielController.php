@@ -14,17 +14,39 @@ class PresentielController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function liste(Request $request)
+    public function voirsonPresentiel(Request $request)
     {
-        if(Auth::check() && ((Auth::user()->role)==3)){ 
-            $ecs=(Auth::user())->ip;
-
-            $seances=[];
-
-            return view('etudiant/presentiel',['user' => Auth::user(),'seances'=>$seances,'ecs'=>$ecs]);
+        if(Auth::check()){
+            if((Auth::user()->role)==3){  //Etudiant
+                $user=Auth::user();
+            
+                
+            }
+            else{ //Enseignant et Responsable
+                $user=\App\Models\User::where('id',3)->first();
+            }
+            return view('etudiant/presentiel',compact('user'));
         }
         else{
-            return back();
+            return redirect('/');
+        } 
+    }
+
+
+    /**
+     * Cette méthode permet d'afficher les groupes de l'étudiant
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function voirPresentielEtudiant($id)
+    {
+        if ( Auth::check() && ( (Auth::user()->role)==2 || (Auth::user()->role)==1) ){
+            $etudiant=\App\Models\User::find($id);
+            //$etudiants=$groupe->etudiants;
+            return view('etudiant/presentiel',['user'=>$etudiant]);
+        }
+        else{
+            return redirect('/');
         } 
     }
 }

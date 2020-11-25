@@ -20,7 +20,7 @@ class EpreuvesController extends Controller
             return view('etudiant/epreuves',['user' => Auth::user(),'epreuves'=>$epreuves]);
         }
         else{
-            return back();
+            return redirect('/');
         } 
     }
 }

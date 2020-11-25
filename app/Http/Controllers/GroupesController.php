@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class GroupesController extends Controller
 {
     /**
-     * Cette méthode permet d'afficher les groupes de l'étudiant
+     * Cette méthode permet d'afficher les groupes de l'étudiant/enseignant depuis ce statut
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,17 +27,17 @@ class GroupesController extends Controller
                     return view('enseignant/groupes',['user'=>$user,'ecs'=>$ecs]);
                 }
                 else{
-                    return back();
+                    return redirect('/');
                 }
             }
         }
         else{
-            return back();
+            return redirect('/');
         } 
     }
 
     /**
-     * Cette méthode permet d'afficher les groupes de l'étudiant
+     * Cette méthode permet d'afficher les groupes de l'étudiant depuis un statut exterieur (enseignant)
      *
      * @return \Illuminate\Http\Response
      */
@@ -50,7 +50,7 @@ class GroupesController extends Controller
             return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants]);
         }
         else{
-            return back();
+            return redirect('/');
         } 
     }
 }
