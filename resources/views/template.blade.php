@@ -80,7 +80,7 @@
     <!--CONTENU-->
     <div class="container-fluid my-1 border">
     <div class="row">
-  @yield('contenu')
+        @yield('contenu')
     
     </div>
     </div>

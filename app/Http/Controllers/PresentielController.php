@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use \App\Models\Seance;
+use \App\Models\Presentiel;
 
 class PresentielController extends Controller
 {
@@ -49,4 +49,22 @@ class PresentielController extends Controller
             return redirect('/');
         } 
     }
+
+    /**
+     * Pour enregistrer une nouvelle presence dans la bdd.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $presentiel=new Presentiel();
+        $presentiel->idEtudiant = $request->idEtudiant;
+        $presentiel->idSeance = $request->idSeance;
+        $presentiel->idType = $request->idType;
+        $presentiel->save();
+
+        return response()->json($presentiel);
+    }
+
 }

@@ -2,7 +2,7 @@
 @section('titre') Index @endsection
 
 @section('contenu')
-<div class="container-fluid my-1 border">
+<div class="container-fluid my-1">
   <div class="row">
     <div class="col-md-2">	
     		    

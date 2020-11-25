@@ -12,7 +12,7 @@
                 - Permettre de supprimer et modifier
                 - ne pas devoir entrer les id pour ajouter une note
                 - verifier que l'on entre bien une epreuve qui correspond à l'etudiant + une note valide
-            <p>
+            </p>
             <br>
             @if(Auth::user()->id != 3)
             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#noteModal">Ajouter une note</a>

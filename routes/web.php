@@ -63,6 +63,8 @@ Route::get('/etudiant/notes/{id}', 'App\Http\Controllers\NotesController@voirNot
 Route::get('/enseignant/gererNotes/nouvelleNote', [\App\Http\Controllers\NotesController::class,'create']);
 Route::get('/enseignant/gererNotes/ajout-note', [\App\Http\Controllers\NotesController::class,'store'])->name('note.ajout');
 
+//Ajouter un presentiel
+Route::get('/etudiant/ajout-presentiel', [\App\Http\Controllers\PresentielController::class,'store'])->name('presentiel.ajout');
 
 
 
