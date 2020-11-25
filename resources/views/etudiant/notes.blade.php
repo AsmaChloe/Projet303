@@ -1,21 +1,33 @@
 @extends('template')
 @section('titre')Liste des notes @endsection
 @section('contenu')
+
+<!--Header-->
+<div class="container-fluid bg-light">
+    <div class="container pt-5 pb-4" >
+        <h1 class="display-4 text-center mb-4">Notes</h1>
+
+        <p class="lead text-center mb-4"> Quand ajout d'une nouvelle note : pb affichage du type de l'epreuve : il faut refresh pour voir<br>
+                - faire le calcul des totaux <br>
+                - Permettre de supprimer et modifier
+                - ne pas devoir entrer les id pour ajouter une note
+                - verifier que l'on entre bien une epreuve qui correspond à l'etudiant + une note valide
+            <p>
+            <br>
+            @if(Auth::user()->id != 3)
+            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#noteModal">Ajouter une note</a>
+            @endif
+    </div>
+</div>
+
 <div class="col-md-2">
 </div>
 <div class="col-md-8">
     <div class="row">
 
         <div class="col-md-12">
-            <h1 class="display-1">Mes notes :</h1> 
-            <p class="lead"> Quand ajout d'une nouvelle note : pb affichage du type de l'epreuve : il faut refresh pour voir<br>
-                - faire le calcul des totaux <br>
-                - Permettre de supprimer et modifier
-            <p>
-            <br>
-            @if($user->id != 3)
-            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#noteModal">Ajouter une note</a>
-            @endif
+            <h1 class="display-1"></h1> 
+            <p class="lead">
         </div>
 
     </div> 
@@ -28,7 +40,7 @@
                     <th colspan="3">{{$ec->sigleEC}}</th>
                     <th>{{$ec->nbECTS}} ECTS</th>
                     <th>{{$ec->nbPoints}} points</th>
-                    @if($user->id != 3)
+                    @if(Auth::user()->id != 3)
                     <th rowspan="2">Modifications</th>
                     @endif
                 </tr>
@@ -52,7 +64,7 @@
                                 <td></td>
                                 <td></td>
                                 
-                                @if($user->id != 3)
+                                @if(Auth::user()->id != 3)
                                 <td class="d-flex ">
                                     <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
                                     <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
@@ -129,7 +141,7 @@
     $("#noteForm").submit(function(e){
         e.preventDefault();
         //Recupération des valeurs
-        let idEtudiant = {{Auth::user()->id}};
+        let idEtudiant = {{$user->id}};
         let idEpreuve = $("#idEpreuve").val();
         let valeurNote = $("#valeurNote").val();
         let maxNote = $("#maxNote").val();

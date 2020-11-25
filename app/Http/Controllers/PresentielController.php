@@ -34,7 +34,7 @@ class PresentielController extends Controller
 
 
     /**
-     * Cette méthode permet d'afficher les groupes de l'étudiant
+     * Cette méthode permet d'afficher le présentiel d'un étudiant
      *
      * @return \Illuminate\Http\Response
      */

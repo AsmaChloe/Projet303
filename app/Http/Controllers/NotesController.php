@@ -17,16 +17,16 @@ class NotesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function liste(Request $request)
+    public function voirSesNotes(Request $request)
     {
-        if(Auth::check() && ((Auth::user()->role)==3 || (Auth::user()->role)==1) ){ //Il faut être connecté et être un étudiant ou un responsable
+        if(Auth::check() && (Auth::user()->role)==3){ //Il faut être connecté et être un étudiant ou un responsable
             
             $ecs=Auth::user()->ip; //IP de l'étudiant
             
             return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs]);
         }
         else{
-            return back();
+            return redirect('/');
         } 
     }
 
@@ -44,7 +44,7 @@ class NotesController extends Controller
             
         }
         else{
-            return back();
+            return redirect('/');
         }
     }
 
@@ -66,7 +66,23 @@ class NotesController extends Controller
         return response()->json($note);
     }
 
-    
+    /**
+     * Cette méthode permet d'afficher les d'un étudiant
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function voirNotesEtudiant($id)
+    {
+        if ( Auth::check() && ( (Auth::user()->role)==2 || (Auth::user()->role)==1) ){
+            $etudiant=\App\Models\User::find($id);
+            $ecs=$etudiant->ip; //IP de l'étudiant
+            
+            return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+        }
+        else{
+            return redirect('/');
+        } 
+    }
 
     
 }

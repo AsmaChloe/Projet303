@@ -10,7 +10,7 @@
                 <br>
                 <h2 class="display-2">Etudiants du groupe {{$groupe->nomGroupe}}</h2>
                 @foreach($etudiants as $etudiant)
-                    {{$etudiant->name}} | <a href= "{{ route('presentielEtudiant',['id'=>$etudiant->id]) }}" >Presentiel</a>
+                    {{$etudiant->name}} | <a href= "{{ route('presentielEtudiant',['id'=>$etudiant->id]) }}" >Presentiel</a> | <a href= "{{ route('notesEtudiant',['id'=>$etudiant->id]) }}" >Notes</a>
                     <br>
                 @endforeach
             </div>

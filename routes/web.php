@@ -56,6 +56,8 @@ Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeG
 Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\GroupesController@listeEtudiant')->name('etudiants');
 //Voir presentiel de etudiant
 Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielController@voirPresentielEtudiant')->name('presentielEtudiant');
+//Voir notes de etudiant
+Route::get('/etudiant/notes/{id}', 'App\Http\Controllers\NotesController@voirNotesEtudiant')->name('notesEtudiant');
 
 //Ajouter une note
 Route::get('/enseignant/gererNotes/nouvelleNote', [\App\Http\Controllers\NotesController::class,'create']);
@@ -72,7 +74,7 @@ Route::get('etudiant', function() {
 });
 
 //Notes de l'etudiant
-Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@liste');
+Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@voirSesNotes');
 
 //Groupes de l'étudiant
 Route::get('/etudiant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
