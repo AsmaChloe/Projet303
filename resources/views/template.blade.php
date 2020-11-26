@@ -47,6 +47,7 @@
           @if(Auth::user()->role==2)
           
             <div class="dropdown-menu">
+              <a class="dropdown-item" href="/Projet303/public/enseignant">Informations</a>
               <a class="dropdown-item" href="/Projet303/public/enseignant/groupes">Groupes</a>
             </div>
           </li>

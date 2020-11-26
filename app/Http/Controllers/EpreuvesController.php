@@ -15,7 +15,7 @@ class EpreuvesController extends Controller
      */
     public function liste(Request $request)
     {
-        if(Auth::check()  ){
+        if(Auth::check() && Auth::user()->role==3){
             $epreuves=Epreuve::all();
             return view('etudiant/epreuves',['user' => Auth::user(),'epreuves'=>$epreuves]);
         }

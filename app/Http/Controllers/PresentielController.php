@@ -16,15 +16,8 @@ class PresentielController extends Controller
      */
     public function voirsonPresentiel(Request $request)
     {
-        if(Auth::check()){
-            if((Auth::user()->role)==3){  //Etudiant
-                $user=Auth::user();
-            
-                
-            }
-            else{ //Enseignant et Responsable
-                $user=\App\Models\User::where('id',3)->first();
-            }
+        if(Auth::check() && Auth::user()->role==3){
+            $user=Auth::user();
             return view('etudiant/presentiel',compact('user'));
         }
         else{

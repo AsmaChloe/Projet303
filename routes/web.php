@@ -17,11 +17,18 @@ Route::get('/', function () {
     return view('index');
 });
 
-/* ROUTES RESPONSABLES */
+/*------------------------------------------------------ROUTES RESPONSABLES */
+
 //Accueil du responsable
 Route::get('responsable', function() {
-    return view('responsable/accueilresponsable');
+    if(Auth::check() && Auth::user()->role==1){
+        return view('responsable/accueilresponsable');
+    }
+    else{
+        return redirect('/');
+    }
 });
+
 
 //Gestionnaire
 Route::get('responsable/gestion', function() {
@@ -45,9 +52,15 @@ Route::get('responsable/listing', function() {
 
 
 /*------------------------------------------------------- ROUTES PROFESSEUR */
-//Accueil du professeur
+
+//Accueil de l'enseignant
 Route::get('enseignant', function() {
-    return view('enseignant/accueilenseignant');
+    if(Auth::check() && Auth::user()->role==2){
+        return view('enseignant/accueilenseignant');
+    }
+    else{
+        return redirect('/');
+    }
 });
 
 //Groupes de l'enseignant
@@ -94,16 +107,6 @@ Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste');
 
 //Voir son presentiel
 Route::get('/etudiant/presentiel', 'App\Http\Controllers\PresentielController@voirsonPresentiel');
-
-
-
-Route::get('etudiant/accueiletudiant', function() {
-    return view('etudiant/accueiletudiant');
-});
-
-
-
-
 
 
 /**********************AUTRE ************************/
