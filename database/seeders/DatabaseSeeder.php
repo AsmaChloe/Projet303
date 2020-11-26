@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 
         //$this->call(TypePresentielTableSeeder::class);
         //$this->call(UserTableSeeder::class);
-        //$this->call(DiplomeTableSeeder::class);
+        $this->call(DiplomeTableSeeder::class);
         //$this->call(ParcoursTableSeeder::class);
         //$this->call(SemestreTableSeeder::class);
         //$this->call(ECTableSeeder::class);
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(EpreuveTableSeeder::class);
         //$this->call(NotesTableSeeder::class);
         //$this->call(GroupesTableSeeder::class);
-        $this->call(SeanceTableSeeder::class);
+        //$this->call(SeanceTableSeeder::class);
         //$this->call(PresentielTableSeeder::class);
         //$this->call(IPTableSeeder::class);
         //$this->call(ECEnseignantTableSeeder::class);

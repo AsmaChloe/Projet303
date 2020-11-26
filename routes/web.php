@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-/*------------------------------------------------------ROUTES RESPONSABLES */
+/*------------------------------------------------------ROUTES RESPONSABLES-------------------------------------------------------- */
 
 //Accueil du responsable
 Route::get('responsable', function() {
@@ -29,6 +29,8 @@ Route::get('responsable', function() {
     }
 });
 
+//Diplomes gérés par le responsable
+Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes');
 
 //Gestionnaire
 Route::get('responsable/gestion', function() {
@@ -43,11 +45,6 @@ Route::get('responsable/enseignants', function() {
 //Gestionnaire des groupes
 Route::get('responsable/groupes', function() {
     return view('responsable/groupes');
-});
-
-//Listing des groupes
-Route::get('responsable/listing', function() {
-    return view('responsable/listing');
 });
 
 
