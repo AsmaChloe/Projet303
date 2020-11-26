@@ -18,7 +18,7 @@ class IPController extends Controller
             return view('etudiant/ip',['user' => Auth::user()]);
         }
         else{
-            return back();
+            return redirect('/');
         } 
     }
 }

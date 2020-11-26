@@ -34,9 +34,21 @@ class PresentielController extends Controller
     public function voirPresentielEtudiant($id)
     {
         if ( Auth::check() && ( (Auth::user()->role)==2 || (Auth::user()->role)==1) ){
+            
             $etudiant=\App\Models\User::find($id);
-            //$etudiants=$groupe->etudiants;
-            return view('etudiant/presentiel',['user'=>$etudiant]);
+            $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
+
+            foreach($ecsEns as $ecEns){
+
+                //Si c'est un etudiant du professeur, on peut voir son presentiel
+                if($ecEns->etudiants->contains($etudiant)){
+                    return view('etudiant/presentiel',['user'=>$etudiant,'ecEns'=>$ecEns]);
+                }
+                else{
+                    return redirect('/');
+                }
+            }
+            
         }
         else{
             return redirect('/');

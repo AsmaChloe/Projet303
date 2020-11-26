@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Etudiants du groupe {{$groupe->nomGroupe}}</h2>
 
-        <p class="lead text-center mb-4">Blabla.</p>
+        <p class="lead text-center mb-4"></p>
     </div>
 </div>
 
@@ -25,6 +25,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 @foreach($etudiants as $etudiant)
                     <tr>
                         <td>{{$etudiant->name}}</td>

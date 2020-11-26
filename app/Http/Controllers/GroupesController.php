@@ -44,10 +44,17 @@ class GroupesController extends Controller
     public function listeEtudiant($id)
     {
         if(Auth::check() && (Auth::user()->role)==2 ){
-            
+            $prof=Auth::user();
+            $groupesEns=$prof->groupesEns;
             $groupe=\App\Models\Groupes::find($id);
-            $etudiants=$groupe->etudiants;
-            return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants]);
+
+            if($groupesEns->contains($groupe)){ //Si c'est un groupe de l'enseignant
+                $etudiants=$groupe->etudiants;
+                return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants]);
+            }
+            else{
+                return redirect('/');
+            }
         }
         else{
             return redirect('/');

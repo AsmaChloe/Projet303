@@ -51,7 +51,7 @@ Route::get('responsable/listing', function() {
 });
 
 
-/*------------------------------------------------------- ROUTES PROFESSEUR */
+/*------------------------------------------------------- ROUTES PROFESSEUR --------------------------------------------------*/
 
 //Accueil de l'enseignant
 Route::get('enseignant', function() {
@@ -65,23 +65,25 @@ Route::get('enseignant', function() {
 
 //Groupes de l'enseignant
 Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
+
 //Etudiants de groupe de l'enseignant
 Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\GroupesController@listeEtudiant')->name('etudiants');
+
 //Voir presentiel de etudiant
 Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielController@voirPresentielEtudiant')->name('presentielEtudiant');
+
 //Voir notes de etudiant
 Route::get('/etudiant/notes/{id}', 'App\Http\Controllers\NotesController@voirNotesEtudiant')->name('notesEtudiant');
 
-//Ajouter une note
-Route::get('/enseignant/gererNotes/nouvelleNote', [\App\Http\Controllers\NotesController::class,'create']);
+//Route pour permettre d'ajouter une note
 Route::get('/enseignant/gererNotes/ajout-note', [\App\Http\Controllers\NotesController::class,'store'])->name('note.ajout');
 
-//Ajouter un presentiel
+//Route pour permettre d'ajouter un presentiel
 Route::get('/etudiant/ajout-presentiel', [\App\Http\Controllers\PresentielController::class,'store'])->name('presentiel.ajout');
 
 
 
-//**************** ETUDIANT ******************/
+/*---------------------------------------------------ROUTES ETUDIANT ---------------------------------------------*/
 
 //Accueil de l'etudiant
 Route::get('etudiant', function() {

@@ -75,9 +75,21 @@ class NotesController extends Controller
     {
         if ( Auth::check() && ( (Auth::user()->role)==2 || (Auth::user()->role)==1) ){
             $etudiant=\App\Models\User::find($id);
+            $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
             $ecs=$etudiant->ip; //IP de l'étudiant
+
+            foreach($ecsEns as $ecEns){
+
+                //Si c'est un etudiant du professeur, on peut voir ses notes
+                if($ecEns->etudiants->contains($etudiant)){
+                    return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+                }
+                else{
+                    return redirect('/');
+                }
+            }
             
-            return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+            
         }
         else{
             return redirect('/');
