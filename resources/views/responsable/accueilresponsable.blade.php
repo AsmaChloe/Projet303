@@ -17,6 +17,13 @@
 		<table class="table table-striped table-bordered">
 			<tr>
 				<td>
+					<h2>Diplomes</h2>
+						<p>xxxxxxxxxxxxxxxx</p>
+						<p><a class="btn" href="responsable/diplomes">Voir »</a></p>							
+				</td>
+			</tr>
+			<tr>
+				<td>
 					<h2>XXXX</h2>
 						<p>xxxxxxxxxxxxxxxx</p>
 						<p><a class="btn" href="#">Voir »</a></p>							

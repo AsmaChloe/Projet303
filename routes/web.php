@@ -31,6 +31,8 @@ Route::get('responsable', function() {
 
 //Diplomes gérés par le responsable
 Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes');
+//Parcours du diplome géré par le responsable
+Route::get('/responsable/diplomes/{idDiplome}', 'App\Http\Controllers\DiplomesController@listeParcours')->name('parcours');
 
 //Gestionnaire
 Route::get('responsable/gestion', function() {

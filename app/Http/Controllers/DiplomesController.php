@@ -22,4 +22,29 @@ class DiplomesController extends Controller
             return redirect('/');
         } 
     }
+
+    /**
+     * Cette méthode permet d'afficher les parcours du diplome géré par le responsable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listeParcours($id)
+    {
+        if(Auth::check() && (Auth::user()->role)==1 ){
+            $resp=Auth::user();
+            //$diplomes=$resp->diplomes;
+            $diplome=\App\Models\Diplomes::find($id);
+            
+            /*foreach($diplomes as $diplome){
+                if($diplome->parcours->contains($parcours)){ //Si le parcours est dans le diplome du responsable*/
+                    return view('responsable/parcours',['parcours'=>$diplome->parcours]);
+            /* }
+            }
+                return redirect('/');*/
+            
+        }
+        else{
+            return redirect('/');
+        } 
+    }
 }

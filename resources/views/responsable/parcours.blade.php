@@ -1,13 +1,13 @@
 @extends('template')
-@section('titre')Diplomes @endsection
+@section('titre')Parcours @endsection
 @section('contenu')
 
 <!--Header-->
 <div class="container-fluid bg-light">
     <div class="container pt-5 pb-4" >
-	<h2 class="display-2 text-center mb-4">Diplomes</h2>
+	<h2 class="display-2 text-center mb-4">Parcours</h2>
 
-        <p class="lead text-center mb-4"><br></p>
+        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxx<br></p>
     </div>
 </div>
 
@@ -22,18 +22,14 @@
                 <table class="table table-striped table-bordered">
 
                     <thead class="thead-dark">
-                        <th>Type diplome</th>
-                        <th>Nom diplome</th>
+                        <th>Parcours</th>
                     </thead>
 
                     <tbody>
-                        @foreach($user->diplomes as $diplome)
+                        @foreach($parcours as $parc)
                         <tr>
                             <td>
-                                {{$diplome->typeDiplome}}
-                            </td>
-                            <td>
-                                <a class="badge badge-secondary" href= "{{ route('parcours',['idDiplome'=>$diplome->idDiplome]) }}" >{{$diplome->nomDiplome}}</a>
+                                {{$parc->sigleParcours}} - {{$parc->nomParcours}} <a class="badge badge-secondary" href= "#" >Voir</a>
                             </td>
                         </tr>
                         @endforeach
@@ -45,5 +41,4 @@
         </div>
     </div>
 </div>
-
 @endsection
