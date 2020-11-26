@@ -1,33 +1,48 @@
 @extends('template')
 @section('titre')Liste des groupes @endsection
 @section('contenu')
-    <div class="container-fluid my-1 border">
-        <div class="row">
-            <div class="col-md-2">
-                
-            </div>
-            <div class="col-md-10">
-                <h1 class="display-1">Mes groupes</h1>
-                Voir si on peut afficher que 1 seule fois les groupes ://
-                <p>
-                    @foreach($ecs as $ec)
-                    <h6 class="display-6">{{$ec->sigleEC}} </h6>
+
+<!--Header-->
+<div class="container-fluid bg-light">
+    <div class="container pt-5 pb-4" >
+        <h2 class="display-2 text-center mb-4">Mes Groupes</h2>
+
+        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxx</p>
+    </div>
+</div>
+
+<div class="container-fluid my-1">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            
+            <!--Table-->
+            @foreach($ecs as $ec)
+                <table class="table table-striped table-bordered">
+
+                    <thead class="thead-dark">
+                        <th>{{$ec->sigleEC}}</th>
+                    </thead>
+
+                    <tbody>
                         @foreach($ec->ec_groupe as $groupe)
-                            @foreach($groupe->enseignants as $enseignant)
-                                
-                                @if($enseignant->id == $user->id)
-                                    <a href= " {{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}" >{{$groupe->nomGroupe}}({{$groupe->typeGroupe}})</a><br>
+                            @if($groupe->enseignants->contains($user))
+                                <tr>
+                                    <td>
+                                        <a class="badge badge-secondary" href= " {{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}" >{{$groupe->nomGroupe}}({{$groupe->typeGroupe}})</a>
+                                    </td>
+                                </tr>
                                     
                                 @endif
-                                
-                            @endforeach
                         @endforeach
                         <br>
-                    @endforeach
-                   
-                </p>
-                    
-            </div>
+                    </tbody>    
+                </table>
+            @endforeach
+        </div>
+        <div class="col-md-2">
         </div>
     </div>
+</div>
 @endsection
