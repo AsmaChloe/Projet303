@@ -57,7 +57,7 @@
           @if(Auth::user()->role==1)
           
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">x</a>
+              <a class="dropdown-item" href="/Projet303/public/responsable">Informations</a>
             </div>
           </li>
           @endif

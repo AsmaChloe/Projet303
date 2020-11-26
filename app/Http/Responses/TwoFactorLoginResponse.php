@@ -7,7 +7,7 @@ use Laravel\Fortify\Contracts\TwoFactorLoginResponse as TwoFactorLoginResponseCo
 class TwoFactorLoginResponse implements TwoFactorLoginResponseContract
 {
     /**
-     * Create an HTTP response that represents the object.
+     * Cette fonction permet de gerer la double authentification avec la redirection en fonction du role
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Symfony\Component\HttpFoundation\Response
