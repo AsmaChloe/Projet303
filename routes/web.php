@@ -33,22 +33,10 @@ Route::get('responsable', function() {
 Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes');
 //Parcours du diplome géré par le responsable
 Route::get('/responsable/diplomes/{idDiplome}', 'App\Http\Controllers\DiplomesController@listeParcours')->name('parcours');
-
-//Gestionnaire
-Route::get('responsable/gestion', function() {
-    return view('responsable/gestion');
-});
-
-//Gestionnaire des enseignants
-Route::get('responsable/enseignants', function() {
-    return view('responsable/enseignants');
-});
-
-//Gestionnaire des groupes
-Route::get('responsable/groupes', function() {
-    return view('responsable/groupes');
-});
-
+//Voir les groupes
+Route::get('/responsable/diplomes/parcours/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
+//Voir les étudiants du groupe selectionne
+Route::get('/responsable/diplomes/parcours/ec/{idGroupe}', 'App\Http\Controllers\GroupesController@listeEtudiant')->name('etudiantsGroupe');
 
 /*------------------------------------------------------- ROUTES PROFESSEUR --------------------------------------------------*/
 
