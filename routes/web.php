@@ -38,7 +38,9 @@ Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\D
 //Voir les groupes des EC
 Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
 //Ajouter un groupe existant à l'EC
-Route::get('/responsable/ajout-groupe', 'App\Http\Controllers\GroupesController@store')->name('groupe.ajout');
+Route::get('/responsable/ajout-groupe', 'App\Http\Controllers\GroupesController@storeECGroupe')->name('groupe.ajout');
+//Ajouter un enseignant
+Route::get('/responsable/ajout-enseignant', 'App\Http\Controllers\GroupesController@storeEnseignantGroupe')->name('enseignant.ajout');
 
 //Voir les étudiants du groupe selectionné
 Route::get('/responsable/diplomes/parcours/ec/groupe/{idGroupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiant')->name('etudiantsGroupe');
@@ -70,10 +72,10 @@ Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielControll
 Route::get('/etudiant/notes/{id}', 'App\Http\Controllers\NotesController@voirNotesEtudiant')->name('notesEtudiant');
 
 //Route pour permettre d'ajouter une note
-Route::get('/enseignant/gererNotes/ajout-note', [\App\Http\Controllers\NotesController::class,'store'])->name('note.ajout');
+Route::get('/enseignant/gererNotes/ajout-note', 'App\Http\Controllers\NotesController@store')->name('note.ajout');
 
 //Route pour permettre d'ajouter un presentiel
-Route::get('/etudiant/ajout-presentiel', [\App\Http\Controllers\PresentielController::class,'store'])->name('presentiel.ajout');
+Route::get('/etudiant/ajout-presentiel', '\App\Http\Controllers\PresentielController@store')->name('presentiel.ajout');
 
 
 

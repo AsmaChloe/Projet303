@@ -50,8 +50,9 @@ class GroupesController extends Controller
             $ec=\App\Models\EC::find($id);
             //Obtenir tous les groupes existant;
             $allGroups=\App\Models\Groupes::all();
-
-            return view('responsable/ec',['ec'=>$ec,'allGroups'=>$allGroups]);
+            
+            $allTeachers=\App\Models\User::where('role',2)->get();
+            return view('responsable/ec',['ec'=>$ec,'allGroups'=>$allGroups, 'allTeachers'=>$allTeachers]);
         }
         else{
             return redirect('/');
@@ -64,12 +65,27 @@ class GroupesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeECGroupe(Request $request)
     {
         //Creation de l'instance depuis le formulaire
         $ecgroupe = \App\Models\Ec_Groupe::make($request->all());
         //Enregistrement 
         $ecgroupe->save();
         return response()->json($ecgroupe);
+    }
+
+    /**
+     * Pour enregistrer une association groupe - enseignant
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeEnseignantGroupe(Request $request)
+    {
+        //Creation de l'instance depuis le formulaire
+        $groupeEns = \App\Models\Enseignant_Groupe::make($request->all());
+        //Enregistrement 
+        $groupeEns->save();
+        return response()->json($groupeEns);
     }
 }

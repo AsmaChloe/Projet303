@@ -72,7 +72,7 @@
               <a class="btn btn-danger" href="/Projet303/public/logout" onclick="event.preventDefault();this.closest('form').submit();">Deconnexion</a>
             </form> 
           @else
-            <a class="btn btn-outline-secondary" href="/Projet303/public/login"><span class="glyphicon glyphicon-log-in"></span>Connexion</a>
+            <a class="btn btn-outline-light" href="/Projet303/public/login"><span class="glyphicon glyphicon-log-in"></span>Connexion</a>
           @endif
         </li>
       </ul>

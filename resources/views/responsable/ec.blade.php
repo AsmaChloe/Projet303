@@ -23,52 +23,68 @@
         </div>
         <div class="col-md-8">
             
-            <!--Table-->
-           
-                <table id="groupeTable" class="table table-striped table-bordered">
+        <!--Table-->
+        <table id="groupeTable" class="table table-striped table-bordered">
 
-                    <thead class="thead-dark">
-                        <th>EC</th>
-                    </thead>
+            <thead class="thead-dark">
+                <th>EC</th>
+                <th colspan="2">Enseignant</th>
+            </thead>
 
-                    <tbody>
-                        @foreach($ec->ec_groupe->orderby('sigleEC') as $groupe)
-                        <tr>
-                            <td>
-                                {{$groupe->nomGroupe}} ({{$groupe->typeGroupe}}) - <a href="{{ route('etudiantsGroupe',['idGroupe'=>$groupe->idGroupe]) }}">voir les etudiants</a> - <a href="#">Ajouter un professeur</a>
-                            </td>
-                        </tr>
+            <tbody>
+                <!--Affichage des groupes selon son sigle-->
+                @foreach($ec->ec_groupe->sortBy('sigleEC') as $groupe)
+                <tr>
+                    <td>{{$groupe->nomGroupe}} ({{$groupe->typeGroupe}})</td>
+                    <td>
+                        <!--Parmi les enseignants de l'ec-->
+                        @foreach($ec->enseignants as $enseignant)
+                            <!--On regarde s'il est professeur du groupe actuel-->
+                            @if($groupe->enseignants->contains($enseignant))
+                                {{$enseignant->name}} 
+                            @endif  
                         @endforeach
-                    </tbody>    
-                </table>
-            
+                                
+                        <!--Si il n'y a pas d'enseignant, on peut en ajouter un déjà existant-->
+                        @if($groupe->enseignants->count()==0)
+                            Aucun enseignant est affilié à ce groupe.
+                            <button id="groupeClicked" value="{{ $groupe->idGroupe }}" type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#enseignantModal">Ajouter</button>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('etudiantsGroupe',['idGroupe'=>$groupe->idGroupe]) }}">Voir les étudiants</a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>    
+        </table>
         </div>
+
         <div class="col-md-2">
         </div>
     </div>
 </div>
 
-<!-- Modal -->
+<!----------------------------------------------------------ZONE DES MODALS -------------------------------------------------------------->
+
+<!-- Celui pour l'ajout du groupe -->
 <div class="modal fade" id="groupeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      
+      <!--Header du modal-->
       <div class="modal-header">
-
-        <!--Bouton-->
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un groupe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+            <h5 class="modal-title" id="exampleModalLabel">Ajouter un groupe</h5>
+        </div>
       
-      </div>
-      
+      <!--Corps du modal-->
       <div class="modal-body">
         
         <!--Formulaire-->
         <form id="groupeForm">
             @csrf
 
-            <!--Liste de tous les groupes-->
+            <!--Liste de tous les groupes -->
             <div class="form-group">
                 <select class="form-control select2-multi" id="groupe" name="groupe" >
                     @foreach ($allGroups as $groupe)
@@ -85,8 +101,46 @@
   </div>
 </div>
 
+<!-- Celui pour l'ajout de l'enseignant -->
+<div class="modal fade" id="enseignantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header du modal-->
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajouter un enseignant</h5>
+        </div>
+      
+      <!--Corps du modal-->
+      <div class="modal-body">
+        
+        <!--Formulaire-->
+        <form id="enseignantForm">
+            @csrf
+
+            <!--Liste de tous les enseignants-->
+            <div class="form-group">
+                <select class="form-control select2-multi" id="enseignant" name="enseignant" >
+                    @foreach ($allTeachers as $teacher)
+                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!------------------------------------------------------------------PARTIE JAVASCRIPT----------------------------------------------------------->
 <script>
+    //Script pour l'ajout de groupe
     $("#groupeForm").submit(function(e){
+        //On récupère les valeurs de plus haut
         e.preventDefault();
         let idGroupe = document.getElementById("groupe").value;
         let idEC = {{ $ec->idEC }};
@@ -111,6 +165,35 @@
             }
         });
     });
+
+    //Script ajout d'enseignant
+    $("#enseignantForm").submit(function(e){
+        e.preventDefault();
+        //On récupère les valeurs plus haut
+        let idGroupe = document.getElementById("groupeClicked").value;
+        let idEnseignant = document.getElementById("enseignant").value;
+        let _token = $("input[name=_token]").val();
+
+        //Transmission des valeurs pour ajouter le groupe.
+        $.ajax({
+            url: "{{route('enseignant.ajout')}}",
+            type: "get",
+            data:{
+                idGroupe : idGroupe,
+                idEnseignant : idEnseignant,
+                _token:_token
+            },
+            success:function(response){
+                if(response){
+                    alert("Ajout d'enseignant réussi");
+                    $("#enseignantForm")[0].reset();
+                    $("#enseignantModal").modal('hide');
+                }
+                
+            }
+        });
+    });
+    
 </script>        
 
 @endsection
