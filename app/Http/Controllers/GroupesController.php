@@ -85,11 +85,28 @@ class GroupesController extends Controller
         if(Auth::check() && (Auth::user()->role)==1 ){
             
             $ec=\App\Models\EC::find($id);
+            //Obtenir tous les groupes existant;
+            $allGroups=\App\Models\Groupes::all();
 
-            return view('responsable/ec',['ec'=>$ec]);
+            return view('responsable/ec',['ec'=>$ec,'allGroups'=>$allGroups]);
         }
         else{
             return redirect('/');
         } 
+    }
+
+    /**
+     * Pour enregistrer une association groupe - ec
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //Creation de l'instance depuis le formulaire
+        $ecgroupe = \App\Models\Ec_Groupe::make($request->all());
+        //Enregistrement 
+        $ecgroupe->save();
+        return response()->json($ecgroupe);
     }
 }

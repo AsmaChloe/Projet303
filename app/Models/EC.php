@@ -39,7 +39,7 @@ class EC extends Model
      * Liste des groupes de l'EC 
      */
     public function ec_groupe(){ 
-        return $this->belongsToMany(Groupes::class,'EC_Groupe','idEC','idGroupe');
+        return $this->belongsToMany(Groupes::class,'ec_groupe','idEC','idGroupe');
     }
 
     /**

@@ -29,14 +29,19 @@ Route::get('responsable', function() {
     }
 });
 
-//Diplomes gérés par le responsable
+//Voir les diplomes gérés par le responsable
 Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes');
-//Parcours du diplome géré par le responsable
-Route::get('/responsable/diplomes/{idDiplome}', 'App\Http\Controllers\DiplomesController@listeParcours')->name('parcours');
-//Voir les groupes
-Route::get('/responsable/diplomes/parcours/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
-//Voir les étudiants du groupe selectionne
-Route::get('/responsable/diplomes/parcours/ec/{idGroupe}', 'App\Http\Controllers\GroupesController@listeEtudiant')->name('etudiantsGroupe');
+
+//Voir les parcours et EC des diplomes du responsable
+Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\DiplomesController@listeParcours')->name('parcours');
+
+//Voir les groupes des EC
+Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
+//Ajouter un groupe à l'EC
+Route::get('/responsable/ajout-groupe', [\App\Http\Controllers\GroupeSController::class,'store'])->name('groupe.ajout');
+
+//Voir les étudiants du groupe selectionné
+Route::get('/responsable/diplomes/parcours/ec/groupe/{idGroupe}', 'App\Http\Controllers\GroupesController@listeEtudiant')->name('etudiantsGroupe');
 
 /*------------------------------------------------------- ROUTES PROFESSEUR --------------------------------------------------*/
 
