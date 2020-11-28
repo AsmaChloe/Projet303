@@ -36,44 +36,7 @@ class GroupesController extends Controller
         } 
     }
 
-    /**
-     * Cette méthode permet d'afficher les groupes de l'étudiant ou les étudiants d'une groupe depuis un statut autre que ce dernier
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function listeEtudiant($id)
-    {
-        if(Auth::check() ){
-            $groupe=\App\Models\Groupes::find($id);
-
-            if((Auth::user()->role)==2 ){ //Si c'est un prof qui veut consulter une liste d'étudiant
-                $prof=Auth::user();
-                $groupesEns=$prof->groupesEns;
-                
-
-                if($groupesEns->contains($groupe)){ //Si c'est un groupe de l'enseignant
-                    $etudiants=$groupe->etudiants;
-                    return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants]);
-                }
-                else{
-                    return redirect('/');
-                }
-            }
-            else{
-                if((Auth::user()->role)==1 ){ //Si c'est un responsable qui veut consulter une liste d'étudiant
-                    
-                    return view('responsable/etudiants',['groupe'=>$groupe]);
-                }
-                else{
-                    return redirect('/');
-                }
-            }
-        }
-        else{
-            return redirect('/');
-        } 
-    }
-
+    
 
     /**
      * Cette méthode permet d'afficher les groupes de l'étudiant depuis un statut exterieur (enseignant)

@@ -32,7 +32,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach($ec->ec_groupe as $groupe)
+                        @foreach($ec->ec_groupe->orderby('sigleEC') as $groupe)
                         <tr>
                             <td>
                                 {{$groupe->nomGroupe}} ({{$groupe->typeGroupe}}) - <a href="{{ route('etudiantsGroupe',['idGroupe'=>$groupe->idGroupe]) }}">voir les etudiants</a> - <a href="#">Ajouter un professeur</a>

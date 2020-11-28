@@ -37,11 +37,13 @@ Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\D
 
 //Voir les groupes des EC
 Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
-//Ajouter un groupe à l'EC
-Route::get('/responsable/ajout-groupe', [\App\Http\Controllers\GroupeSController::class,'store'])->name('groupe.ajout');
+//Ajouter un groupe existant à l'EC
+Route::get('/responsable/ajout-groupe', 'App\Http\Controllers\GroupesController@store')->name('groupe.ajout');
 
 //Voir les étudiants du groupe selectionné
-Route::get('/responsable/diplomes/parcours/ec/groupe/{idGroupe}', 'App\Http\Controllers\GroupesController@listeEtudiant')->name('etudiantsGroupe');
+Route::get('/responsable/diplomes/parcours/ec/groupe/{idGroupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiant')->name('etudiantsGroupe');
+//Ajouter un etudiant existant au groupe
+Route::get('/responsable/ajout-etudiant', 'App\Http\Controllers\EtudiantsController@store')->name('etudiant.ajout');
 
 /*------------------------------------------------------- ROUTES PROFESSEUR --------------------------------------------------*/
 
@@ -59,7 +61,7 @@ Route::get('enseignant', function() {
 Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
 
 //Etudiants de groupe de l'enseignant
-Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\GroupesController@listeEtudiant')->name('etudiants');
+Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiant')->name('etudiants');
 
 //Voir presentiel de etudiant
 Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielController@voirPresentielEtudiant')->name('presentielEtudiant');
