@@ -27,7 +27,7 @@
     		<!--Semestre-->
 			<thead class="thead table-dark">
       			<tr>
-        			<th scope="col" colspan="3" class="policeTaille pt-3 pb-3">Semestre {{$semestre->idSemestre}} </th>
+        			<th scope="col" colspan="4" class="policeTaille pt-3 pb-3">Semestre {{$semestre->idSemestre}} </th>
       			</tr>
     		</thead>
 			
@@ -35,14 +35,15 @@
 			<tbody>
         		@foreach($semestre->ecs as $ec)
 					<tr>
-          				<th scope="row" colspan="3" class="table-primary"><a href="">{{$ec->sigleEC}}</a></th>
+          				<th scope="row" colspan="4" class="table-primary"><a href="">{{$ec->sigleEC}}</a></th>
         			</tr>
+                    
 
 					@foreach($ec->ec_groupe as $groupe)
 						<!-- Si les différents groupes liés à l'EC sont parmi les groupes de l'etudiant, c'est valide-->
 						@if($user->groupesEtu->contains($groupe->idGroupe))
 							<tr>
-	            				<th scope="row" colspan="3" class="table-success">{{$groupe->nomGroupe}} ({{$groupe->typeGroupe}})</th>
+	            				<th scope="row" colspan="4" class="table-success">{{$groupe->nomGroupe}} ({{$groupe->typeGroupe}})</th>
 							</tr>
 
 							@foreach($groupe->seances as $seance)
@@ -57,6 +58,15 @@
 												<td scope="row">Séance</th>
 												<td scope="row">{{$seance->debutSeance}} | {{$seance->finSeance}}</th>
 												<td scope="row"><span class='badge'>{{$presentiel->type->valeurType}}</span></th>
+                                                @if(Auth::user()->id != 3)
+                                                <td class="d-flex ">
+                                                    <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
+                                                    <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <a href="{{ route('supprimerPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
+                                                </td>
+                                                @endif
 											</tr>
 											<tr  id="insererIci"></tr>
 										@endif

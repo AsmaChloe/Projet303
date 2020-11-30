@@ -72,4 +72,24 @@ class PresentielController extends Controller
         return response()->json($presentiel);
     }
 
+     /**
+     * Pour definir un présentiel comme supprimé. Il sera cependant toujours dans la BDD et recupérable.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request, $id)
+    {
+        if(Presentiel::where('idPresentiel',$id)->delete()){
+            
+            return redirect()->back()->with('alert','Presentiel supprimée');
+        }
+        else{
+            
+            return redirect()->back()->with('alert','Probleme lors de la suppresion du présentiel');
+        }
+
+        
+    }
+
 }

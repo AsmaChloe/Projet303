@@ -16,8 +16,9 @@ class TypePresentielTableSeeder extends Seeder
     {
         TypePresentiel::truncate();
         
-        TypePresentiel::create(['valeurType'=>"Abscent"]);
         TypePresentiel::create(['valeurType'=>"Present"]);
         TypePresentiel::create(['valeurType'=>"Distance"]);
+        TypePresentiel::create(['valeurType'=>"Absent"]);
+        TypePresentiel::create(['valeurType'=>"Justifié"]);
     }
 }

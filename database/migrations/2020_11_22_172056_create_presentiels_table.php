@@ -21,6 +21,7 @@ class CreatePresentielsTable extends Migration
             $table->foreign('idEtudiant')->references('id')->on('users');
             $table->unsignedBigInteger('idType');
             $table->foreign('idType')->references('idType')->on('type_presentiels');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
