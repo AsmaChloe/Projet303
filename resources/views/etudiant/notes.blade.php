@@ -9,7 +9,7 @@
 
         <p class="lead text-center mb-4"> Quand ajout d'une nouvelle note : pb affichage du type de l'epreuve : il faut refresh pour voir<br>
                 - faire le calcul des totaux <br>
-                - Permettre de supprimer et modifier
+                - Permettre de modifier<br>
                 - ne pas devoir entrer les id pour ajouter une note
                 - verifier que l'on entre bien une epreuve qui correspond à l'etudiant + une note valide
             </p>
@@ -24,22 +24,25 @@
 </div>
 <div class="col-md-8">
     <br>
+
+    <!--Table note-->
+    @foreach($ecs as $ec)
     <table id="noteTable" class="table table-striped table-bordered">
         
-        @foreach($ecs as $ec)
             <thead >
                 <tr class="thead-dark">
                     <th colspan="3">{{$ec->sigleEC}}</th>
                     <th>{{$ec->nbECTS}} ECTS</th>
                     <th>{{$ec->nbPoints}} points</th>
                     @if(Auth::user()->id != 3)
-                    <th rowspan="2">Modifications</th>
+                    <th >Modifications</th>
                     @endif
                 </tr>
                 <tr>
                     <th>Epreuves</th>
                     <th colspan="2">Session 1</th>
                     <th colspan="2">Session 2</th>
+                    <th> - </th>
                     
                 </tr>
             </thead>
@@ -52,7 +55,7 @@
                             <tr>
                                 <th>{{$epreuve->type->valeurType}}</th>
                                 <td>{{$note->valeurNote}}/{{$note->maxNote}}</td>
-                                <td>{{$epreuve->pourcentage}}%</td>
+                                <td>{{$epreuve->pourcentage}}%</th>
                                 <td></td>
                                 <td></td>
                                 
@@ -62,9 +65,8 @@
                                     <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
                                     @method('DELETE')
                                     @csrf
-                                    <form action="#" method="POST">
-                                        <button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button>
-                                    </form>
+                                    <a href="{{ route('supprimerNote',['idNote'=>$note->idNote]) }}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
+                                    
                                 </td>
                                 @endif
                             </tr>
@@ -79,9 +81,10 @@
                     <td colspan='2'>A</td>
                 </tr>
             </tbody>
-        @endforeach
-        <br>
+        
+        
     </table>
+    @endforeach
            
     <br>
 </div>
@@ -130,6 +133,8 @@
 </div>
 
 <script>
+
+    //Ajout
     $("#noteForm").submit(function(e){
         e.preventDefault();
         //Recupération des valeurs
@@ -161,6 +166,13 @@
             }
         });
     });
+
+    //Affichage d'une alerte lors de la suppression d'une note
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
 </script>        
 @endsection
 

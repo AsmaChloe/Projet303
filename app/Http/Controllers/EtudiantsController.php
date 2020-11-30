@@ -35,7 +35,6 @@ class EtudiantsController extends Controller
                     
                     //On récupère tous les étudiants
                     $allStudents=\App\Models\User::where('role',3)->get();
-
                     
                     return view('responsable/etudiants',['groupe'=>$groupe, 'allStudents'=>$allStudents]);
                 }

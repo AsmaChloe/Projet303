@@ -96,5 +96,25 @@ class NotesController extends Controller
         } 
     }
 
+
+    /**
+     * Pour definir une note comme supprimé. Elle sera cependant toujours dans la BDD et recupérable.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request, $id)
+    {
+        if(Notes::where('idNote',$id)->delete()){
+            
+            return redirect()->back()->with('alert','Note supprimée');
+        }
+        else{
+            
+            return redirect()->back()->with('alert','Probleme lors de la suppresion de la note');
+        }
+
+        
+    }
     
 }
