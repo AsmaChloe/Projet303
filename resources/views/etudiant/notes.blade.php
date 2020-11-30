@@ -96,38 +96,35 @@
 <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <!--Bouton-->
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une note</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <!--Header du modal-->
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajouter une note</h5>
+        </div>
       
-      </div>
-      
-      <div class="modal-body">
+        <!--Corps du modal-->
+        <div class="modal-body">
         
-        <!--Formulaire-->
-        <form id="noteForm">
-            @csrf
-            <div class="form-group">
-                <label for="idEpreuve">Epreuve</label>
-                <input type="text" class="form-control" id="idEpreuve" placeholder="Saisir l'id de l'epreuve"/>
-            </div>
+            <!--Formulaire-->
+            <form id="noteForm">
+                @csrf
+                <div class="form-group">
+                    <label for="idEpreuve">Epreuve</label>
+                    <input type="text" class="form-control" id="idEpreuve" placeholder="Saisir l'id de l'epreuve"/>
+                </div>
  
-            <div class="form-group">
-                <label for="valeurNote">Note</label>
-                <input type="text" class="form-control" id="valeurNote" placeholder="Saisir la note"/>
-            </div>
+                <div class="form-group">
+                    <label for="valeurNote">Note</label>
+                    <input type="text" class="form-control" id="valeurNote" placeholder="Saisir la note"/>
+                </div>
 
-            <div class="form-group">
-                <label for="maxNote">Denominateur note</label>
-                <input type="text" class="form-control" id="maxNote" placeholder="Saisir sur combien est la note"/>
-            </div>
-            <button type="submit" class="btn btn-primary">Ajouter</button>
-        </form>
+                <div class="form-group">
+                    <label for="maxNote">Denominateur note</label>
+                    <input type="text" class="form-control" id="maxNote" placeholder="Saisir sur combien est la note"/>
+                </div>
 
-      </div>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+        </div>
     </div>
   </div>
 </div>
