@@ -41,8 +41,8 @@ class EnseignantGroupeTableSeeder extends Seeder
         ]); //CM(S3F) de 305 avec Enseignant 5
 
         Enseignant_Groupe::create([
-            'idEnseignant'=> 13,
+            'idEnseignant'=> 18,
            'idGroupe'=> 1
-        ]); //CM(S3F) de 306 avec Enseignant 1
+        ]); //CM(S3F) de 306 avec Enseignant 6
     }
 }

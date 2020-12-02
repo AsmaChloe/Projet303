@@ -18,24 +18,25 @@ class EtudiantsController extends Controller
 
             $groupe=\App\Models\Groupes::find($id);
             $etudiants=$groupe->etudiants;
+            $allStudents=\App\Models\User::where('role',3)->get(); //Recherche à affiner
 
-            if((Auth::user()->role)==2 ){ //Si c'est un enseignant
+            if((Auth::user()->role)==2 && (Auth::user()->responsable)==0 ){ //Si c'est un enseignant non-responsable
 
                 $prof=Auth::user();
                 $groupesEns=$prof->groupesEns;
                 
                 if($groupesEns->contains($groupe)){ //Si c'est un groupe de l'enseignant
                     
-                    return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants]);
+                    return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'allStudents'=>$allStudents]);
                 }
                 else{
                     return redirect('/');
                 }
             }
             else{
-                if((Auth::user()->role)==1 ){ //Si c'est un responsable
+                if( Auth::user()->responsable==1 ){ //Si c'est un responsable (enseignant ou admnin)
                     
-                    $allStudents=\App\Models\User::where('role',3)->get(); //Recherche à affiner
+                    
                     return view('enseignant/etudiants',['groupe'=>$groupe, 'etudiants'=>$etudiants, 'allStudents'=>$allStudents]);
                 }
                 else{

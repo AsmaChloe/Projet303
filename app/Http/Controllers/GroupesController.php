@@ -45,7 +45,7 @@ class GroupesController extends Controller
      */
     public function voirGroupesEC($id)
     {
-        if(Auth::check() && (Auth::user()->role)==1 ){
+        if(Auth::check() && (Auth::user()->responsable)==1 ){
             
             $ec=\App\Models\EC::find($id);
             //Obtenir tous les groupes existant;

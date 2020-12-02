@@ -14,7 +14,7 @@ class DiplomesController extends Controller
      */
     public function voirDiplomes(Request $request)
     {
-        if(Auth::check() && (Auth::user()->role)==1){ //Il faut être connecté et être un responsable
+        if(Auth::check() && (Auth::user()->responsable)==1){ //Il faut être connecté et être un responsable
             
             return view('responsable/diplomes',['user' => Auth::user()]);
         }
@@ -30,7 +30,7 @@ class DiplomesController extends Controller
      */
     public function listeParcours($id)
     {
-        if(Auth::check() && (Auth::user()->role)==1 ){
+        if(Auth::check() && (Auth::user()->responsable)==1 ){
             $resp=Auth::user();
             //$diplomes=$resp->diplomes;
             $diplome=\App\Models\Diplomes::find($id);

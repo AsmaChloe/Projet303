@@ -18,7 +18,7 @@ class LoginResponse implements LoginResponseContract
     {
         switch (\Auth::user()->role) {
             case 1:
-                return redirect()->intended('responsable');
+                return redirect()->intended('administrateur');
             case 2:
                 return redirect()->intended('enseignant');
             case 3 :

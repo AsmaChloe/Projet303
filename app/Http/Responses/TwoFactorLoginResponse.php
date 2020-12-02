@@ -22,7 +22,7 @@ class TwoFactorLoginResponse implements TwoFactorLoginResponseContract
 
         switch ($role) {
             case 1:
-                return redirect()->intended('responsable');
+                return redirect()->intended('administrateur');
             case 2:
                 return redirect()->intended('enseignant');
             case 3 :
