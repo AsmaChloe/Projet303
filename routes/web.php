@@ -93,7 +93,7 @@ Route::get('/etudiant/notes/{id}', 'App\Http\Controllers\NotesController@voirNot
 
 /*-------------Special responsable ----------*/
 //Voir ses diplomes gérés
-Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes');
+Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes')->name('diplomesResponsable');
 //Voir les parcours et EC de ses diplomes
 Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\DiplomesController@listeParcours')->name('parcours');
 //Voir les groupes des EC
@@ -104,7 +104,7 @@ Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\Gro
 //Accueil
 Route::get('administrateur', function() {
     if(Auth::check() && Auth::user()->role==1){
-        return view('responsable/accueiladmin');
+        return view('administrateur/accueiladmin');
     }
     else{
         return redirect('/');

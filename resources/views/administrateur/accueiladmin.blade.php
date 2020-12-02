@@ -18,15 +18,15 @@
 			<tr>
 				<td>
 					<h2>Diplomes</h2>
-						<p>xxxxxxxxxxxxxxxx</p>
+						<p>Diplomes > Parcours > Ec  </p>
 						<p><a class="btn" href="responsable/diplomes">Voir »</a></p>							
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<h2>XXXX</h2>
-						<p>xxxxxxxxxxxxxxxx</p>
-						<p><a class="btn" href="#">Voir »</a></p>							
+					<h2>Utilisateurs</h2>
+						<p>Gerer les utilisateurs </p>
+						<p><a class="btn" href="#">Voir les utilisateurs »</a></p>							
 				</td>
 			</tr>
 		</table>

@@ -56,11 +56,13 @@
           </li>
           @endif
 
-          <!--Pour responsable-->
+          <!--Pour admin-->
           @if(Auth::user()->role==1)
           
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/Projet303/public/responsable">Informations</a>
+              <a class="dropdown-item" href="/Projet303/public/administrateur">Informations</a>
+              <a class="dropdown-item" href="{{ route('diplomesResponsable') }}">Diplomes</a>
+              <a class="dropdown-item" href="#">Utilisateurs</a>
             </div>
           </li>
           @endif
@@ -68,6 +70,7 @@
         @endif
       </ul>
       
+      <!--Partie droite-->
       <ul class="navbar-nav">
         <li class="nav-item">
           @if(Auth::check())
