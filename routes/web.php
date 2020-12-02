@@ -91,6 +91,14 @@ Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielControll
 //Notes de son étudiant
 Route::get('/etudiant/notes/{id}', 'App\Http\Controllers\NotesController@voirNotesEtudiant')->name('notesEtudiant');
 
+/*-------------Special responsable ----------*/
+//Voir ses diplomes gérés
+Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes');
+//Voir les parcours et EC de ses diplomes
+Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\DiplomesController@listeParcours')->name('parcours');
+//Voir les groupes des EC
+Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
+
 /*-----------------------Administrateur-------------------------*/
 
 //Accueil
@@ -102,12 +110,6 @@ Route::get('administrateur', function() {
         return redirect('/');
     }
 });
-//Voir ses diplomes gérés
-Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes');
-//Voir les parcours et EC de ses diplomes
-Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\DiplomesController@listeParcours')->name('parcours');
-//Voir les groupes des EC
-Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
 
 /*---------------------------------------------------------- AUTRE ----------------------------------------------------------------- */
   
