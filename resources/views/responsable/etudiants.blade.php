@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
 	<h2 class="display-2 text-center mb-4">Etudiants de {{$groupe->nomGroupe}}</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxx<br></p>
+        <p class="lead text-center mb-4">POuvoir ajouter que des etudiants de la filliere + qui n'y sont pas<br></p>
 
         <!--Bouton ajout-->
         @if(Auth::user()->id==1)
@@ -27,15 +27,24 @@
                 <table id="etudiantTable" class="table table-striped table-bordered">
 
                     <thead class="thead-dark">
-                        <th>Nom</th>
+                        <th colspan="2">Nom</th>
                     </thead>
 
                     <tbody>
+                        <!--Affichage selon l'ordre alphabetique-->
                         @foreach($groupe->etudiants->sortBy('name') as $etudiant)
                         <tr>
                             <td>
                                 {{$etudiant->name}}
                             </td>
+                            <!--Dissociation du groupe & vision de l'étudiant-->
+                            @if(Auth::user()->id != 3)
+                            <td class="d-flex ">
+                                <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
+                                <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
+                                <a href="{{ route('supprimerEtGroupe',['idEtudiant'=>$etudiant->id, 'idGroupe'=>$groupe->idGroupe]) }}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
+                            </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>    
@@ -51,17 +60,13 @@
 <div class="modal fade" id="etudiantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
 
-        <!--Bouton-->
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un étudiant</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <!--Header du modal-->
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajouter un étudiant</h5></div>
       
-      </div>
-      
-      <div class="modal-body">
+        <!--Corps du modal-->
+        <div class="modal-body">
         
         <!--Formulaire-->
         <form id="etudiantForm">
@@ -87,6 +92,7 @@
 <script>
     $("#etudiantForm").submit(function(e){
         e.preventDefault();
+        //Recupération des informations
         let idEtudiant = document.getElementById("student").value;
         let idGroupe = {{ $groupe->idGroupe }};
         let _token = $("input[name=_token]").val();
@@ -102,7 +108,7 @@
             },
             success:function(response){
                 if(response){
-                    alert("Ajout de l'étudiant réussi");
+                    alert("Ajout de l'étudiant réussi. Refresh to see.");
                     $("#etudiantForm")[0].reset();
                     $("#etudiantModal").modal('hide');
                 }

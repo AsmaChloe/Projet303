@@ -101,11 +101,33 @@ class GroupesController extends Controller
 
         if($ensGroupe->forceDelete()){
             
-            return redirect()->back()->with('alert',"Groupe dissocié de l'enseignant supprimée");
+            return redirect()->back()->with('alert',"Dissociation effective");
         }
         else{
             
-            return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'enseignant et de l'EC ");
+            return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'enseignant et du groupe ");
+        }
+
+        
+    }
+
+     /**
+     * Supprimer définitivement une association etudiant - groupe
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteEtGroupe(int $idEtudiant, int $idGroupe)
+    {
+        $etGroupe=\App\Models\Groupe_Etudiants::where('idGroupe',$idGroupe)->where('idEtudiant',$idEtudiant);
+
+        if($etGroupe->forceDelete()){
+            
+            return redirect()->back()->with('alert',"Dissociation effective");
+        }
+        else{
+            
+            return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'etudiant et du groupe ");
         }
 
         

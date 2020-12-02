@@ -41,14 +41,16 @@ Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\Gro
 //Routes pour ajouter et dissocier un groupe existant à l'EC
 Route::get('/responsable/ajout-groupe', 'App\Http\Controllers\GroupesController@storeECGroupe')->name('groupe.ajout');
 
-//Ajouter un enseignant
+//Associer et dissocier un enseignant et un groupe
 Route::get('/responsable/ajout-enseignant', 'App\Http\Controllers\GroupesController@storeEnseignantGroupe')->name('enseignant.ajout');
-Route::get('/enseignant/supprimer-ensgroupe/{idEnseignant}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteEnsGroupe')->name('supprimerEnsGroupe');
+Route::get('/responsable/supprimer-ensgroupe/{idEnseignant}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteEnsGroupe')->name('supprimerEnsGroupe');
 
 //Voir les étudiants du groupe selectionné
 Route::get('/responsable/diplomes/parcours/ec/groupe/{idGroupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiant')->name('etudiantsGroupe');
-//Ajouter un etudiant existant au groupe
+
+//Associer et dissocier un etudiant et un groupe
 Route::get('/responsable/ajout-etudiant', 'App\Http\Controllers\EtudiantsController@store')->name('etudiant.ajout');
+Route::get('/responsable/supprimer-etgroupe/{idEtudiant}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteEtGroupe')->name('supprimerEtGroupe');
 
 /*------------------------------------------------------- ROUTES PROFESSEUR --------------------------------------------------*/
 
