@@ -103,7 +103,7 @@ class NotesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, $id)
+    public function softDeletreNote(Request $request, $id)
     {
         if(Notes::where('idNote',$id)->delete()){
             

@@ -63,8 +63,6 @@
                                 <td class="d-flex ">
                                     <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
                                     <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
-                                    @method('DELETE')
-                                    @csrf
                                     <a href="{{ route('supprimerNote',['idNote'=>$note->idNote]) }}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
                                     
                                 </td>
