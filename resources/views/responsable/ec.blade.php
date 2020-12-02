@@ -62,7 +62,7 @@
                             <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
                             @method('DELETE')
                             @csrf
-                            <a href="{{ route('supprimmerEnsGroupe',['idEnseignant'=>$enseignant->id, 'idGroupe'=>$groupe->idGroupe])}}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
+                            <a href="{{ route('supprimerEnsGroupe',['idEnseignant'=>$enseignant->id, 'idGroupe'=>$groupe->idGroupe])}}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
                         </td>
                     @endif
                 </tr>
