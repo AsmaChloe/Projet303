@@ -46,10 +46,10 @@ Route::get('/responsable/ajout-enseignant', 'App\Http\Controllers\GroupesControl
 Route::get('/responsable/supprimer-ensgroupe/{idEnseignant}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteEnsGroupe')->name('supprimerEnsGroupe');
 
 //Voir les étudiants du groupe selectionné
-Route::get('/responsable/diplomes/parcours/ec/groupe/{idGroupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiant')->name('etudiantsGroupe');
+Route::get('/responsable/diplomes/parcours/ec/groupe/{idGroupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiantsGroupe');
 
 //Associer et dissocier un etudiant et un groupe
-Route::get('/responsable/ajout-etudiant', 'App\Http\Controllers\EtudiantsController@store')->name('etudiant.ajout');
+Route::get('/responsable/ajout-etudiant', 'App\Http\Controllers\EtudiantsController@linkEtGroupe')->name('etudiant.ajout');
 Route::get('/responsable/supprimer-etgroupe/{idEtudiant}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteEtGroupe')->name('supprimerEtGroupe');
 
 /*------------------------------------------------------- ROUTES PROFESSEUR --------------------------------------------------*/
@@ -68,7 +68,7 @@ Route::get('enseignant', function() {
 Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
 
 //Etudiants de groupe de l'enseignant
-Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiant')->name('etudiants');
+Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiants');
 
 //Voir presentiel de etudiant
 Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielController@voirPresentielEtudiant')->name('presentielEtudiant');

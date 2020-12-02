@@ -12,18 +12,20 @@ class EtudiantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listeEtudiant($id)
+    public function listeEtudiants($id)
     {
         if(Auth::check() ){
-            $groupe=\App\Models\Groupes::find($id);
 
-            if((Auth::user()->role)==2 ){ //Si c'est un prof qui veut consulter une liste d'étudiant
+            $groupe=\App\Models\Groupes::find($id);
+            $etudiants=$groupe->etudiants;
+
+            if((Auth::user()->role)==2 ){ //Si c'est un enseignant
+
                 $prof=Auth::user();
                 $groupesEns=$prof->groupesEns;
                 
-
                 if($groupesEns->contains($groupe)){ //Si c'est un groupe de l'enseignant
-                    $etudiants=$groupe->etudiants;
+                    
                     return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants]);
                 }
                 else{
@@ -31,11 +33,9 @@ class EtudiantsController extends Controller
                 }
             }
             else{
-                if((Auth::user()->role)==1 ){ //Si c'est un responsable qui veut consulter une liste d'étudiant
+                if((Auth::user()->role)==1 ){ //Si c'est un responsable
                     
-                    $etudiants=$groupe->etudiants;
-                    $allStudents=\App\Models\User::where('role',3)->get();
-                    
+                    $allStudents=\App\Models\User::where('role',3)->get(); //Recherche à affiner
                     return view('enseignant/etudiants',['groupe'=>$groupe, 'etudiants'=>$etudiants, 'allStudents'=>$allStudents]);
                 }
                 else{
@@ -54,7 +54,7 @@ class EtudiantsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function linkEtGroupe(Request $request)
     {
         //Creation de l'instance depuis le formulaire
         $groupeEtudiant = \App\Models\Groupe_Etudiants::make($request->all());
