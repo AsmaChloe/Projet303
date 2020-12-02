@@ -22,6 +22,15 @@
 						<p><a class="btn" href="enseignant/groupes">Voir les groupes »</a></p>							
 				</td>
 			</tr>
+			@if(Auth::user()->responsable==1)
+			<tr>
+				<td>
+					<h2>Diplomes</h2>
+						<p>xxxxxxxxxxxxxxxx</p>
+						<p><a class="btn" href="responsable/diplomes">Voir les diplomes »</a></p>							
+				</td>
+			</tr>
+			@endif
 		</table>
 	</div>
 </div>

@@ -91,12 +91,12 @@ Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielControll
 //Notes de son étudiant
 Route::get('/etudiant/notes/{id}', 'App\Http\Controllers\NotesController@voirNotesEtudiant')->name('notesEtudiant');
 
-/*-----------------------Responsable-------------------------*/
+/*-----------------------Administrateur-------------------------*/
 
 //Accueil
-Route::get('responsable', function() {
+Route::get('administrateur', function() {
     if(Auth::check() && Auth::user()->role==1){
-        return view('responsable/accueilresponsable');
+        return view('responsable/accueiladmin');
     }
     else{
         return redirect('/');

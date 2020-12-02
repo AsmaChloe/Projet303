@@ -42,7 +42,6 @@
                     <th>Epreuves</th>
                     <th colspan="2">Session 1</th>
                     <th colspan="2">Session 2</th>
-                    <th> - </th>
                     
                 </tr>
             </thead>
