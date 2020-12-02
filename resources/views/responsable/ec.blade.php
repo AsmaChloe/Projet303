@@ -27,15 +27,17 @@
         <table id="groupeTable" class="table table-striped table-bordered">
 
             <thead class="thead-dark">
-                <th>EC</th>
-                <th colspan="2">Enseignant</th>
+                <th>Groupe</th>
+                <th colspan="3">Enseignant</th>
             </thead>
 
             <tbody>
                 <!--Affichage des groupes selon son sigle-->
                 @foreach($ec->ec_groupe->sortBy('sigleEC') as $groupe)
                 <tr>
+                
                     <td>{{$groupe->nomGroupe}} ({{$groupe->typeGroupe}})</td>
+                    
                     <td>
                         <!--Parmi les enseignants de l'ec-->
                         @foreach($ec->enseignants as $enseignant)
@@ -54,6 +56,15 @@
                     <td>
                         <a href="{{ route('etudiantsGroupe',['idGroupe'=>$groupe->idGroupe]) }}">Voir les étudiants</a>
                     </td>
+                    @if(Auth::user()->id != 3)
+                        <td class="d-flex ">
+                            <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
+                            <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
+                            @method('DELETE')
+                            @csrf
+                            <a href="{{ route('supprimmerEnsGroupe',['idEnseignant'=>$enseignant->id, 'idGroupe'=>$groupe->idGroupe])}}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
+                        </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>    

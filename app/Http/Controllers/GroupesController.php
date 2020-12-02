@@ -88,4 +88,26 @@ class GroupesController extends Controller
         $groupeEns->save();
         return response()->json($groupeEns);
     }
+
+     /**
+     * Supprimer définitivement une association enseignant - groupe
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteEnsGroupe(int $idEnseignant, int $idGroupe)
+    {
+        $ensGroupe=\App\Models\Enseignant_Groupe::where('idGroupe',$idGroupe)->where('idEnseignant',$idEnseignant);
+
+        if($ensGroupe->forceDelete()){
+            
+            return redirect()->back()->with('alert',"Groupe dissocié de l'enseignant supprimée");
+        }
+        else{
+            
+            return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'enseignant et de l'EC ");
+        }
+
+        
+    }
 }

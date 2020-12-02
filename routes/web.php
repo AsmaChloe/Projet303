@@ -37,10 +37,13 @@ Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\D
 
 //Voir les groupes des EC
 Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
-//Ajouter un groupe existant à l'EC
+
+//Routes pour ajouter et dissocier un groupe existant à l'EC
 Route::get('/responsable/ajout-groupe', 'App\Http\Controllers\GroupesController@storeECGroupe')->name('groupe.ajout');
+
 //Ajouter un enseignant
 Route::get('/responsable/ajout-enseignant', 'App\Http\Controllers\GroupesController@storeEnseignantGroupe')->name('enseignant.ajout');
+Route::get('/enseignant/supprimer-ensgroupe/{idEnseignant}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteEnsGroupe')->name('supprimerEnsGroupe');
 
 //Voir les étudiants du groupe selectionné
 Route::get('/responsable/diplomes/parcours/ec/groupe/{idGroupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiant')->name('etudiantsGroupe');
