@@ -82,7 +82,7 @@ Route::get('/enseignant/gererNotes/supprimerNote/{idNote}', 'App\Http\Controller
 
 //Routes pour permettre d'ajouter et supprimer un presentiel
 Route::get('/etudiant/ajout-presentiel', '\App\Http\Controllers\PresentielController@store')->name('presentiel.ajout');
-Route::get('/enseignant/supprimerPresentiel/{idPresentiel}', 'App\Http\Controllers\PresentielController@delete')->name('supprimerPresentiel');
+Route::get('/enseignant/supprimerPresentiel/{idPresentiel}', 'App\Http\Controllers\PresentielController@softDeletePresentiel')->name('supprimerPresentiel');
 
 
 

@@ -1,5 +1,5 @@
 @extends('template')
-@section('titre')Eleves du groupe X @endsection
+@section('titre')Eleves du groupe {{$groupe->nomGroupe}} @endsection
 @section('contenu')
 
 <!--Header-->

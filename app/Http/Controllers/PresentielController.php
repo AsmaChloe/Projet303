@@ -10,7 +10,7 @@ use \App\Models\Presentiel;
 class PresentielController extends Controller
 {
     /**
-     * Cette méthode permet d'afficher la liste des IP de l'étudiant
+     * Cette méthode permet d'afficher son présentiel en tant qu'étudiant.
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,26 +27,40 @@ class PresentielController extends Controller
 
 
     /**
-     * Cette méthode permet d'afficher le présentiel d'un étudiant
+     * Cette méthode permet d'afficher le présentiel d'un étudiant (pour responsable/enseignant)
      *
      * @return \Illuminate\Http\Response
      */
     public function voirPresentielEtudiant($id)
     {
-        if ( Auth::check() && ( (Auth::user()->role)==2 || (Auth::user()->role)==1) ){
-            
+        if ( Auth::check() ){
+
             $etudiant=\App\Models\User::find($id);
-            $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
+            
+            switch(Auth::user()->role) {
 
-            foreach($ecsEns as $ecEns){
+                case 1 :
+                    return view('etudiant/presentiel',['user'=>$etudiant]);
+                break;
 
-                //Si c'est un etudiant du professeur, on peut voir son presentiel
-                if($ecEns->etudiants->contains($etudiant)){
-                    return view('etudiant/presentiel',['user'=>$etudiant,'ecEns'=>$ecEns]);
-                }
-                else{
-                    return redirect('/');
-                }
+                case 2 :
+                    $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
+                    
+                    foreach($ecsEns as $ecEns){
+
+                        //Si c'est un etudiant du professeur, on peut voir son presentiel
+                        if($ecEns->etudiants->contains($etudiant)){
+                            return view('etudiant/presentiel',['user'=>$etudiant]);
+                        }
+                        else{
+                            return redirect('/');
+                        }
+                    }
+                break;
+
+                default :
+                return redirect('/');
+
             }
             
         }
@@ -78,7 +92,7 @@ class PresentielController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, $id)
+    public function softDeletePresentiel(Request $request, $id)
     {
         if(Presentiel::where('idPresentiel',$id)->delete()){
             

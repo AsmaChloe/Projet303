@@ -12,41 +12,6 @@ use \App\Models\EC;
 
 class NotesController extends Controller
 {
-    /**
-     * Cette méthode permet d'afficher la liste des notes de l'étudiant
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function voirSesNotes(Request $request)
-    {
-        if(Auth::check() && (Auth::user()->role)==3){ //Il faut être connecté et être un étudiant ou un responsable
-            
-            $ecs=Auth::user()->ip; //IP de l'étudiant
-            
-            return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs]);
-        }
-        else{
-            return redirect('/');
-        } 
-    }
-
-    /**
-     * Pour ajouter une nouvelle note.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        
-        $notes=Notes::orderBy('idNote','asc')->get();
-        if($request->user()){
-            return view('enseignant/gererNotes/nouvelleNote',compact('notes'));
-            
-        }
-        else{
-            return redirect('/');
-        }
-    }
 
     /**
      * Pour enregistrer une nouvelle note dans la bdd.
@@ -65,28 +30,60 @@ class NotesController extends Controller
 
         return response()->json($note);
     }
+    
+    /**
+     * Cette méthode permet d'afficher la liste de ses notes, en tant qu'étudiant
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function voirSesNotes(Request $request)
+    {
+        if(Auth::check() && (Auth::user()->role)==3){ //Il faut être connecté et être un étudiant
+            
+            $ecs=Auth::user()->ip; //IP de l'étudiant
+            
+            return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs]);
+        }
+        else{
+            return redirect('/');
+        } 
+    }
+
+    
 
     /**
-     * Cette méthode permet d'afficher les d'un étudiant
+     * Cette méthode permet d'afficher les notes d'un étudiant (pour enseignant/responsable)
      *
      * @return \Illuminate\Http\Response
      */
     public function voirNotesEtudiant($id)
     {
-        if ( Auth::check() && ( (Auth::user()->role)==2 || (Auth::user()->role)==1) ){
+        if ( Auth::check() ){
             $etudiant=\App\Models\User::find($id);
-            $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
+            
             $ecs=$etudiant->ip; //IP de l'étudiant
 
-            foreach($ecsEns as $ecEns){
-
-                //Si c'est un etudiant du professeur, on peut voir ses notes
-                if($ecEns->etudiants->contains($etudiant)){
+            switch( Auth::user()->role) {
+                case 1 :
                     return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
-                }
-                else{
+                break;
+                
+                case 2 :
+                    $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
+                    foreach($ecsEns as $ecEns){
+
+                        //Si c'est un etudiant du professeur, on peut voir ses notes
+                        if($ecEns->etudiants->contains($etudiant)){
+                            return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+                        }
+                        else{
+                            return redirect('/');
+                        }
+                    }
+                break;
+
+                default :
                     return redirect('/');
-                }
             }
             
             
@@ -98,12 +95,12 @@ class NotesController extends Controller
 
 
     /**
-     * Pour definir une note comme supprimé. Elle sera cependant toujours dans la BDD et recupérable.
+     * Pour definir une note comme supprimée. Elle sera cependant toujours dans la BDD et recupérable.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function softDeletreNote(Request $request, $id)
+    public function softDeleteNote(Request $request, $id)
     {
         if(Notes::where('idNote',$id)->delete()){
             
