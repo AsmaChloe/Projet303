@@ -33,10 +33,10 @@ class EtudiantsController extends Controller
             else{
                 if((Auth::user()->role)==1 ){ //Si c'est un responsable qui veut consulter une liste d'étudiant
                     
-                    //On récupère tous les étudiants
+                    $etudiants=$groupe->etudiants;
                     $allStudents=\App\Models\User::where('role',3)->get();
                     
-                    return view('responsable/etudiants',['groupe'=>$groupe, 'allStudents'=>$allStudents]);
+                    return view('enseignant/etudiants',['groupe'=>$groupe, 'etudiants'=>$etudiants, 'allStudents'=>$allStudents]);
                 }
                 else{
                     return redirect('/');

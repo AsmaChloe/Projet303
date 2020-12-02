@@ -54,7 +54,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('etudiantsGroupe',['idGroupe'=>$groupe->idGroupe]) }}">Voir les étudiants</a>
+                        <a href="{{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}">Voir les étudiants</a>
                     </td>
                     @if(Auth::user()->id != 3)
                         <td class="d-flex ">
