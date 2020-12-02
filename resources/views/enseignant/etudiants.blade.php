@@ -10,7 +10,7 @@
         <p class="lead text-center mb-4">POuvoir ajouter que des etudiants de la filliere + qui n'y sont pas</p>
 
         <!--Bouton ajout-->
-        @if(Auth::user()->id==1)
+        @if(Auth::user()->responsable==1)
             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#etudiantModal">Ajouter un etudiant au groupe {{$groupe->nomGroupe}}</a>
         @endif
     </div>
@@ -39,7 +39,7 @@
                         <td><a class="badge badge-secondary" href= "{{ route('notesEtudiant',['id'=>$etudiant->id]) }}" >Notes</a></td>
 
                         <!--Dissociation du groupe & vision de l'étudiant-->
-                        @if(Auth::user()->id ==1)
+                        @if(Auth::user()->responsable==1)
                             <td class="d-flex ">
                                 <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
                                 <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>

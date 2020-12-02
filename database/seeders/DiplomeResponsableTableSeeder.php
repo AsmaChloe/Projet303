@@ -16,8 +16,8 @@ class DiplomeResponsableTableSeeder extends Seeder
     {
         diplome_responsable::truncate();
 
-        diplome_responsable::create(['idDiplome'=>1,'idResponsable'=>1]);
-        diplome_responsable::create(['idDiplome'=>2,'idResponsable'=>2]);
+        diplome_responsable::create(['idDiplome'=>1,'idResponsable'=>18]);
+        diplome_responsable::create(['idDiplome'=>2,'idResponsable'=>19]);
     }
 }
 

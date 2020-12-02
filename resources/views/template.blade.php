@@ -49,6 +49,9 @@
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/Projet303/public/enseignant">Informations</a>
               <a class="dropdown-item" href="/Projet303/public/enseignant/groupes">Groupes</a>
+              @if(Auth::user()->responsable==1)
+              <a class="dropdown-item" href="/Projet303/public/responsable/diplomes">Diplomes</a>
+              @endif
             </div>
           </li>
           @endif

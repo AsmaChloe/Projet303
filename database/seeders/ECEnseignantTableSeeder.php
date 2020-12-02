@@ -19,22 +19,24 @@ class ECEnseignantTableSeeder extends Seeder
         EC_Enseignant::truncate();
 
         $nbEC=EC::count();
+        $listeProf=User::where('role',2)->get(); //Tableau de prof
         $nbProf=User::where('role',2)->count();
 
         $i=1;
-        $k=13;
-        $nbProf+=$k;
+        $j=0;
+        //$k=13;
+        //$listeProf+=$k;
         while($i<=$nbEC){
             EC_Enseignant::create([
                 'idEC'=>$i,
-                'idEnseignant'=>$k
+                'idEnseignant' => $listeProf[$j]->id
             ]);
 
-            if($k==$nbProf-1){
-                $k=13;
+            if($j==sizeof($listeProf)-1){
+                $j=0;
             }
             else{
-                $k++;
+                $j++;
             }
             $i++;
         }
