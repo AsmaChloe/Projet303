@@ -8,15 +8,27 @@ use Illuminate\Support\Facades\Auth;
 class DiplomesController extends Controller
 {
     /**
-     * Cette méthode permet d'afficher la liste des diplomes que gère le responsable
+     * Cette méthode permet d'afficher la liste des diplomes (pour l'enseignant ou l'administrateur)
      *
      * @return \Illuminate\Http\Response
      */
     public function voirDiplomes(Request $request)
     {
-        if(Auth::check() && (Auth::user()->responsable)==1){ //Il faut être connecté et être un responsable
+        if(Auth::check() && Auth::user()->responsable==1){ 
+            $user=Auth::user();
+
+            switch($user->role){
+                case 1 :
+                    $diplome=\App\Models\Diplomes::all();
+                break;
+                case 2 :
+                    $diplomes=$user->diplomes;
+                break;
+                default :
+                    return redirect('/');
+            }
             
-            return view('responsable/diplomes',['user' => Auth::user()]);
+            return view('responsable/diplomes',['user' => $user,'diplomes'=>$diplome]);
         }
         else{
             return redirect('/');

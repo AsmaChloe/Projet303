@@ -24,10 +24,9 @@
         <div class="col-md-8">
 
         <table id="etudiantTable" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <td colspan="4" class=" text-center ">Etudiants du groupe</td>
-                </tr>
+            <thead class="thead-dark">
+                    <th colspan="4" class=" text-center ">Etudiants du groupe</th>
+                
             </thead>
 
             <tbody>

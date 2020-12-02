@@ -27,7 +27,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach($user->diplomes as $diplome)
+                        @foreach($diplomes as $diplome)
                         <tr>
                             <td>
                                 {{$diplome->typeDiplome}}
