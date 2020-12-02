@@ -75,6 +75,28 @@ class GroupesController extends Controller
     }
 
     /**
+     * Supprimer définitivement une association ec - groupe
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteECGroupe(int $idEC, int $idGroupe)
+    {
+        $ecGroupe=\App\Models\EC_Groupe::where('idGroupe',$idGroupe)->where('idEC',$idEC);
+
+        if($ecGroupe->forceDelete()){
+            
+            return redirect()->back()->with('alert',"Dissociation effective");
+        }
+        else{
+            
+            return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'ec et du groupe ");
+        }
+
+        
+    }
+
+    /**
      * Pour enregistrer une association groupe - enseignant
      *
      * @param  \Illuminate\Http\Request  $request

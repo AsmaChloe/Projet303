@@ -39,6 +39,8 @@ Route::get('/responsable/ajout-etudiant', 'App\Http\Controllers\EtudiantsControl
 Route::get('/responsable/supprimer-ensgroupe/{idEnseignant}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteEnsGroupe')->name('supprimerEnsGroupe');
 //Groupe-Etudiants
 Route::get('/responsable/supprimer-etgroupe/{idEtudiant}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteEtGroupe')->name('supprimerEtGroupe');
+//EC-Groupe
+Route::get('/responsable/supprimer-ecgroupe/{idEC}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteECGroupe')->name('supprimerECGroupe');
 
 /*---------------------Les suppressions----------------------*/
 //Note
