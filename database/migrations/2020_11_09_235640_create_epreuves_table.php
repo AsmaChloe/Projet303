@@ -15,8 +15,9 @@ class CreateEpreuvesTable extends Migration
     {
         Schema::create('epreuves', function (Blueprint $table) {
             $table->id('idEpreuve');
-            $table->datetime('dateEpreuve');
-            $table->integer('dureeEpreuve');
+            $table->date('dateEpreuve');
+            $table->time('debutEpreuve');
+            $table->time('finEpreuve');
             $table->integer('numSession');
             $table->integer('pourcentage');
             $table->unsignedBigInteger('idEC');

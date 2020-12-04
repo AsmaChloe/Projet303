@@ -23,11 +23,14 @@ class EpreuveTableSeeder extends Seeder
         $type=TypeEpreuve::all()->pluck('idTypeEpreuve');
         $nbEC=EC::count();
         $faker = \Faker\Factory::create();
+        
 
         for($i=1;$i<=$nbEC;$i++){
+            $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
             Epreuve::create([
-                'dateEpreuve'=>$faker->dateTimeBetween('now',"+6 months","Europe/Paris")->format('Y-m-d H:i:s'),
-                'dureeEpreuve'=>120, 
+                'dateEpreuve'=>$temp->format('Y-m-d'),
+                'debutEpreuve'=> '14:00:00' , 
+                'finEpreuve'=> '16:00:00' ,
                 'numSession'=>1,
                 'pourcentage'=>100, 
                 'idEC'=>$i,

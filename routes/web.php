@@ -23,7 +23,8 @@ Route::get('/', function () {
 Route::get('/enseignant/gererNotes/ajout-note', 'App\Http\Controllers\NotesController@store')->name('note.ajout');
 //Presentiel
 Route::get('/etudiant/ajout-presentiel', '\App\Http\Controllers\PresentielController@store')->name('presentiel.ajout');
-
+//Epreuve
+Route::get('/etudiant/ajout-epreuve', '\App\Http\Controllers\EpreuvesController@store')->name('epreuve.ajout');
 /*---------------------Les associations----------------------*/
 
 //EC-Groupes

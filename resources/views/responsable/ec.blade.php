@@ -11,8 +11,9 @@
         Ajout du professeur</p>
 
         <!--Bouton ajout-->
-            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#groupeModal">Ajouter un groupe existant </a>
+        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#groupeModal">Ajouter un groupe existant </a>
         
+        <!--Bouton voir les epreuves-->
         <a href="{{ route('voirEpreuvesEC',['idEC'=>$ec->idEC]) }}" class='btn btn-success' >Voir les épreuves</a>
         
     </div>

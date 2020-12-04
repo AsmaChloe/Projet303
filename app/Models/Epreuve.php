@@ -13,7 +13,7 @@ class Epreuve extends Model
     protected $table = 'epreuves';
     protected $primaryKey = 'idEpreuve';
 
-    protected $fillable = ['dateEpreuve','dureeEpreuve','numSession','pourcentage','idEC','idTypeEpreuve'];
+    protected $fillable = ['dateEpreuve','debutEpreuve', 'finEpreuve','numSession','pourcentage','idEC','idTypeEpreuve'];
 
     /**
      * Obtenir l'ec de l'épreuve
