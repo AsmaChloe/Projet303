@@ -19,7 +19,7 @@ class DiplomesController extends Controller
 
             switch($user->role){
                 case 1 :
-                    $diplome=\App\Models\Diplomes::all();
+                    $diplomes=\App\Models\Diplomes::all();
                 break;
                 case 2 :
                     $diplomes=$user->diplomes;
@@ -28,7 +28,7 @@ class DiplomesController extends Controller
                     return redirect('/');
             }
             
-            return view('responsable/diplomes',['user' => $user,'diplomes'=>$diplome]);
+            return view('responsable/diplomes',['user' => $user,'diplomes'=>$diplomes]);
         }
         else{
             return redirect('/');
