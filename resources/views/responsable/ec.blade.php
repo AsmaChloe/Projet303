@@ -11,9 +11,10 @@
         Ajout du professeur</p>
 
         <!--Bouton ajout-->
-        @if(Auth::user()->id==1)
             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#groupeModal">Ajouter un groupe existant </a>
-        @endif
+        
+        <a href="{{ route('voirEpreuvesEC',['idEC'=>$ec->idEC]) }}" class='btn btn-success' >Voir les épreuves</a>
+        
     </div>
 </div>
 
@@ -28,7 +29,8 @@
 
             <thead class="thead-dark">
                 <th>Groupe</th>
-                <th colspan="3">Enseignant</th>
+                <th colspan="1">Enseignant</th>
+                <th colspan="3"> </th>
             </thead>
 
             <tbody>
@@ -55,6 +57,9 @@
                     </td>
                     <td>
                         <a href="{{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}">Voir les étudiants</a>
+                    </td>
+                    <td>
+                        <a href="#">Voir les séances</a>
                     </td>
                     @if(Auth::user()->id != 3)
                         <td class="d-flex ">

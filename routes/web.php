@@ -65,7 +65,7 @@ Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@voirSesNotes
 //Voir ses groupes
 Route::get('/etudiant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
 //Voir ses epreuves
-Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@liste');
+Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@voirMesEpreuves')->name('voirEpreuves');
 //Voir ses IP
 Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste');
 //Voir son presentiel
@@ -86,6 +86,8 @@ Route::get('enseignant', function() {
 Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
 //Ses etudiants selon le groupe
 Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiants');
+//Voir les epreuves de l'EC
+Route::get('/etudiant/epreuves/{idEC}', 'App\Http\Controllers\EpreuvesController@voirEpreuvesEC')->name('voirEpreuvesEC');
 //Presentiel de son étudiant
 Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielController@voirPresentielEtudiant')->name('presentielEtudiant');
 //Notes de son étudiant

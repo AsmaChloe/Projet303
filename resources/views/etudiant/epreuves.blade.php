@@ -1,5 +1,5 @@
 @extends('template')
-@section('titre')Mes epreuves @endsection
+@section('titre')Epreuves @endsection
 @section('contenu')
 
 <!--Header-->
@@ -27,9 +27,9 @@
 					<th>Duree</th>
 				</tr>
 			</thead>
-
+			
 			<!--Pour chaque epreuve-->
-			@foreach($user->epreuves as $epreuve)
+			@foreach($epreuves as $epreuve)
 			<tbody>
 				<tr>
 					<td>{{$epreuve->ec->sigleEC}}</td>

@@ -9,18 +9,52 @@ use \App\Models\Epreuve;
 class EpreuvesController extends Controller
 {
     /**
-     * Cette méthode permet d'afficher la liste des epreuves de l'étudiant
+     * Cette méthode permet d'afficher la liste de ses epreuves (spécial etudiant)
      *
      * @return \Illuminate\Http\Response
      */
-    public function liste(Request $request)
+    public function voirMesEpreuves()
     {
         if(Auth::check() && Auth::user()->role==3){
-            $epreuves=Epreuve::all();
-            return view('etudiant/epreuves',['user' => Auth::user(),'epreuves'=>$epreuves]);
+            $user=Auth::user();
+            
+            $epreuves=$user->epreuves;
+            
+            return view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves]);
         }
         else{
             return redirect('/');
         } 
     }
+
+    /**
+     * Cette méthode permet d'afficher la liste de des epreuves d'un EC particulier
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function voirEpreuvesEC($id)
+    {
+        $user=Auth::user();
+        if(Auth::check() && $user->role!=3){
+            
+            
+            if($user->role==1 || $user->role==2){
+                $epreuves=array();
+                
+                //On récupère l'EC en question
+                $ec=\App\Models\EC::where('idEC',$id)->get();
+                //On ajoute ses epreuves dans un tableaux
+                foreach($ec[0]->epreuves as $epreuve){
+                    array_push($epreuves,$epreuve);
+                }
+            }
+            
+            return view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves]);
+        }
+        else{
+            return redirect('/');
+        } 
+    }
+
+
 }

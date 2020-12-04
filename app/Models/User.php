@@ -72,10 +72,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Obtenir le(s) parcour(s) que dirige le responsable user->parcours()
+     * Obtenir le(s) parcour(s) que dirige le responsable user->parcoursResp
      */
     public function parcoursResp(){
-        return $this->hasManyThrough(Parcours::class,diplome_responsable::class,'idResponsable','idDiplome','id','idResponsable');
+        return $this->hasManyThrough(Parcours::class,Diplome_Responsable::class,'idResponsable','idDiplome','id','idDiplome');
+        //Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo dans pivot
     }
 
     /**

@@ -46,8 +46,8 @@ class Parcours extends Model
      * Obtenir le(s) ec(s) du parcours user->ecs()
      */
     public function ecs(){
-        return $this->hasManyThrough(EC::class,ParcoursSemestre::class,'idParcours','idSemestre');
-                        //Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id actuel du pivot
+        return $this->hasManyThrough(EC::class,ParcoursSemestre::class,'idParcours','idSemestre','idParcours','idSemestre');
+        //Has many  / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo du pivot
 
     }
 

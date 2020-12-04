@@ -22,7 +22,8 @@
                 <table class="table table-striped table-bordered">
 
                     <thead class="thead-dark">
-                        <th>{{$ec->sigleEC}}</th>
+                        <th>{{$ec->sigleEC}}
+                         - <a href="{{ route('voirEpreuvesEC',['idEC'=>$ec->idEC]) }}" class='btn btn-sm  btn-success' >Voir les épreuves</a></th>
                     </thead>
 
                     <tbody>
