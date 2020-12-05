@@ -16,7 +16,7 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-8">
-            
+        
             <!--Table-->
             @foreach($ecs as $ec)
                 <table class="table table-striped table-bordered">
@@ -27,7 +27,7 @@
                             <a href="{{ route('voirEpreuvesEC',['idEC'=>$ec->idEC]) }}" class='btn btn-sm btn-outline-light' >Voir les épreuves</a>
                         </th>
                     </thead>
-
+                    
                     <tbody>
                         @foreach($ec->ec_groupe as $groupe)
                             @if($groupe->enseignants->contains($user))

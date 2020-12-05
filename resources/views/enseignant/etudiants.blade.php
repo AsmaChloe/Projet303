@@ -28,7 +28,7 @@
                     <th colspan="4" class=" text-center ">Etudiants du groupe</th>
                 
             </thead>
-
+    
             <tbody>
                 <!--Affichage selon l'ordre alphabetique-->
                 @foreach($etudiants->sortBy('name') as $etudiant)
