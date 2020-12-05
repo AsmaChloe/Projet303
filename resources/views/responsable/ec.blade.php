@@ -99,9 +99,12 @@
 
             <!--Liste de tous les groupes -->
             <div class="form-group">
+                <p>Il n'apparait que les groupes déjà lié à l'EC {{$ec->sigleEC}}.</p>
+
+                <label for="groupe">Enseignant du groupe</label>
                 <select class="form-control select2-multi" id="groupe" name="groupe" >
-                    @foreach ($allGroups as $groupe)
-                        <option value="{{ $groupe->idGroupe }}">{{ $groupe->nomGroupe }}</option>
+                    @foreach ($groupes2ec as $groupe2ec)
+                        <option value="{{ $groupe2ec->idGroupe }}">{{ $groupe2ec->nomGroupe }}</option>
                     @endforeach
                 </select>
             </div>
@@ -129,9 +132,10 @@
         <!--Formulaire-->
         <form id="enseignantForm">
             @csrf
-
+            <p>Il n'apparait que les enseignants déjà lié à l'EC {{$ec->sigleEC}}.</p>
             <!--Liste de tous les enseignants-->
             <div class="form-group">
+                <label for="enseignant">Enseignant du groupe</label>
                 <select class="form-control select2-multi" id="enseignant" name="enseignant" >
                     @foreach ($profs as $prof)
                         <option value="{{ $prof->id }}">{{ $prof->name }}</option>

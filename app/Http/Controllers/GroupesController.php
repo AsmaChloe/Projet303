@@ -48,13 +48,13 @@ class GroupesController extends Controller
         if(Auth::check() && (Auth::user()->responsable)==1 ){
             
             $ec=\App\Models\EC::find($id);
+
             //Cet attribut sera utilise pour l'association Groupe - Enseignant, l'enseignant est un enseignant déjà lié à l'EC actuel
             $profs=$ec->enseignants;
-            //Obtenir tous les groupes existant;
-            $allGroups=\App\Models\Groupes::all();
-            
-            $allTeachers=\App\Models\User::where('role',2)->get();
-            return view('responsable/ec',['ec'=>$ec,'allGroups'=>$allGroups, 'allTeachers'=>$allTeachers,'profs'=>$profs]);
+            //Cet attribut sera utilise pour l'association Groupe - EC, le groupe est un groupe déjà lié à l'EC actuel
+            $groupes2ec=$ec->ec_groupe;
+
+            return view('responsable/ec',['ec'=>$ec,'groupes2ec'=>$groupes2ec,'profs'=>$profs]);
         }
         else{
             return redirect('/');
