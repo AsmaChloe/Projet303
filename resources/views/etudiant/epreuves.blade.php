@@ -27,7 +27,7 @@
 				<tr class="thead-dark">
 					<th>EC</th>
 					<th>Date</th>
-					<th>Duree</th>
+					<th colspan="2">Duree</th>
 				</tr>
 			</thead>
 
@@ -37,7 +37,14 @@
 				<tr>
 					<td>{{$epreuve->ec->sigleEC}}</td>
 					<td>le {{ $epreuve->dateEpreuve}}</td>
-					<td>{{ $epreuve->finEpreuve }}</td>
+					<td>{{ $epreuve->debutEpreuve }} - {{ $epreuve->finEpreuve }}</td>
+                    @if(Auth::user()->responsable==1)
+                        <td class="d-flex ">
+                            <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
+                            <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
+                            <a href="{{ route('supprimerEpreuve',['idEpreuve'=>$epreuve->idEpreuve]) }}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
+                        </td>
+                    @endif
 				</tr>
 			</tbody>
 			@endforeach
@@ -132,7 +139,7 @@
             success:function(response){
                 if(response){
                     alert("Ajout de l'epreuve réussi");
-					$("#epreuveTable tbody").prepend('<tr><td>{{$ec->sigleEC}}</td><td> '+response.dateEpreuve+'</td><td>'+response.finEpreuve+'</td></tr>');
+					$("#epreuveTable tbody").prepend('<tr><td>{{$ec->sigleEC}}</td><td> '+response.dateEpreuve+'</td><td>'+response.debutEpreuve+''+response.finEpreuve+'</td></tr>');
                     $("#epreuveForm")[0].reset();
                     $("#epreuveModal").modal('hide');
                 }

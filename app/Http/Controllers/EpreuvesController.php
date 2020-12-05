@@ -74,5 +74,26 @@ class EpreuvesController extends Controller
         return response()->json($epreuve);
     }
 
+     /**
+     * Supprimer définitivement une epreuve
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteEpreuve(int $idEpreuve)
+    {
+        $epreuve=\App\Models\Epreuve::where('idEpreuve',$idEpreuve);
+
+        if($epreuve->forceDelete()){
+            
+            return redirect()->back()->with('alert',"epreuve supprimé");
+        }
+        else{
+            
+            return redirect()->back()->with('alert',"Probleme lors de la suppression de l'epreuve");
+        }
+
+        
+    }
 
 }

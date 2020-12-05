@@ -53,4 +53,26 @@ class SeancesController extends Controller
 
         return response()->json($seance);
     }
+
+    /**
+     * Supprimer définitivement une seance
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteSeance(int $idSeance)
+    {
+        $seance=\App\Models\Seance::where('idSeance',$idSeance);
+
+        if($seance->forceDelete()){
+            
+            return redirect()->back()->with('alert',"seance supprimée");
+        }
+        else{
+            
+            return redirect()->back()->with('alert',"Probleme lors de la suppression de la seance");
+        }
+
+        
+    }
 }

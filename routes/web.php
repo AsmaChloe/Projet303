@@ -50,6 +50,10 @@ Route::get('/responsable/supprimer-ecgroupe/{idEC}/{idGroupe}', 'App\Http\Contro
 Route::get('/enseignant/gererNotes/supprimerNote/{idNote}', 'App\Http\Controllers\NotesController@softDeleteNote')->name('supprimerNote');
 //Presentiel
 Route::get('/enseignant/supprimerPresentiel/{idPresentiel}', 'App\Http\Controllers\PresentielController@softDeletePresentiel')->name('supprimerPresentiel');
+//Epreuve
+Route::get('/responsable/supprimerEpreuve/{idEpreuve}', 'App\Http\Controllers\EpreuvesController@deleteEpreuve')->name('supprimerEpreuve');
+//Seance
+Route::get('/responsable/supprimerSeance/{idSeance}', 'App\Http\Controllers\SeancesController@deleteSeance')->name('supprimerSeance');
 
 /*--------------------------------------------------------ROUTES VUES--------------------------------------------------------------- */
 /*-------------------------Etudiant--------------------------*/
