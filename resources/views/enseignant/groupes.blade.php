@@ -22,8 +22,10 @@
                 <table class="table table-striped table-bordered">
 
                     <thead class="thead-dark">
-                        <th>{{$ec->sigleEC}}
-                         - <a href="{{ route('voirEpreuvesEC',['idEC'=>$ec->idEC]) }}" class='btn btn-sm  btn-success' >Voir les épreuves</a></th>
+                        <th>{{$ec->sigleEC}}</th>
+                        <th>
+                            <a href="{{ route('voirEpreuvesEC',['idEC'=>$ec->idEC]) }}" class='btn btn-sm btn-outline-light' >Voir les épreuves</a>
+                        </th>
                     </thead>
 
                     <tbody>
@@ -31,10 +33,12 @@
                             @if($groupe->enseignants->contains($user))
                                 <tr>
                                     <td>
-                                        <a class="badge badge-secondary" href= " {{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}" >{{$groupe->nomGroupe}}({{$groupe->typeGroupe}})</a>
+                                        <a class="btn btn-sm btn-outline-dark" href= " {{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}" >{{$groupe->nomGroupe}}({{$groupe->typeGroupe}})</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-dark" href="{{ route('seances',['idGroupe'=>$groupe->idGroupe,'idEC'=>$ec->idEC]) }}">Voir les séances</a>
                                     </td>
                                 </tr>
-                                    
                                 @endif
                         @endforeach
                         <br>
