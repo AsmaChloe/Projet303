@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
 	<h2 class="display-2 text-center mb-4">Groupes de l'ec {{$ec->sigleEC}} </h2>
 
-        <p class="lead text-center mb-4">Pouvoir ajouter seulement des groupes d'info<br></p>
+        <p class="lead text-center mb-4">Modif<br></p>
 
         <!--Bouton ajout-->
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#groupeModal">Ajouter un groupe existant </a>
