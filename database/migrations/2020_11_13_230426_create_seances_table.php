@@ -15,8 +15,10 @@ class CreateSeancesTable extends Migration
     {
         Schema::create('seances', function (Blueprint $table) {
             $table->id('idSeance');
-            $table->datetime('debutSeance');
-            $table->datetime('finSeance');
+            $table->integer('numSeance');
+            $table->date('dateSeance');
+            $table->time('debutSeance');
+            $table->time('finSeance');
             $table->unsignedBigInteger('idGroupe');
             $table->foreign('idGroupe')->references('idGroupe')->on('groupes');
             $table->unsignedBigInteger('idEC');

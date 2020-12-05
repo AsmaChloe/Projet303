@@ -19,19 +19,25 @@ class SeanceTableSeeder extends Seeder
         Seance::truncate();
         
         $faker = \Faker\Factory::create();
+        $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
 
         //Les CM de 301,303,304,305,306
         Seance::create([
-            'debutSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
-            'finSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
+            'numSeance'=>1,
+            'dateSeance'=>$temp->format('Y-m-d'),
+            'debutSeance'=> '14:00:00', 
+            'finSeance'=> '16:00:00',
             'idGroupe' => 1,
             'idEC' => 1
         ]);
 
         for($i=3;$i<=6;$i++){
+            $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
             Seance::create([
-                'debutSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
-                'finSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
+                'numSeance'=>1,
+                'dateSeance'=>$temp->format('Y-m-d'),
+                'debutSeance'=> '14:00:00', 
+                'finSeance'=> '16:00:00',
                 'idGroupe' => 1,
                 'idEC' => $i
             ]);
@@ -39,16 +45,21 @@ class SeanceTableSeeder extends Seeder
 
         //Les TD pour le groupe S3F3 de 301 à 306
         Seance::create([
-            'debutSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
-            'finSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
+            'numSeance'=>1,
+            'dateSeance'=>$temp->format('Y-m-d'),
+            'debutSeance'=> '14:00:00', 
+            'finSeance'=> '16:00:00',
             'idGroupe' => 2,
             'idEC' => 1
         ]);
 
         for($i=3;$i<=6;$i++){
+            $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
             Seance::create([
-                'debutSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
-                'finSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
+                'numSeance'=>1,
+                'dateSeance'=>$temp->format('Y-m-d'),
+                'debutSeance'=> '14:00:00', 
+                'finSeance'=> '16:00:00',
                 'idGroupe' => 2,
                 'idEC' => $i
             ]);
@@ -56,9 +67,12 @@ class SeanceTableSeeder extends Seeder
 
         //Les TP pour le groupe S3F3A de 301 à 306
         for($i=1;$i<=6;$i++){
+            $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
             Seance::create([
-                'debutSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
-                'finSeance' => $faker->dateTimeBetween('-1 months',"now","UTC")->format('Y-m-d H:i:s'),
+                'numSeance'=>1,
+                'dateSeance'=>$temp->format('Y-m-d'),
+                'debutSeance'=> '14:00:00', 
+                'finSeance'=> '16:00:00',
                 'idGroupe' => 4,
                 'idEC' => $i
             ]);

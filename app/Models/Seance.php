@@ -16,7 +16,7 @@ class Seance extends Model
     protected $table = 'seances';
     protected $primaryKey = 'idSeance';
 
-    protected $fillable = ['debutSeance','finSeance','idGroupe','idEC'];
+    protected $fillable = ['numSeance','dateSeance','debutSeance','finSeance','idGroupe','idEC'];
 
     /**
      * Obtenir le groupe qui a assité à la séance
