@@ -7,15 +7,13 @@
     <div class="container pt-5 pb-4" >
 	<h2 class="display-2 text-center mb-4">Groupes de l'ec {{$ec->sigleEC}} </h2>
 
-        <p class="lead text-center mb-4">Pouvoir ajouter seulement des groupes d'info<br>
-        Ajout du professeur</p>
+        <p class="lead text-center mb-4">Pouvoir ajouter seulement des groupes d'info<br></p>
 
         <!--Bouton ajout-->
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#groupeModal">Ajouter un groupe existant </a>
         
         <!--Bouton voir les epreuves-->
         <a href="{{ route('voirEpreuvesEC',['idEC'=>$ec->idEC]) }}" class='btn btn-success' >Voir les épreuves</a>
-        
     </div>
 </div>
 
@@ -135,8 +133,8 @@
             <!--Liste de tous les enseignants-->
             <div class="form-group">
                 <select class="form-control select2-multi" id="enseignant" name="enseignant" >
-                    @foreach ($allTeachers as $teacher)
-                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                    @foreach ($profs as $prof)
+                        <option value="{{ $prof->id }}">{{ $prof->name }}</option>
                     @endforeach
                 </select>
             </div>
