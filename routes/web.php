@@ -25,6 +25,8 @@ Route::get('/enseignant/gererNotes/ajout-note', 'App\Http\Controllers\NotesContr
 Route::get('/etudiant/ajout-presentiel', '\App\Http\Controllers\PresentielController@store')->name('presentiel.ajout');
 //Epreuve
 Route::get('/etudiant/ajout-epreuve', '\App\Http\Controllers\EpreuvesController@store')->name('epreuve.ajout');
+//Seance
+Route::get('/enseignant/ajout-seance', '\App\Http\Controllers\SeancesController@store')->name('seance.ajout');
 /*---------------------Les associations----------------------*/
 
 //EC-Groupes
@@ -85,6 +87,8 @@ Route::get('enseignant', function() {
 });
 //Ses groupes
 Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
+//Voir les seances de son groupe dans son ec
+Route::get('/enseignant/seances/{idGroupe}/{idEC}', 'App\Http\Controllers\SeancesController@voirSeancesGroupe')->name('seances');
 //Ses etudiants selon le groupe
 Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiants');
 //Voir les epreuves de l'EC

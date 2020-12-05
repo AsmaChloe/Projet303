@@ -57,10 +57,10 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}">Voir les étudiants</a>
+                        <a class="btn btn-sm btn-outline-dark" href="{{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}">Voir les étudiants</a>
                     </td>
                     <td>
-                        <a href="#">Voir les séances</a>
+                        <a class="btn btn-sm btn-outline-dark" href="{{ route('seances',['idGroupe'=>$groupe->idGroupe,'idEC'=>$ec->idEC]) }}">Voir les séances</a>
                     </td>
                     @if(Auth::user()->id != 3)
                         <td class="d-flex ">
