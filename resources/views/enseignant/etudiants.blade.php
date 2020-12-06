@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Etudiants du groupe {{$groupe->nomGroupe}}</h2>
 
-        <p class="lead text-center mb-4">POuvoir ajouter que des etudiants de la filliere + qui n'y sont pas</p>
+        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxx</p>
 
         <!--Bouton ajout-->
         @if(Auth::user()->responsable==1)
@@ -34,14 +34,12 @@
                 @foreach($etudiants->sortBy('name') as $etudiant)
                     <tr>
                         <td>{{$etudiant->name}}</td>
-                        <td><a class="badge badge-secondary" href= "{{ route('presentielEtudiant',['idEtudiant'=>$etudiant->id]) }}" >Presentiel</a></td>
-                        <td><a class="badge badge-secondary" href= "{{ route('notesEtudiant',['idEtudiant'=>$etudiant->id]) }}" >Notes</a></td>
+                        <td><a class="btn btn-sm btn-dark" href= "{{ route('presentielEtudiant',['idEtudiant'=>$etudiant->id]) }}" >Presentiel</a></td>
+                        <td><a class="btn btn-sm btn-dark" href= "{{ route('notesEtudiant',['idEtudiant'=>$etudiant->id]) }}" >Notes</a></td>
 
                         <!--Dissociation du groupe & vision de l'étudiant-->
                         @if(Auth::user()->responsable==1)
                             <td class="d-flex ">
-                                <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
-                                <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
                                 <a href="{{ route('supprimerEtGroupe',['idEtudiant'=>$etudiant->id, 'idGroupe'=>$groupe->idGroupe]) }}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
                             </td>
                             @endif
@@ -73,11 +71,11 @@
         <form id="etudiantForm">
             @csrf
 
-            <!--Liste de tous les groupes-->
+            <!--Liste des etudiants-->
             <div class="form-group">
-                <select class="form-control select2-multi" id="student" name="student" >
-                    @foreach ($allStudents as $student)
-                        <option value="{{ $student->id }}">{{ $student->name }}</option>
+                <select class="form-control select2-multi" id="etudiant2parcours" name="etudiant2parcours" >
+                    @foreach ($etudiants2parcours as $etudiant2parcours)
+                        <option value="{{ $etudiant2parcours->id }}">{{ $etudiant2parcours->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -94,7 +92,7 @@
     $("#etudiantForm").submit(function(e){
         e.preventDefault();
         //Recupération des informations
-        let idEtudiant = document.getElementById("student").value;
+        let idEtudiant = document.getElementById("etudiant2parcours").value;
         let idGroupe = {{ $groupe->idGroupe }};
         let _token = $("input[name=_token]").val();
 

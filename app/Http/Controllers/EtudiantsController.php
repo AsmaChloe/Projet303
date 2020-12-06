@@ -18,7 +18,7 @@ class EtudiantsController extends Controller
 
             $groupe=\App\Models\Groupes::find($id);
             $etudiants=$groupe->etudiants;
-            $allStudents=\App\Models\User::where('role',3)->get(); //Recherche à affiner
+            $allStudents=\App\Models\User::where('role',3)->get();
 
             if((Auth::user()->role)==2 ){ //Si c'est un enseignant 
 
@@ -34,15 +34,27 @@ class EtudiantsController extends Controller
                         return redirect('/');
                     }
                 }
-                else{ //Responsable
-                    //On récupère ses matières via ses parcours
+                 //Enseignant responsable
+                else{
                     $parcours=Auth::user()->parcoursResp;
-                    foreach($parcours as $par){
-                        foreach($par->ecs as $ec){
+                    //Tableau des etudiants du parcours
+                    $etudiants2parcours=array();
 
+                    //Pour tous les parcours du responsable
+                    foreach($parcours as $par){
+                        
+                        //On récupère tous les étudiants des parcours
+                        foreach($allStudents as $student){
+                            if($student->parcoursEtu->contains($par)){
+                                array_push($etudiants2parcours,$student);
+                            }
+                        }
+
+                        //Maintenant on récupère tous les EC des parcours
+                        foreach($par->ecs as $ec){
                             //Si le groupe actuel se trouve parmi les EC des parcours du responsable, il peut y acceder
                             if($ec->ec_groupe->contains($groupe)){
-                                return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'allStudents'=>$allStudents]);
+                                return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'etudiants2parcours'=>$etudiants2parcours]);
                             }
                             else{
                                 return redirect('/');
