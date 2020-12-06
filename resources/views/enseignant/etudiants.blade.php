@@ -34,8 +34,8 @@
                 @foreach($etudiants->sortBy('name') as $etudiant)
                     <tr>
                         <td>{{$etudiant->name}}</td>
-                        <td><a class="badge badge-secondary" href= "{{ route('presentielEtudiant',['id'=>$etudiant->id]) }}" >Presentiel</a></td>
-                        <td><a class="badge badge-secondary" href= "{{ route('notesEtudiant',['id'=>$etudiant->id]) }}" >Notes</a></td>
+                        <td><a class="badge badge-secondary" href= "{{ route('presentielEtudiant',['idEtudiant'=>$etudiant->id]) }}" >Presentiel</a></td>
+                        <td><a class="badge badge-secondary" href= "{{ route('notesEtudiant',['idEtudiant'=>$etudiant->id]) }}" >Notes</a></td>
 
                         <!--Dissociation du groupe & vision de l'étudiant-->
                         @if(Auth::user()->responsable==1)

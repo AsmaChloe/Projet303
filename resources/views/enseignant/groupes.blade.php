@@ -33,7 +33,7 @@
                             @if($groupe->enseignants->contains($user))
                                 <tr>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-dark" href= " {{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}" >{{$groupe->nomGroupe}}({{$groupe->typeGroupe}})</a>
+                                        <a class="btn btn-sm btn-outline-dark" href= " {{ route('etudiantsGroupe',['groupe'=>$groupe->idGroupe]) }}" >{{$groupe->nomGroupe}}({{$groupe->typeGroupe}})</a>
                                     </td>
                                     <td>
                                         <a class="btn btn-sm btn-outline-dark" href="{{ route('seances',['idGroupe'=>$groupe->idGroupe,'idEC'=>$ec->idEC]) }}">Voir les séances</a>
