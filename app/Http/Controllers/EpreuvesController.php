@@ -36,24 +36,47 @@ class EpreuvesController extends Controller
     {
         $user=Auth::user();
         $typesEpreuves=\App\Models\TypeEpreuve::all();
-
+        //On récupère l'EC en question
+        $ec=\App\Models\EC::where('idEC',$id)->get();
+        $ec=$ec[0];
         if(Auth::check()){
             
-            
-            if($user->role==1 || $user->role==2){
-                $epreuves=array();
-                
-                //On récupère l'EC en question
-                $ec=\App\Models\EC::where('idEC',$id)->get();
-                //On ajoute ses epreuves dans un tableaux
-                foreach($ec[0]->epreuves as $epreuve){
-                    array_push($epreuves,$epreuve);
+            if($user->role==2){
+                //Si c'est un professeur responsable : il peut voir tous les EC de ses parcours
+                if($user->responsable==1){
+                        
+                    //On prend ses parcours
+                    $parcours=$user->parcoursResp;
+                    foreach($parcours as $par){
+                        //Si l'EC actuel fait partie d'un parcours du responsable
+                        if($par->ecs->contains($ec)){
+                            //
+                        }
+                        else{
+                            return redirect('/');
+                        } 
+                    }
                 }
-            }else{
-                return redirect('/');
+                //Sinon il voit que ses EC à lui
+                else{
+                    if($user->ec_enseignant->contains($ec)){
+                        //
+                    }
+                    else{
+                        return redirect('/');
+                    } 
+                }
+            
             }
             
-            return view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves,'types'=>$typesEpreuves,'ec'=>$ec[0]]);
+            $epreuves=array();
+                
+            //On ajoute ses epreuves dans un tableaux
+            foreach($ec->epreuves as $epreuve){
+                array_push($epreuves,$epreuve);
+            }
+
+            return view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves,'types'=>$typesEpreuves,'ec'=>$ec]);
         }
         else{
             return redirect('/');
