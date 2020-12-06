@@ -94,13 +94,13 @@ Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeG
 //Voir les seances de son groupe dans son ec
 Route::get('/enseignant/seances/{idGroupe}/{idEC}', 'App\Http\Controllers\SeancesController@voirSeancesGroupe')->name('seances');
 //Ses etudiants selon le groupe
-Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiants');
+Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiantsGroupe');
 //Voir les epreuves de l'EC
 Route::get('/etudiant/epreuves/{idEC}', 'App\Http\Controllers\EpreuvesController@voirEpreuvesEC')->name('voirEpreuvesEC');
 //Presentiel de son étudiant
-Route::get('/etudiant/presentiel/{id}', 'App\Http\Controllers\PresentielController@voirPresentielEtudiant')->name('presentielEtudiant');
+Route::get('/etudiant/presentiel/{idEtudiant}', 'App\Http\Controllers\PresentielController@voirPresentielEtudiant')->name('presentielEtudiant');
 //Notes de son étudiant
-Route::get('/etudiant/notes/{id}', 'App\Http\Controllers\NotesController@voirNotesEtudiant')->name('notesEtudiant');
+Route::get('/etudiant/notes/{idEtudiant}', 'App\Http\Controllers\NotesController@voirNotesEtudiant')->name('notesEtudiant');
 
 /*-------------Special responsable ----------*/
 //Voir ses diplomes gérés
