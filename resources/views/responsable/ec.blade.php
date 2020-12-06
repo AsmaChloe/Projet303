@@ -55,7 +55,7 @@
                         @endif
                     </td>
                     <td>
-                        <a class="btn btn-sm btn-outline-dark" href="{{ route('etudiants',['groupe'=>$groupe->idGroupe]) }}">Voir les étudiants</a>
+                        <a class="btn btn-sm btn-outline-dark" href="{{ route('etudiantsGroupe',['groupe'=>$groupe->idGroupe]) }}">Voir les étudiants</a>
                     </td>
                     <td>
                         <a class="btn btn-sm btn-outline-dark" href="{{ route('seances',['idGroupe'=>$groupe->idGroupe,'idEC'=>$ec->idEC]) }}">Voir les séances</a>
