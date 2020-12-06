@@ -69,15 +69,32 @@ class NotesController extends Controller
                 break;
                 
                 case 2 :
-                    $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
-                    foreach($ecsEns as $ecEns){
+                    if(Auth::user()->responsable==0){
+                        $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
+                        foreach($ecsEns as $ecEns){
 
-                        //Si c'est un etudiant du professeur, on peut voir ses notes
-                        if($ecEns->etudiants->contains($etudiant)){
-                            return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+                            //Si c'est un etudiant du professeur, on peut voir ses notes
+                            if($ecEns->etudiants->contains($etudiant)){
+                                return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+                            }
+                            else{
+                                return redirect('/');
+                            }
                         }
-                        else{
-                            return redirect('/');
+                    }
+                    //Si c'est un enseignant responsable
+                    else{
+                        //On récupère ses parcours
+                        $parcours=Auth::user()->parcoursResp;
+
+                        foreach($parcours as $par){
+                            //Si parmis les etudiants du parcours se trouve l'étudiant actuel, c'est valide
+                            if($par->etudiants->contains($etudiant)){
+                                return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+                            }
+                            else{
+                                return redirect('/');
+                            }
                         }
                     }
                 break;
