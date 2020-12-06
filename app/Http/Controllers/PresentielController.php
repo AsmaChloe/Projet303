@@ -44,17 +44,35 @@ class PresentielController extends Controller
                 break;
 
                 case 2 :
-                    $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
+                    //Si c'est un enseignant non-respnsable
+                    if(Auth::user()->responsable==0){
+                        $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
                     
-                    foreach($ecsEns as $ecEns){
+                        foreach($ecsEns as $ecEns){
 
-                        //Si c'est un etudiant du professeur, on peut voir son presentiel
-                        if($ecEns->etudiants->contains($etudiant)){
-                            return view('etudiant/presentiel',['user'=>$etudiant]);
+                            //Si c'est un etudiant du professeur, on peut voir son presentiel
+                            if($ecEns->etudiants->contains($etudiant)){
+                                return view('etudiant/presentiel',['user'=>$etudiant]);
+                            }
+                            else{
+                                return redirect('/');
+                            }
                         }
-                        else{
-                            return redirect('/');
+                    }
+                    //Si il est responsable il a acces aux etudiants de son parcours
+                    else{
+                        $parcours=Auth::user()->parcoursResp;
+
+                        foreach($parcours as $par){
+                            //Si parmis les etudiants du parcours se trouve l'étudiant actuel, c'est valide
+                            if($par->etudiants->contains($etudiant)){
+                                return view('etudiant/presentiel',['user'=>$etudiant]);
+                            }
+                            else{
+                                return redirect('/');
+                            }
                         }
+                        
                     }
                 break;
 
