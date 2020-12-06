@@ -39,12 +39,12 @@ class EtudiantsController extends Controller
                     $parcours=Auth::user()->parcoursResp;
                     foreach($parcours as $par){
                         foreach($par->ecs as $ec){
-                            //Si le groupe est un groupe de l'enseignant c'est valide
-                            if($ec->ec_groupe->contains($id)){
+
+                            //Si le groupe actuel se trouve parmi les EC des parcours du responsable, il peut y acceder
+                            if($ec->ec_groupe->contains($groupe)){
                                 return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'allStudents'=>$allStudents]);
                             }
                             else{
-                                //Sinon il n'en a pas acces
                                 return redirect('/');
                             }
                         }   
