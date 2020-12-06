@@ -22,18 +22,27 @@ class SeancesController extends Controller
             $ec=\App\Models\EC::where('idEC',$idEC)->get();
             $ec=$ec[0];
 
-            $seances=array();
+            //Si l'EC est un EC du groupe c'est okay
+            if($groupe->ec_groupe->contains($ec)){
+                $seances=array();
 
-            //Toutes les seances de l'ec
-            $seancesEC=$ec->seances;
-            foreach($seancesEC as $seance){
-                //On prend que les séances du groupe
-                if($seance->idGroupe == $idGroupe){
-                    array_push($seances,$seance);
+                //Toutes les seances de l'ec
+                $seancesEC=$ec->seances;
+                foreach($seancesEC as $seance){
+                    //On prend que les séances du groupe
+                    if($seance->idGroupe == $idGroupe){
+                        array_push($seances,$seance);
+                    }
                 }
+
+                return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
+
+            }
+            else{
+                return redirect('/');
             }
 
-            return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
+            
         }
         else{
             return redirect('/');
