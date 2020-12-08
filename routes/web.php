@@ -60,6 +60,10 @@ Route::get('/responsable/supprimerSeance/{idSeance}', 'App\Http\Controllers\Sean
 Route::get('/editSeance/{idSeance}', 'App\Http\Controllers\SeancesController@editSeance')->name('editSeance');
 Route::post('/updateSeance/{idSeance}', 'App\Http\Controllers\SeancesController@updateSeance')->name('updateSeance');
 
+//Modifier une épreuve
+Route::get('/editEpreuve/{idEpreuve}', 'App\Http\Controllers\EpreuvesController@editEpreuve')->name('editEpreuve');
+Route::post('/updateEpreuve/{idEpreuve}', 'App\Http\Controllers\EpreuvesController@updateEpreuve')->name('updateEpreuve');
+
 /*--------------------------------------------------------ROUTES VUES--------------------------------------------------------------- */
 /*-------------------------Etudiant--------------------------*/
 

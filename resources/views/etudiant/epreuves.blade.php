@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Epreuves</h2>
 
-        <p class="lead text-center mb-4">Afficher correctement la date</p>
+        <p class="lead text-center mb-4">Afficher correctement la date<br>Verifications</p>
 
 		<!--Bouton ajout-->
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#epreuveModal">Ajouter une epreuve</a>
@@ -26,8 +26,12 @@
 			<thead>
 				<tr class="thead-dark">
 					<th>EC</th>
+                    <th>Type</th>
 					<th>Date</th>
 					<th colspan="2">Duree</th>
+                    <th>Pourcentage</th>
+                    <th>Session</th>
+                    <th>Modification</th>
 				</tr>
 			</thead>
 
@@ -36,13 +40,16 @@
 			<tbody>
 				<tr>
 					<td>{{$epreuve->ec->sigleEC}}</td>
-					<td>le {{ $epreuve->dateEpreuve}}</td>
-					<td>{{ $epreuve->debutEpreuve }} - {{ $epreuve->finEpreuve }}</td>
+					<td>{{$epreuve->type->valeurType}}</td>
+                    <td>le {{ $epreuve->dateEpreuve}}</td>
+					<td>{{ $epreuve->debutEpreuve }}</td>
+                    <td>{{ $epreuve->finEpreuve }}</td>
+                    <td>{{ $epreuve->pourcentage}}</td>
+                    <td>{{$epreuve->numSession}}</td>
                     @if(Auth::user()->responsable==1)
                         <td class="d-flex ">
-                            <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
-                            <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
-                            <a href="{{ route('supprimerEpreuve',['idEpreuve'=>$epreuve->idEpreuve]) }}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
+                            <a href="{{ route('editEpreuve',['idEpreuve'=>$epreuve->idEpreuve]) }}" class="btn btn-sm btn-dark mb-1">Modifier</a>
+                            <a href="{{ route('supprimerEpreuve',['idEpreuve'=>$epreuve->idEpreuve]) }}" class="btn btn-sm btn-danger mb-1">Supprimer</a>
                         </td>
                     @endif
 				</tr>
@@ -139,7 +146,7 @@
             success:function(response){
                 if(response){
                     alert("Ajout de l'epreuve réussi");
-					$("#epreuveTable tbody").prepend('<tr><td>{{$ec->sigleEC}}</td><td> '+response.dateEpreuve+'</td><td>'+response.debutEpreuve+''+response.finEpreuve+'</td></tr>');
+					$("#epreuveTable tbody").prepend('<tr><td>{{$ec->sigleEC}}</td><td>type</td><td> '+response.dateEpreuve+'</td><td>'+response.debutEpreuve+''+response.finEpreuve+'</td><td>'+response.pourcentage+'</td><td>'+response.numSession+'</td></tr>');
                     $("#epreuveForm")[0].reset();
                     $("#epreuveModal").modal('hide');
                 }

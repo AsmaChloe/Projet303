@@ -18,7 +18,7 @@
         </div>
         
         <div class="col-md-8">
-            <form method="post" action="{{ route('updateSeance',['idSeance'=>$seance->idSeance])}}" >@csrf {{ csrf_field() }}
+            <form method="post" action="{{ route('updateSeance',['idSeance'=>$seance->idSeance])}}" >@csrf
 
                 <input type="hidden" name="idSeance" value="{{$seance['idSeance']}}"/>
                 <input type="hidden" name="idEC" value="{{$seance['idEC']}}"/>

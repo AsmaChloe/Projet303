@@ -11,7 +11,7 @@ class EpreuvesController extends Controller
     /**
      * Cette méthode permet d'afficher la liste de ses epreuves (spécial etudiant)
      *
-     * @return \Illuminate\Http\Response
+     * @return view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves]);
      */
     public function voirMesEpreuves()
     {
@@ -29,8 +29,8 @@ class EpreuvesController extends Controller
 
     /**
      * Cette méthode permet d'afficher la liste des epreuves d'un EC particulier (By responsable)
-     *
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves,'types'=>$typesEpreuves,'ec'=>$ec]);
      */
     public function voirEpreuvesEC($id)
     {
@@ -97,11 +97,43 @@ class EpreuvesController extends Controller
         return response()->json($epreuve);
     }
 
+    /**
+     * Ouvre le formulaire pour modifier la séance
+     *
+     * @param  int  $idEpreuve
+     * @return  view('enseignant.editEpreuve',['epreuve'=>$epreuve]);
+     */
+    public function editEpreuve($idEpreuve){
+        $epreuve = Epreuve::find($idEpreuve);
+        
+        //Pour la liste des types d'epreuve
+        $typesEpreuves=\App\Models\TypeEpreuve::all();
+        return view('enseignant.editEpreuve',['epreuve'=>$epreuve,'typesEpreuve'=>$typesEpreuves]);
+    }
+
+    /**
+     * Mise à jour de la séance dans la base de données.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idSeance
+     * @return redirect()->route('voirEpreuvesEC',[$request->idEC]);
+     */
+    public function updateEpreuve(Request $request, $idEpreuve){
+        
+        $epreuve = Epreuve::findOrFail($idEpreuve);
+
+        $epreuve->fill($request->all());
+
+        $epreuve->save();
+
+        return redirect()->route('voirEpreuvesEC',[$request->idEC]);
+    }
+
      /**
      * Supprimer définitivement une epreuve
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  int $idEpreuve
+     * @return redirect()->back()->with('alert',"message");
      */
     public function deleteEpreuve(int $idEpreuve)
     {

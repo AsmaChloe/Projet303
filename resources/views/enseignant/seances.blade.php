@@ -37,8 +37,8 @@
                     <td>{{$seance->finSeance}}</td>
                     @if(Auth::user()->responsable==1)
                         <td class="d-flex ">
-                            <a href="{{ route('editSeance',['idSeance'=>$seance->idSeance]) }}" class="btn btn-sm btnprimary">Modifier</a>
-                            <a href="{{ route('supprimerSeance',['idSeance'=>$seance->idSeance]) }}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
+                            <a href="{{ route('editSeance',['idSeance'=>$seance->idSeance]) }}" class="btn btn-sm btn-dark mb-1">Modifier</a>
+                            <a href="{{ route('supprimerSeance',['idSeance'=>$seance->idSeance]) }}" class="btn btn-sm btn-danger mb-1">Supprimer</a>
                         </td>
                     @endif
                 </tr>
