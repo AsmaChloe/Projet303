@@ -24,18 +24,20 @@
         <table id="seanceTable" class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <th>Numéro de séance</th>
-                <th colspan="2">Date et heure de la séance</th>
+                <th>Date</td>
+                <th colspan="3">Heure</th>
             </thead>
 
             <tbody>
                 @foreach($seances as $seance)
                 <tr>
                     <td>{{$seance->numSeance}}</td>
-                    <td>{{$seance->dateSeance}} de {{$seance->debutSeance}} à {{$seance->finSeance}}</td>
+                    <td>{{$seance->dateSeance}}</td>
+                    <td>{{$seance->debutSeance}}</td>
+                    <td>{{$seance->finSeance}}</td>
                     @if(Auth::user()->responsable==1)
                         <td class="d-flex ">
-                            <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
-                            <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
+                            <a href="{{ route('editSeance',['idSeance'=>$seance->idSeance]) }}" class="btn btn-sm btnprimary">Modifier</a>
                             <a href="{{ route('supprimerSeance',['idSeance'=>$seance->idSeance]) }}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
                         </td>
                     @endif
@@ -101,7 +103,7 @@
         let idEC = {{ $ec->idEC }};
         let _token = $("input[name=_token]").val();
 
-        //Transmission des valeurs pour ajouter le groupe.
+        //Transmission des valeurs pour ajouter la séance.
         $.ajax({
             url: "{{route('seance.ajout')}}",
             type: "get",
@@ -117,7 +119,7 @@
             success:function(response){
                 if(response){
                     alert("Ajout de la séance réussi.");
-                    $("#seanceTable tbody").prepend('<tr><td>'+response.numSeance+'</td><td>'+response.dateSeance+' de '+response.debutSeance+' à '+response.finSeance+'</td><tr>');
+                    $("#seanceTable tbody").prepend('<tr><td>'+response.numSeance+'</td><td>'+response.dateSeance+'</td><td>'+response.debutSeance+'</td><td>'+response.finSeance+'</td></tr>');
                     $("#seanceForm")[0].reset();
                     $("#seanceModal").modal('hide');
                 }
@@ -125,6 +127,6 @@
             }
         });
     });
-</script>        
+</script> 
 
 @endsection

@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use \App\Models\Seance;
+
 class SeancesController extends Controller
 {
     /**
      * Cette méthode permet d'afficher la liste des seance d'un groupe dans un EC particulier
-     *
-     * @return \Illuminate\Http\Response
+     * @param int $idGroupe
+     * @param int $idEC
+     * @return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
      */
     public function voirSeancesGroupe($idGroupe,$idEC)
     {
@@ -22,33 +25,61 @@ class SeancesController extends Controller
             $ec=\App\Models\EC::where('idEC',$idEC)->get();
             $ec=$ec[0];
 
-            //Si l'ec ET le groupe sont des ec/groupe de l'enseignant c'est okay
-            $enseignant=\Auth::user();
-            if($enseignant->ec_enseignant->contains($ec) && $enseignant->groupesEns->contains($groupe)){
+            //Pour un enseignant
+            if(Auth::user()->role==2){
+                $enseignant=\Auth::user();
 
-                //Si l'EC est un EC du groupe c'est okay
-                if($groupe->ec_groupe->contains($ec)){
-                    $seances=array();
+                //Non-responsable
+                if(Auth::user()->responsable==0){
+                    
+                    //Si l'ec ET le groupe sont des ec/groupe de l'enseignant c'est okay
+                    if($enseignant->ec_enseignant->contains($ec) && $enseignant->groupesEns->contains($groupe)){
 
-                    //Toutes les seances de l'ec
-                    $seancesEC=$ec->seances;
-                    foreach($seancesEC as $seance){
-                        //On prend que les séances du groupe
-                        if($seance->idGroupe == $idGroupe){
-                            array_push($seances,$seance);
+                    //Si l'EC est un EC du groupe c'est okay
+                        if($groupe->ec_groupe->contains($ec)){
+                            //
+                        }
+                        else{
+                            return redirect('/');
                         }
                     }
-
-                    return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
-
+                    else{
+                        return redirect('/');
+                    }   
                 }
+                //Responsable
                 else{
-                    return redirect('/');
+                    
+                    //On récupère les parcours du responsable
+                    $parcours=$enseignant->parcoursResp;
+
+                    foreach($parcours as $parc){
+                        
+                        //Si l'EC actuel est un ec du parcours ET est lié au groupe actuel, c'est valide.
+                        if($parc->ecs->contains($ec) && $ec->ec_groupe->contains($groupe)){
+                            //
+                        }
+                        else{
+                            return redirect('/');
+                        }
+                    }
                 }
+
+                $seances=array();
+
+                //Toutes les seances de l'ec
+                $seancesEC=$ec->seances;
+                foreach($seancesEC as $seance){
+                    //On prend que les séances du groupe
+                    if($seance->idGroupe == $idGroupe){
+                        array_push($seances,$seance);
+                    }
+                }
+
+                return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
+
             }
-            else{
-                return redirect('/');
-            }   
+            
         }
         else{
             return redirect('/');
@@ -61,9 +92,9 @@ class SeancesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function ajoutSeance(Request $request)
     {
-        $seance= \App\Models\Seance::make($request->all());
+        $seance= Seance::make($request->all());
         $seance->save();
 
         return response()->json($seance);
@@ -72,12 +103,12 @@ class SeancesController extends Controller
     /**
      * Supprimer définitivement une seance
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  int $idSeance
+     * @return redirect()->back()->with('alert',message");
      */
     public function deleteSeance(int $idSeance)
     {
-        $seance=\App\Models\Seance::where('idSeance',$idSeance);
+        $seance=Seance::where('idSeance',$idSeance);
 
         if($seance->forceDelete()){
             
@@ -87,7 +118,34 @@ class SeancesController extends Controller
             
             return redirect()->back()->with('alert',"Probleme lors de la suppression de la seance");
         }
+    }
 
+    /**
+     * Ouvre le formulaire pour modifier la séance
+     *
+     * @param  int  $idSeance
+     * @return  view('enseignant.editSeance',['seance'=>$seance]);
+     */
+    public function editSeance($idSeance){
+        $seance = Seance::find($idSeance);
+        return view('enseignant.editSeance',['seance'=>$seance]);
+    }
+
+    /**
+     * Mise à jour de la séance dans la base de données.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idSeance
+     * @return redirect()->route('seances',[$request->idGroupe,$request->idEC]);
+     */
+    public function updateSeance(Request $request, $idSeance){
         
+        $seance=Seance::findOrFail($idSeance);
+
+        $seance->fill($request->all());
+
+        $seance->save();
+
+        return redirect()->route('seances',[$request->idGroupe,$request->idEC]);
     }
 }

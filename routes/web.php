@@ -26,7 +26,7 @@ Route::get('/etudiant/ajout-presentiel', '\App\Http\Controllers\PresentielContro
 //Epreuve
 Route::get('/etudiant/ajout-epreuve', '\App\Http\Controllers\EpreuvesController@store')->name('epreuve.ajout');
 //Seance
-Route::get('/enseignant/ajout-seance', '\App\Http\Controllers\SeancesController@store')->name('seance.ajout');
+Route::get('/enseignant/ajout-seance', '\App\Http\Controllers\SeancesController@ajoutSeance')->name('seance.ajout');
 /*---------------------Les associations----------------------*/
 
 //EC-Groupes
@@ -54,6 +54,11 @@ Route::get('/enseignant/supprimerPresentiel/{idPresentiel}', 'App\Http\Controlle
 Route::get('/responsable/supprimerEpreuve/{idEpreuve}', 'App\Http\Controllers\EpreuvesController@deleteEpreuve')->name('supprimerEpreuve');
 //Seance
 Route::get('/responsable/supprimerSeance/{idSeance}', 'App\Http\Controllers\SeancesController@deleteSeance')->name('supprimerSeance');
+
+/*---------------------Les modifications----------------------*/
+//Modifier une séance
+Route::get('/editSeance/{idSeance}', 'App\Http\Controllers\SeancesController@editSeance')->name('editSeance');
+Route::post('/updateSeance/{idSeance}', 'App\Http\Controllers\SeancesController@updateSeance')->name('updateSeance');
 
 /*--------------------------------------------------------ROUTES VUES--------------------------------------------------------------- */
 /*-------------------------Etudiant--------------------------*/
