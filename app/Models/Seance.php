@@ -22,7 +22,7 @@ class Seance extends Model
      * Obtenir le groupe qui a assité à la séance
      */
     public function groupe(){
-        return $this->belongsTo(Groupes::class,'idSeance');
+        return $this->belongsTo(Groupes::class,'idGroupe');
     }
 
     /**

@@ -11,8 +11,8 @@ class PresentielController extends Controller
 {
     /**
      * Cette méthode permet d'afficher son présentiel en tant qu'étudiant.
-     *
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request  $request
+     * @return view('etudiant/presentiel',compact('user'));
      */
     public function voirsonPresentiel(Request $request)
     {
@@ -28,19 +28,32 @@ class PresentielController extends Controller
 
     /**
      * Cette méthode permet d'afficher le présentiel d'un étudiant (pour responsable/enseignant)
-     *
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return view('etudiant/presentiel',['user'=>$etudiant,'types'=>$types,'seances'=>$seances]);
      */
     public function voirPresentielEtudiant($id)
     {
         if ( Auth::check() ){
 
             $etudiant=\App\Models\User::find($id);
+            $types=\App\Models\TypePresentiel::all();
+            $ecs=$etudiant->ip;
+            $seances=array();
+            $TousLesPresentiels=Presentiel::all();
+            foreach($ecs as $ec){
+                foreach($ec->seances as $seance){
+                    if(Presentiel::where('idSeance',$seance->idSeance)->count()<=0){
+                        array_push($seances,$seance);
+                    }
+                    
+                }
+                
+            }
             
             switch(Auth::user()->role) {
 
                 case 1 :
-                    return view('etudiant/presentiel',['user'=>$etudiant]);
+                    return view('etudiant/presentiel',['user'=>$etudiant,'types'=>$types,'seances'=>$seances]);
                 break;
 
                 case 2 :
@@ -52,7 +65,7 @@ class PresentielController extends Controller
 
                             //Si c'est un etudiant du professeur, on peut voir son presentiel
                             if($ecEns->etudiants->contains($etudiant)){
-                                return view('etudiant/presentiel',['user'=>$etudiant]);
+                                return view('etudiant/presentiel',['user'=>$etudiant,'types'=>$types,'seances'=>$seances]);
                             }
                             else{
                                 return redirect('/');
@@ -66,7 +79,7 @@ class PresentielController extends Controller
                         foreach($parcours as $par){
                             //Si parmis les etudiants du parcours se trouve l'étudiant actuel, c'est valide
                             if($par->etudiants->contains($etudiant)){
-                                return view('etudiant/presentiel',['user'=>$etudiant]);
+                                return view('etudiant/presentiel',['user'=>$etudiant,'types'=>$types,'seances'=>$seances]);
                             }
                             else{
                                 return redirect('/');
@@ -104,11 +117,44 @@ class PresentielController extends Controller
         return response()->json($presentiel);
     }
 
-     /**
-     * Pour definir un présentiel comme supprimé. Il sera cependant toujours dans la BDD et recupérable.
+    
+    /**
+     * Ouvre le formulaire pour modifier le présentiel
+     *
+     * @param  int  $idPresentiel
+     * @return  view('enseignant.editPresentiel',['presentiel'=>$presentiel]);
+     */
+    public function editPresentiel($idPresentiel){
+        $presentiel = Presentiel::find($idPresentiel);
+        
+        $types=\App\Models\TypePresentiel::all();
+        return view('enseignant.editPresentiel',['presentiel'=>$presentiel,'types'=>$types]);
+    }
+
+    /**
+     * Mise à jour du presentiel dans la base de données.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  int  $idPresentiel
+     * @return redirect()->route('voirEpreuvesEC',[$request->idEC]);
+     */
+    public function updatePresentiel(Request $request, $idPresentiel){
+        
+        $presentiel = Presentiel::findOrFail($idPresentiel);
+
+        $presentiel->fill($request->all());
+
+        $presentiel->save();
+
+        
+        return redirect()->route('presentielEtudiant',[$request->idEtudiant]);
+    }
+
+     /**
+     * Pour definir un présentiel comme supprimé. Il sera cependant toujours dans la BDD et recupérable.
+     * @paraem int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @return redirect()->back()->with('alert','Message');
      */
     public function softDeletePresentiel(Request $request, $id)
     {

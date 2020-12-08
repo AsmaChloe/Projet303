@@ -64,6 +64,10 @@ Route::post('/updateSeance/{idSeance}', 'App\Http\Controllers\SeancesController@
 Route::get('/editEpreuve/{idEpreuve}', 'App\Http\Controllers\EpreuvesController@editEpreuve')->name('editEpreuve');
 Route::post('/updateEpreuve/{idEpreuve}', 'App\Http\Controllers\EpreuvesController@updateEpreuve')->name('updateEpreuve');
 
+//Modifier un présentiel
+Route::get('/editPresentiel/{idPresentiel}', 'App\Http\Controllers\PresentielController@editPresentiel')->name('editPresentiel');
+Route::post('/updatePresentiel/{idPresentiel}', 'App\Http\Controllers\PresentielController@updatePresentiel')->name('updatePresentiel');
+
 /*--------------------------------------------------------ROUTES VUES--------------------------------------------------------------- */
 /*-------------------------Etudiant--------------------------*/
 
