@@ -68,6 +68,10 @@ Route::post('/updateEpreuve/{idEpreuve}', 'App\Http\Controllers\EpreuvesControll
 Route::get('/editPresentiel/{idPresentiel}', 'App\Http\Controllers\PresentielController@editPresentiel')->name('editPresentiel');
 Route::post('/updatePresentiel/{idPresentiel}', 'App\Http\Controllers\PresentielController@updatePresentiel')->name('updatePresentiel');
 
+//Modifier une note
+Route::get('/editNote/{idNote}', 'App\Http\Controllers\NotesController@editNote')->name('editNote');
+Route::post('/updateNote/{idNote}', 'App\Http\Controllers\NotesController@updateNote')->name('updateNote');
+
 /*--------------------------------------------------------ROUTES VUES--------------------------------------------------------------- */
 /*-------------------------Etudiant--------------------------*/
 

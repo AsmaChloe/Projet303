@@ -63,7 +63,7 @@
                                                 @if(Auth::user()->id != 3)
                                                 <td>
                                                     <a href="{{ route('editPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
-                                                    <a href="{{ route('supprimerPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}"><button type="submit" class="btn btn-sm btn-danger">Supprimer</button></a>
+                                                    <a href="{{ route('supprimerPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-danger">Supprimer</a>
                                                 </td>
                                                 @endif
 											</tr>

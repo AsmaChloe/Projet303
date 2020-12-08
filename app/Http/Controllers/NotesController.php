@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 use \App\Models\Notes;
-use \App\Models\EC;
-
 
 class NotesController extends Controller
 {
@@ -36,11 +33,11 @@ class NotesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function voirSesNotes(Request $request)
+    public function voirSesNotes()
     {
         if(Auth::check() && (Auth::user()->role)==3){ //Il faut être connecté et être un étudiant
             
-            $ecs=Auth::user()->ip; //IP de l'étudiant
+            $ecs=Auth::user()->ip; //On récupère les EC à partir de l'IP de l'etudiant
             
             return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs]);
         }
@@ -53,36 +50,53 @@ class NotesController extends Controller
 
     /**
      * Cette méthode permet d'afficher les notes d'un étudiant (pour enseignant/responsable)
-     *
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs,'epreuves'=>$epreuves])
      */
-    public function voirNotesEtudiant($id)
+    public function voirNotesEtudiant($idEtudiant)
     {
         if ( Auth::check() ){
-            $etudiant=\App\Models\User::find($id);
+            //On récupère l'etudiant en question
+            $etudiant=\App\Models\User::find($idEtudiant);
             
-            $ecs=$etudiant->ip; //IP de l'étudiant
+            //IP de l'étudiant
+            $ecs=$etudiant->ip; 
 
+            //On récupère ses epreuves
+            $epreuves=array();
+            foreach($ecs as $ec){
+                foreach($ec->epreuves as $epreuve){
+                    //Si il existe déjà un note pour l'épreuve, on ne veut pas l'afficher
+                    if(Notes::where('idEpreuve',$epreuve->idEpreuve)->where('idEtudiant',$idEtudiant)->count()<=0){
+                        array_push($epreuves,$epreuve);
+                    }
+                    
+                }
+            }
+            
             switch( Auth::user()->role) {
-                case 1 :
-                    return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+                case 1 : //Admin
+                    return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs,'epreuves'=>$epreuves]);
                 break;
                 
-                case 2 :
-                    if(Auth::user()->responsable==0){
+                case 2 : //Enseignant
+                    if(Auth::user()->responsable==0){ //Enseignant non-responsable
+
                         $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
                         foreach($ecsEns as $ecEns){
 
                             //Si c'est un etudiant du professeur, on peut voir ses notes
                             if($ecEns->etudiants->contains($etudiant)){
-                                return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+                                
+                                return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs,'epreuves'=>$epreuves]);
                             }
                             else{
                                 return redirect('/');
                             }
                         }
                     }
-                    //Si c'est un enseignant responsable
+
+                    //Enseignant non-responsable
                     else{
                         //On récupère ses parcours
                         $parcours=Auth::user()->parcoursResp;
@@ -90,7 +104,7 @@ class NotesController extends Controller
                         foreach($parcours as $par){
                             //Si parmis les etudiants du parcours se trouve l'étudiant actuel, c'est valide
                             if($par->etudiants->contains($etudiant)){
-                                return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs]);
+                                return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs,'epreuves'=>$epreuves]);
                             }
                             else{
                                 return redirect('/');
@@ -110,16 +124,45 @@ class NotesController extends Controller
         } 
     }
 
+    /**
+     * Ouvre le formulaire pour modifier la note
+     *
+     * @param  int  $idNote
+     * @return  view('enseignant.editNote',['note'=>$note]);
+     */
+    public function editNote($idNote){
+        $note = Notes::find($idNote);
+        return view('enseignant.editNote',['note'=>$note]);
+    }
+
+    /**
+     * Mise à jour de la note dans la base de données.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idNote
+     * @return redirect()->route('notesEtudiant',[$request->idEtudiant]);
+     */
+    public function updateNote(Request $request, $idNote){
+        
+        $note = Notes::findOrFail($idNote);
+
+        $note->fill($request->all());
+
+        $note->save();
+        
+        return redirect()->route('notesEtudiant',[$request->idEtudiant]);
+    }
 
     /**
      * Pour definir une note comme supprimée. Elle sera cependant toujours dans la BDD et recupérable.
      *
+     * @param int $idNote
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function softDeleteNote(Request $request, $id)
+    public function softDeleteNote(Request $request, $idNote)
     {
-        if(Notes::where('idNote',$id)->delete()){
+        if(Notes::where('idNote',$idNote)->delete()){
             
             return redirect()->back()->with('alert','Note supprimée');
         }
