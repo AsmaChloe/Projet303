@@ -12,10 +12,12 @@
                 - vérifier que note est valide
         </p>
         <br>
-        @if(Auth::user()->id != 3 && count($epreuves)!=0)
-        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#noteModal">Ajouter une note</a>
-        @else
-        <div class="alert alert-danger" role="alert">L'élève a déjà toutes ses notes. Vous ne pouvez pas en rajouter</div>
+        @if(Auth::user()->id != 3)
+            @if(count($epreuves)!=0)
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#noteModal">Ajouter une note</a>
+            @else
+            <div class="alert alert-danger" role="alert">L'élève a déjà toutes ses notes. Vous ne pouvez pas en rajouter</div>
+            @endif
         @endif
     </div>
 </div>
@@ -70,8 +72,7 @@
             <tr>
                 <th>Total</th>
                 <td colspan='2'>A</td>
-                <td colspan='2'>A</td>
-                <td></td>
+                <td colspan='3'>A</td>
             </tr>
         </tbody>
     </table>

@@ -10,7 +10,9 @@
         <p class="lead text-center mb-4">Afficher correctement la date<br>Verifications</p>
 
 		<!--Bouton ajout-->
+        @if(Auth::user()->responsable==1)
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#epreuveModal">Ajouter une epreuve</a>
+        @endif
     </div>
 </div>
 
@@ -31,7 +33,9 @@
 					<th colspan="2">Duree</th>
                     <th>Pourcentage</th>
                     <th>Session</th>
+                    @if(Auth::user()->responsable==1)
                     <th>Modification</th>
+                    @endif
 				</tr>
 			</thead>
 
@@ -44,7 +48,7 @@
                     <td>le {{ $epreuve->dateEpreuve}}</td>
 					<td>{{ $epreuve->debutEpreuve }}</td>
                     <td>{{ $epreuve->finEpreuve }}</td>
-                    <td>{{ $epreuve->pourcentage}}</td>
+                    <td>{{ $epreuve->pourcentage}}%</td>
                     <td>{{$epreuve->numSession}}</td>
                     @if(Auth::user()->responsable==1)
                         <td >

@@ -20,7 +20,9 @@ class EpreuvesController extends Controller
             
             $epreuves=$user->epreuves;
             
-            return view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves]);
+            //Pour eviter une erreur. la variable $ec est pas utilisée quand l'utilisateur connecté est un étudiant.
+            $ec=\App\Models\EC::find(1);
+            return view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves,'types'=>array(),'ec'=>$ec]);
         }
         else{
             return redirect('/');

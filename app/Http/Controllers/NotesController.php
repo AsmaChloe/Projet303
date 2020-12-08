@@ -39,7 +39,7 @@ class NotesController extends Controller
             
             $ecs=Auth::user()->ip; //On récupère les EC à partir de l'IP de l'etudiant
             
-            return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs]);
+            return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs,'epreuves'=>array()]);
         }
         else{
             return redirect('/');

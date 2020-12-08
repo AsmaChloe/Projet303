@@ -18,7 +18,9 @@ class PresentielController extends Controller
     {
         if(Auth::check() && Auth::user()->role==3){
             $user=Auth::user();
-            return view('etudiant/presentiel',compact('user'));
+            $seances=array();
+            $types=array();
+            return view('etudiant/presentiel',compact('user','seances','types'));
         }
         else{
             return redirect('/');

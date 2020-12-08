@@ -12,11 +12,14 @@
 			Apparance des semestres a modifier
 		</p>
 		<br>
-            @if(Auth::user()->id != 3 && count($seances)!=0)
-            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#presentielModal">Ajouter un presentiel</a>
-            @else
-            <div class="alert alert-danger" role="alert">Le présentiel de l'élève est complet. Vous ne pouvez pas en rajouter</div>
+            @if(Auth::user()->id != 3)
+                @if(count($seances)!=0)
+                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#presentielModal">Ajouter un presentiel</a>
+                @else
+                <div class="alert alert-danger" role="alert">Le présentiel de l'élève est complet. Vous ne pouvez pas en rajouter</div>
+                @endif
             @endif
+
     </div>
 </div>
 
