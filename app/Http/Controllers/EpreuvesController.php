@@ -98,7 +98,7 @@ class EpreuvesController extends Controller
     }
 
     /**
-     * Ouvre le formulaire pour modifier la séance
+     * Ouvre le formulaire pour modifier l'epreuve
      *
      * @param  int  $idEpreuve
      * @return  view('enseignant.editEpreuve',['epreuve'=>$epreuve]);
@@ -112,7 +112,7 @@ class EpreuvesController extends Controller
     }
 
     /**
-     * Mise à jour de la séance dans la base de données.
+     * Mise à jour de l'epreuve dans la base de données.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $idSeance
