@@ -15,8 +15,9 @@
 <div class="container-fluid ">
 	<div class="row">
 	<div class="col-md-2">    
-        </div>
-		<div class="col-md-8">    
+	</div>
+	
+	<div class="col-md-8">    
         
 		<table class="table table-striped table-bordered">
 			<tr>
@@ -36,9 +37,10 @@
 			</tr>
 			@endif
 		</table>
-		</div>
-		<div class="col-md-2">    
-        </div>
+	</div>
+	
+	<div class="col-md-2">    
+	</div>
 	</div>
 </div>
 @endsection
