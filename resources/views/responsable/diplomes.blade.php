@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
 	<h2 class="display-2 text-center mb-4">Diplomes</h2>
 
-        <p class="lead text-center mb-4"><br></p>
+        <p class="lead text-center mb-4">xxxxxxxxxxxxxx<br></p>
     </div>
 </div>
 
@@ -33,7 +33,7 @@
                                 {{$diplome->typeDiplome}}
                             </td>
                             <td>
-                                <a class="badge badge-secondary" href= "{{ route('parcours',['idDiplome'=>$diplome->idDiplome]) }}" >{{$diplome->nomDiplome}}</a>
+                                <a class="btn btn-sm  btn-dark" href= "{{ route('parcours',['idDiplome'=>$diplome->idDiplome]) }}" >{{$diplome->nomDiplome}}</a>
                             </td>
                         </tr>
                         @endforeach

@@ -36,9 +36,9 @@
                     <td>{{$seance->debutSeance}}</td>
                     <td>{{$seance->finSeance}}</td>
                     @if(Auth::user()->responsable==1)
-                        <td class="d-flex ">
-                            <a href="{{ route('editSeance',['idSeance'=>$seance->idSeance]) }}" class="btn btn-sm btn-dark mb-1">Modifier</a>
-                            <a href="{{ route('supprimerSeance',['idSeance'=>$seance->idSeance]) }}" class="btn btn-sm btn-danger mb-1">Supprimer</a>
+                        <td>
+                            <a href="{{ route('editSeance',['idSeance'=>$seance->idSeance]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
+                            <a href="{{ route('supprimerSeance',['idSeance'=>$seance->idSeance]) }}" class="btn btn-sm btn-danger">Supprimer</a>
                         </td>
                     @endif
                 </tr>

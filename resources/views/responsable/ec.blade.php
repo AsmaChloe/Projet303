@@ -60,13 +60,9 @@
                     <td>
                         <a class="btn btn-sm btn-outline-dark" href="{{ route('seances',['idGroupe'=>$groupe->idGroupe,'idEC'=>$ec->idEC]) }}">Voir les séances</a>
                     </td>
-                    @if(Auth::user()->id != 3)
-                        <td class="d-flex ">
-                            <a href="#" class="btn btn-sm btnprimary mb-1">Consulter</a>
-                            <a href="#" class="btn btn-sm btnprimary mb-1">Editer</a>
-                            <a href="{{ route('supprimerECGroupe',['idEC'=>$ec->idEC, 'idGroupe'=>$groupe->idGroupe])}}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
-                        </td>
-                    @endif
+                    <td class="d-flex ">
+                        <a href="{{ route('supprimerECGroupe',['idEC'=>$ec->idEC, 'idGroupe'=>$groupe->idGroupe])}}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>    

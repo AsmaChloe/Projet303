@@ -33,7 +33,7 @@
                                 {{$parc->sigleParcours}} - {{$parc->nomParcours}}
                             </td>
                             <td>@foreach($parc->ecs as $ec)
-                                <a class="badge badge-secondary" href= "{{ route('groupesEC',['idEC'=>$ec->idEC]) }}" >{{$ec->sigleEC}}</a>
+                                <a class="btn btn-sm btn-outline-dark" href= "{{ route('groupesEC',['idEC'=>$ec->idEC]) }}" >{{$ec->sigleEC}}</a>
                                 @endforeach 
                             </td>
                         </tr>

@@ -47,9 +47,9 @@
                     <td>{{ $epreuve->pourcentage}}</td>
                     <td>{{$epreuve->numSession}}</td>
                     @if(Auth::user()->responsable==1)
-                        <td class="d-flex ">
-                            <a href="{{ route('editEpreuve',['idEpreuve'=>$epreuve->idEpreuve]) }}" class="btn btn-sm btn-dark mb-1">Modifier</a>
-                            <a href="{{ route('supprimerEpreuve',['idEpreuve'=>$epreuve->idEpreuve]) }}" class="btn btn-sm btn-danger mb-1">Supprimer</a>
+                        <td >
+                            <a href="{{ route('editEpreuve',['idEpreuve'=>$epreuve->idEpreuve]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
+                            <a href="{{ route('supprimerEpreuve',['idEpreuve'=>$epreuve->idEpreuve]) }}" class="btn btn-sm btn-danger">Supprimer</a>
                         </td>
                     @endif
 				</tr>
@@ -82,29 +82,38 @@
             <div class="form-group">
                 <label for="dateEpreuve">Date de l'épreuve</label>
 				<input type="date" class="form-control" id="dateEpreuve" placeholder="Saisir la date de l'epreuve"/>
-                
+            </div>
+
+            <div class="form-group">   
 			    <label for="debutEpreuve">Heure du début de l'épreuve</label>
 				<input type="time" class="form-control" id="debutEpreuve" placeholder="Saisir l'heure du début de l'epreuve"/>
-                
+            </div>
+
+            <div class="form-group">    
 				<label for="finEpreuve">Heure de la fin de l'épreuve</label>
                 <input type="time" class="form-control" id="finEpreuve" placeholder="Saisir l'heure de la fin de l'epreuve"/>
-             
+            </div>
+
+            <div class="form-group"> 
 				<label for="numSession">Numéro de session</label>
 				<select class="form-control select2-multi" id="numSession" name="numSession" >    
                         <option value="1">Session 1</option>
 						<option value="2">Session 2</option>
 				</select>
-		
+            </div>
+
+            <div class="form-group">
 				<label for="pourcentage">Pourcentage de l'épreuve</label>
 				<input type="text" class="form-control" id="pourcentage" placeholder="Saisir le pourcentage de l'epreuve"/>
+            </div>
 
+            <div class="form-group">
 				<label for="idTypeEpreuve">Type de l'épreuve</label>
                 <select class="form-control select2-multi" id="idTypeEpreuve" name="idTypeEpreuve" >
                     @foreach($types as $type)
                         <option value="{{$type->idTypeEpreuve}}">{{$type->valeurType}}</option>
                     @endforeach
                 </select>
-	
             </div>
 
             <button type="submit" class="btn btn-primary">Ajouter</button>
