@@ -14,11 +14,15 @@
 
 <div class="container-fluid ">
 	<div class="row">
+	<div class="col-md-2">    
+        </div>
+		<div class="col-md-8">    
+        
 		<table class="table table-striped table-bordered">
 			<tr>
 				<td>
 					<h2>Groupes</h2>
-						<p>xxxxxxxxxxxxxxxx</p>
+						<p>Vous pourrez gérer et accéder à vos groupes d'étudiants selon les EC que vous enseignez.</p>
 						<p><a class="btn" href="enseignant/groupes">Voir les groupes »</a></p>							
 				</td>
 			</tr>
@@ -26,12 +30,15 @@
 			<tr>
 				<td>
 					<h2>Diplomes</h2>
-						<p>xxxxxxxxxxxxxxxx</p>
+						<p>Vous pourrez gérer et accéder aux formations que vous gérez. Ainsi que ses matières, groupes d'étudiants, enseignants et étudiants.</p>
 						<p><a class="btn" href="responsable/diplomes">Voir les diplomes »</a></p>							
 				</td>
 			</tr>
 			@endif
 		</table>
+		</div>
+		<div class="col-md-2">    
+        </div>
 	</div>
 </div>
 @endsection
