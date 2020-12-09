@@ -14,22 +14,31 @@
 
 <div class="container-fluid ">
 	<div class="row">
-		<table class="table table-striped table-bordered">
-			<tr>
-				<td>
-					<h2>Diplomes</h2>
-						<p>Diplomes > Parcours > Ec  </p>
-						<p><a class="btn" href="responsable/diplomes">Voir »</a></p>							
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<h2>Utilisateurs</h2>
-						<p>Gerer les utilisateurs </p>
-						<p><a class="btn" href="#">Voir les utilisateurs »</a></p>							
-				</td>
-			</tr>
-		</table>
+		<div class="col-md-2">    
+		</div>
+
+		<div class="col-md-8">    
+
+			<table class="table table-striped table-bordered">
+				<tr>
+					<td>
+						<h2>Diplomes</h2>
+							<p>Vous pourrez gérer et accéder aux formations que vous gérez. Ainsi que ses matières, groupes d'étudiants, enseignants et étudiants.</p>
+							<p><a class="btn" href="responsable/diplomes">Voir les diplomes »</a></p>							
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h2>Utilisateurs</h2>
+							<p>Ici vous pourrez créer, modifier et supprimer des utilisateurs</p>
+							<p><a class="btn" href="#">Voir les utilisateurs »</a></p>							
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-2">    
 	</div>
 </div>
 @endsection
