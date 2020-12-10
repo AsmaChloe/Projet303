@@ -111,7 +111,7 @@ Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeG
 //Voir les seances de son groupe dans son ec
 Route::get('/enseignant/seances/{idGroupe}/{idEC}', 'App\Http\Controllers\SeancesController@voirSeancesGroupe')->name('seances');
 //Ses etudiants selon le groupe
-Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiantsGroupe');
+Route::get('/enseignant/groupes/{groupe}', 'App\Http\Controllers\EtudiantsController@listeEtudiantsGroupe')->name('etudiantsGroupe');
 //Voir les epreuves de l'EC
 Route::get('/etudiant/epreuves/{idEC}', 'App\Http\Controllers\EpreuvesController@voirEpreuvesEC')->name('voirEpreuvesEC');
 //Presentiel de son étudiant
@@ -138,7 +138,12 @@ Route::get('administrateur', function() {
         return redirect('/');
     }
 });
-
+//Voir les utilisateurs
+Route::get('/administrateur/utilisateurs', function(){
+    return view('administrateur/utilisateurs');
+});
+//Voir les étudiants
+Route::get('/administrateur/utilisateurs/etudiants', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiants');
 /*---------------------------------------------------------- AUTRE ----------------------------------------------------------------- */
   
 Route::fallback(function () {

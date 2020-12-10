@@ -8,15 +8,26 @@ use Illuminate\Support\Facades\Auth;
 class EtudiantsController extends Controller
 {
     /**
+     * Cette méthode permet d'afficher tous les étudiants.
+     *
+     * @return route('etudiants',['etudiants'=>$etudiants]);
+     */
+    public function listeEtudiants(){
+        $etudiants=\App\Models\User::where('role',3)->get();
+        return view('administrateur/etudiants',['etudiants'=>$etudiants]);
+    }
+
+
+    /**
      * Cette méthode permet d'afficher les groupes de l'étudiant ou les étudiants d'une groupe depuis un statut autre que ce dernier
      *
      * @return \Illuminate\Http\Response
      */
-    public function listeEtudiants($id)
+    public function listeEtudiantsGroupe($idGroupe)
     {
         if(Auth::check() ){
 
-            $groupe=\App\Models\Groupes::find($id);
+            $groupe=\App\Models\Groupes::find($idGroupe);
             //Les etudiants du groupe
             $etudiants=$groupe->etudiants;
 
