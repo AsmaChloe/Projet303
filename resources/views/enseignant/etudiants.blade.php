@@ -7,14 +7,19 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Etudiants du groupe {{$groupe->nomGroupe}}</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxx</p>
+        <p class="lead text-center mb-4"><br></p>
 
         <!--Bouton ajout-->
         @if(Auth::user()->responsable==1)
-            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#etudiantModal">Ajouter un etudiant au groupe {{$groupe->nomGroupe}}</a>
+            @if(count($etudiants2parcours)==0)
+                <div class="alert alert-danger" role="alert">Tous les étudiants sont déjà dans le groupe. Vous ne pouvez pas en rajouter</div>
+            @else
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#etudiantModal">Ajouter un etudiant au groupe {{$groupe->nomGroupe}}</a>
+            @endif
         @endif
     </div>
 </div>
+
 
 <div class="container-fluid my-1">
     <div class="row">
@@ -25,7 +30,9 @@
 
         <table id="etudiantTable" class="table table-striped table-bordered">
             <thead class="thead-dark">
-                    <th colspan="4" class=" text-center ">Etudiants du groupe</th>
+                <th>Etudiants du groupe</th>
+                <th colspan="2" class=" text-center ">Consulter</th>
+                <th>Modification</th>
                 
             </thead>
     
@@ -107,7 +114,7 @@
             },
             success:function(response){
                 if(response){
-                    alert("Ajout de l'étudiant réussi. Refresh to see.");
+                    alert("Ajout de l'étudiant réussi.");
                     $("#etudiantForm")[0].reset();
                     $("#etudiantModal").modal('hide');
                 }

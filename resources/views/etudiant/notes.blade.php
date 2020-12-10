@@ -153,7 +153,7 @@
             success:function(response){
                 //Si c'est reussis : On affiche ->ici petit problème
                 if(response){
-                    $("#noteTable tbody").prepend('<tr><th>Type Epreuve</th><td>'+response.valeurNote+'/ '+response.maxNote+'</td><td>%</td><td></td><td></td><tr>');
+                    $("#noteTable tbody").prepend('<tr><th>Type Epreuve</th><td>'+response.valeurNote+'/ '+response.maxNote+'</td><td>%</td><td></td><td></td></tr>');
                     $("#noteForm")[0].reset();
                     $("#noteModal").modal('hide');
                 }
