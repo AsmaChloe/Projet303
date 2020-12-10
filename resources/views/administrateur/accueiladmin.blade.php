@@ -31,7 +31,7 @@
 					<td>
 						<h2>Utilisateurs</h2>
 							<p>Ici vous pourrez créer, modifier et supprimer des utilisateurs</p>
-							<p><a class="btn" href="#">Voir les utilisateurs »</a></p>							
+							<p><a class="btn" href="administrateur/utilisateurs">Voir les utilisateurs »</a></p>							
 					</td>
 				</tr>
 			</table>
