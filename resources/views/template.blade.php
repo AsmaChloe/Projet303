@@ -62,7 +62,7 @@
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/Projet303/public/administrateur">Informations</a>
               <a class="dropdown-item" href="{{ route('diplomesResponsable') }}">Diplomes</a>
-              <a class="dropdown-item" href="#">Utilisateurs</a>
+              <a class="dropdown-item" href="{{ route('utilisateurs') }}">Utilisateurs</a>
             </div>
           </li>
           @endif
