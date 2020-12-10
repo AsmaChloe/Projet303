@@ -19,7 +19,6 @@ class EtudiantsController extends Controller
             $groupe=\App\Models\Groupes::find($id);
             //Les etudiants du groupe
             $etudiants=$groupe->etudiants;
-            $allStudents=\App\Models\User::where('role',3)->get();
 
             if((Auth::user()->role)==2 ){ //Si c'est un enseignant 
 
@@ -29,7 +28,7 @@ class EtudiantsController extends Controller
                 
                     if($groupesEns->contains($groupe)){ //Si c'est un groupe de l'enseignant
                         
-                        return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'allStudents'=>$allStudents]);
+                        return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'etudiants2parcours'=>array()]);
                     }
                     else{ //Ce n'est pas un groupe de l'enseignant, il n'a pas le droit d'y acceder
                         return redirect('/');
