@@ -17,6 +17,7 @@ class EtudiantsController extends Controller
         if(Auth::check() ){
 
             $groupe=\App\Models\Groupes::find($id);
+            //Les etudiants du groupe
             $etudiants=$groupe->etudiants;
             $allStudents=\App\Models\User::where('role',3)->get();
 
@@ -42,12 +43,11 @@ class EtudiantsController extends Controller
 
                     //Pour tous les parcours du responsable
                     foreach($parcours as $par){
+                    
                         
                         //On récupère tous les étudiants des parcours
-                        foreach($allStudents as $student){
-                            if($student->parcoursEtu->contains($par)){
-                                array_push($etudiants2parcours,$student);
-                            }
+                        foreach($par->etudiants as $student){
+                            array_push($etudiants2parcours,$student);
                         }
 
                         //Maintenant on récupère tous les EC des parcours
@@ -64,11 +64,34 @@ class EtudiantsController extends Controller
                     
                 }
             }
+        
             else{
                 if( Auth::user()->role==1 ){ //Si c'est un admin
                     
+                    //On récupère le(s) parcours des élèves déjà inscrit
+                    $parcours=array();
+                    $parcoursID=array(); 
+
+                    foreach($etudiants as $etudiant){
+                        foreach($etudiant->parcoursEtu as $parc){
+                            if(!in_array($parc->id,$parcoursID)){
+                                array_push($parcoursID,$parc->id);
+                                array_push($parcours,$parc);
+                            }
+                        }
+                    }
+
+                    //Maintenant on récupère les étudiants étant dans le(s) parcours MAIS pas dans le groupe
+                    $etudiants2parcours=array();
+                    foreach($parcours as $par){
+                        foreach($par->etudiants as $etudiant){
+                            if(!($groupe->etudiants->contains($etudiant))){
+                                array_push($etudiants2parcours,$etudiant);
+                            }
+                        }
+                    }
                     
-                    return view('enseignant/etudiants',['groupe'=>$groupe, 'etudiants'=>$etudiants, 'allStudents'=>$allStudents]);
+                    return view('enseignant/etudiants',['groupe'=>$groupe, 'etudiants'=>$etudiants, 'etudiants2parcours'=>$etudiants2parcours]);
                 }
                 else{
                     return redirect('/');
@@ -78,6 +101,28 @@ class EtudiantsController extends Controller
         else{
             return redirect('/');
         } 
+    }
+
+    /**
+     * Supprimer définitivement une association etudiant - groupe
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteEtGroupe(int $idEtudiant, int $idGroupe)
+    {
+        $etGroupe=\App\Models\Groupe_Etudiants::where('idGroupe',$idGroupe)->where('idEtudiant',$idEtudiant);
+
+        if($etGroupe->forceDelete()){
+            
+            return redirect()->back()->with('alert',"Dissociation effective");
+        }
+        else{
+            
+            return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'etudiant et du groupe ");
+        }
+
+        
     }
 
     /**

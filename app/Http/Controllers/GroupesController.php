@@ -9,19 +9,21 @@ class GroupesController extends Controller
 {
     /**
      * Cette méthode permet d'afficher les groupes de l'étudiant/enseignant depuis ce statut
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function listeGroupe(Request $request)
+    public function listeGroupe()
     {
         if(Auth::check()){
+            $user=Auth::user();
+
             if((Auth::user()->role)==3){ //Si etudiant
 
-                return view('etudiant/groupes',['user'=>Auth::user()]);
+                return view('etudiant/groupes',['user'=>$user]);
             }
             else{
                 if( (Auth::user()->role)==2){ // Si enseignant
-                    $user=Auth::user();
+                    
                     $ecs=$user->ec_enseignant;
 
                     return view('enseignant/groupes',['user'=>$user,'ecs'=>$ecs]);
@@ -39,22 +41,23 @@ class GroupesController extends Controller
     
 
     /**
-     * Cette méthode permet d'afficher les groupes de l'étudiant depuis un statut exterieur (enseignant)
+     * Cette méthode permet d'afficher les groupes de l'étudiant selon un EC (Acces par un responsable)
      *
-     * @return \Illuminate\Http\Response
+     * @param int $idEC
+     * @return view('responsable/ec',['ec'=>$ec,'groupes'=>$groupes,'profs'=>$profs]);
      */
-    public function voirGroupesEC($id)
+    public function voirGroupesEC($idEC)
     {
         if(Auth::check() && (Auth::user()->responsable)==1 ){
             
-            $ec=\App\Models\EC::find($id);
+            $ec=\App\Models\EC::find($idEC);
 
             //Cet attribut sera utilise pour l'association Groupe - Enseignant, l'enseignant est un enseignant déjà lié à l'EC actuel
             $profs=$ec->enseignants;
             //Cet attribut sera utilise pour l'association Groupe - EC, le groupe est un groupe déjà lié à l'EC actuel
-            $groupes2ec=$ec->ec_groupe;
+            $groupes=\App\Models\Groupes::all();
 
-            return view('responsable/ec',['ec'=>$ec,'groupes2ec'=>$groupes2ec,'profs'=>$profs]);
+            return view('responsable/ec',['ec'=>$ec,'groupes'=>$groupes,'profs'=>$profs]);
         }
         else{
             return redirect('/');
@@ -62,7 +65,7 @@ class GroupesController extends Controller
     }
 
     /**
-     * Pour enregistrer une association groupe - ec
+     * Cette fonction permet d'enregistrer une association groupe - ec
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -79,8 +82,9 @@ class GroupesController extends Controller
     /**
      * Supprimer définitivement une association ec - groupe
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  int $idEC
+     * @param  int $idGroupe
+     * redirect()->back()->with('alert',"message")
      */
     public function deleteECGroupe(int $idEC, int $idGroupe)
     {
@@ -116,8 +120,9 @@ class GroupesController extends Controller
      /**
      * Supprimer définitivement une association enseignant - groupe
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  int idEnseignant
+     * @param idGroupe
+     * @return redirect()->back()->with('alert',"message");
      */
     public function deleteEnsGroupe(int $idEnseignant, int $idGroupe)
     {
@@ -135,25 +140,5 @@ class GroupesController extends Controller
         
     }
 
-     /**
-     * Supprimer définitivement une association etudiant - groupe
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function deleteEtGroupe(int $idEtudiant, int $idGroupe)
-    {
-        $etGroupe=\App\Models\Groupe_Etudiants::where('idGroupe',$idGroupe)->where('idEtudiant',$idEtudiant);
-
-        if($etGroupe->forceDelete()){
-            
-            return redirect()->back()->with('alert',"Dissociation effective");
-        }
-        else{
-            
-            return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'etudiant et du groupe ");
-        }
-
-        
-    }
+     
 }

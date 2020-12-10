@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
 	<h2 class="display-2 text-center mb-4">Groupes de l'ec {{$ec->sigleEC}} </h2>
 
-        <p class="lead text-center mb-4">Modif<br></p>
+        <p class="lead text-center mb-4"><br></p>
 
         <!--Bouton ajout-->
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#groupeModal">Ajouter un groupe existant </a>
@@ -60,7 +60,7 @@
                     <td>
                         <a class="btn btn-sm btn-outline-dark" href="{{ route('seances',['idGroupe'=>$groupe->idGroupe,'idEC'=>$ec->idEC]) }}">Voir les séances</a>
                     </td>
-                    <td class="d-flex ">
+                    <td>
                         <a href="{{ route('supprimerECGroupe',['idEC'=>$ec->idEC, 'idGroupe'=>$groupe->idGroupe])}}"><button type="submit" class="btn btn-sm btn-danger mb-1">Supprimer</button></a>
                     </td>
                 </tr>
@@ -95,12 +95,11 @@
 
             <!--Liste de tous les groupes -->
             <div class="form-group">
-                <p>Il n'apparait que les groupes déjà lié à l'EC {{$ec->sigleEC}}.</p>
 
-                <label for="groupe">Enseignant du groupe</label>
+                <label for="groupe">Groupe</label>
                 <select class="form-control select2-multi" id="groupe" name="groupe" >
-                    @foreach ($groupes2ec as $groupe2ec)
-                        <option value="{{ $groupe2ec->idGroupe }}">{{ $groupe2ec->nomGroupe }}</option>
+                    @foreach ($groupes as $groupe)
+                        <option value="{{ $groupe->idGroupe }}">{{ $groupe->nomGroupe }}</option>
                     @endforeach
                 </select>
             </div>
