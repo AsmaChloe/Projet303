@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Auth;
 class DiplomesController extends Controller
 {
     /**
-     * Cette méthode permet d'afficher la liste des diplomes (pour l'enseignant ou l'administrateur)
+     * Cette méthode permet d'afficher la liste des diplomes (pour un responsable)
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return view('responsable/diplomes',['user' => $user,'diplomes'=>$diplomes]);
      */
     public function voirDiplomes(Request $request)
     {
@@ -38,21 +39,18 @@ class DiplomesController extends Controller
     /**
      * Cette méthode permet d'afficher les parcours du diplome géré par le responsable
      *
-     * @return \Illuminate\Http\Response
+     * @param int $idDiplome
+     * @return view('responsable/parcours',['parcours'=>$diplome->parcours,'allECS'=>$allECS]);
      */
-    public function listeParcours($id)
+    public function listeParcours($idDiplome)
     {
         if(Auth::check() && (Auth::user()->responsable)==1 ){
-            $resp=Auth::user();
-            //$diplomes=$resp->diplomes;
-            $diplome=\App\Models\Diplomes::find($id);
-            
-            /*foreach($diplomes as $diplome){
-                if($diplome->parcours->contains($parcours)){ //Si le parcours est dans le diplome du responsable*/
-                    return view('responsable/parcours',['parcours'=>$diplome->parcours]);
-            /* }
-            }
-                return redirect('/');*/
+            //On récupère le diplome
+            $diplome=\App\Models\Diplomes::find($idDiplome);
+            //Et tous les EC
+            $allECS=\App\Models\EC::all();
+
+            return view('responsable/parcours',['parcours'=>$diplome->parcours,'allECS'=>$allECS]);
             
         }
         else{

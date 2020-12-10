@@ -35,7 +35,8 @@ Route::get('/responsable/ajout-groupe', 'App\Http\Controllers\GroupesController@
 Route::get('/responsable/ajout-enseignant', 'App\Http\Controllers\GroupesController@storeEnseignantGroupe')->name('enseignant.ajout');
 //Groupe-Etudiants
 Route::get('/responsable/ajout-etudiant', 'App\Http\Controllers\EtudiantsController@linkEtGroupe')->name('etudiant.ajout');
-
+//Parcours-ec
+Route::get('/administrateur/linkParcoursEC', 'App\Http\Controllers\ECController@linkParcoursEC')->name('linkParcoursEC');
 /*--------------------Les dissociations----------------------*/
 
 //Groupes-Enseignants
@@ -44,6 +45,8 @@ Route::get('/responsable/supprimer-ensgroupe/{idEnseignant}/{idGroupe}', 'App\Ht
 Route::get('/responsable/supprimer-etgroupe/{idEtudiant}/{idGroupe}', 'App\Http\Controllers\EtudiantsController@deleteEtGroupe')->name('supprimerEtGroupe');
 //EC-Groupe
 Route::get('/responsable/supprimer-ecgroupe/{idEC}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteECGroupe')->name('supprimerECGroupe');
+//Parcours-EC
+Route::get('/administrateur/supprimer-parcoursec/{idParcours}/{idEC}', 'App\Http\Controllers\ECController@deleteParcoursEC')->name('supprimerParcoursEC');
 
 /*---------------------Les suppressions----------------------*/
 //Note
