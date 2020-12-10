@@ -156,7 +156,7 @@ class EtudiantsController extends Controller
     {
         if(\App\Models\User::where('id',$id)->delete()){
             
-            return redirect()->back()->with('alert','Utilisateur supprimée');
+            return redirect()->back()->with('alert','Utilisateur supprimé');
         }
         else{
             

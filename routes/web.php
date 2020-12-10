@@ -27,6 +27,8 @@ Route::get('/etudiant/ajout-presentiel', '\App\Http\Controllers\PresentielContro
 Route::get('/etudiant/ajout-epreuve', '\App\Http\Controllers\EpreuvesController@store')->name('epreuve.ajout');
 //Seance
 Route::get('/enseignant/ajout-seance', '\App\Http\Controllers\SeancesController@ajoutSeance')->name('seance.ajout');
+//Diplome
+Route::get('/administrateur/ajout-diplome', '\App\Http\Controllers\DiplomesController@ajoutDiplome')->name('diplome.ajout');
 /*---------------------Les associations----------------------*/
 
 //EC-Groupes
@@ -37,6 +39,8 @@ Route::get('/responsable/ajout-enseignant', 'App\Http\Controllers\GroupesControl
 Route::get('/responsable/ajout-etudiant', 'App\Http\Controllers\EtudiantsController@linkEtGroupe')->name('etudiant.ajout');
 //Parcours-ec
 Route::get('/administrateur/linkParcoursEC', 'App\Http\Controllers\ECController@linkParcoursEC')->name('linkParcoursEC');
+//Diplome-responsable
+Route::get('/administrateur/linkDiplomeResp', 'App\Http\Controllers\DiplomesController@linkDiplomeResp')->name('linkDiplomeResp');
 /*--------------------Les dissociations----------------------*/
 
 //Groupes-Enseignants
@@ -47,6 +51,8 @@ Route::get('/responsable/supprimer-etgroupe/{idEtudiant}/{idGroupe}', 'App\Http\
 Route::get('/responsable/supprimer-ecgroupe/{idEC}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteECGroupe')->name('supprimerECGroupe');
 //Parcours-EC
 Route::get('/administrateur/supprimer-parcoursec/{idParcours}/{idEC}', 'App\Http\Controllers\ECController@deleteParcoursEC')->name('supprimerParcoursEC');
+//Diplome-Responsable
+Route::get('/administrateur/supprimer-diplomeresp/{idDiplome}/{idResponsable}', 'App\Http\Controllers\DiplomesController@deleteDiplomesResp')->name('supprimerDiplomeResp');
 
 /*---------------------Les suppressions----------------------*/
 //Note
@@ -59,7 +65,8 @@ Route::get('/responsable/supprimerEpreuve/{idEpreuve}', 'App\Http\Controllers\Ep
 Route::get('/responsable/supprimerSeance/{idSeance}', 'App\Http\Controllers\SeancesController@deleteSeance')->name('supprimerSeance');
 //Utilisateur
 Route::get('/administrateur/supprimerUser/{id}', 'App\Http\Controllers\EtudiantsController@softDeleteUser')->name('supprimerUser');
-
+//Diplome
+Route::get('/administrateur/supprimerDiplome/{idDiplome}', 'App\Http\Controllers\DiplomesController@softDeleteDiplome')->name('supprimerDiplome');
 /*---------------------Les modifications----------------------*/
 //Modifier une séance
 Route::get('/editSeance/{idSeance}', 'App\Http\Controllers\SeancesController@editSeance')->name('editSeance');
