@@ -54,7 +54,6 @@ Route::get('/enseignant/supprimerPresentiel/{idPresentiel}', 'App\Http\Controlle
 Route::get('/responsable/supprimerEpreuve/{idEpreuve}', 'App\Http\Controllers\EpreuvesController@deleteEpreuve')->name('supprimerEpreuve');
 //Seance
 Route::get('/responsable/supprimerSeance/{idSeance}', 'App\Http\Controllers\SeancesController@deleteSeance')->name('supprimerSeance');
-
 //Utilisateur
 Route::get('/administrateur/supprimerUser/{id}', 'App\Http\Controllers\EtudiantsController@softDeleteUser')->name('supprimerUser');
 
@@ -78,6 +77,10 @@ Route::post('/updateNote/{idNote}', 'App\Http\Controllers\NotesController@update
 //Modifier un etudiant
 Route::get('/editEtudiant/{idEtudiant}', 'App\Http\Controllers\EtudiantsController@editEtudiant')->name('editEtudiant');
 Route::post('/updateEtudiant/{idEtudiant}', 'App\Http\Controllers\EtudiantsController@updateEtudiant')->name('updateEtudiant');
+
+//Modifier un enseignant
+Route::get('/editEnseignant/{idEnseignant}', 'App\Http\Controllers\EnseignantsController@editEnseignant')->name('editEnseignant');
+Route::post('/updateEnseignant/{idEnseignant}', 'App\Http\Controllers\EnseignantsController@updateEnseignant')->name('updateEnseignant');
 
 /*--------------------------------------------------------ROUTES VUES--------------------------------------------------------------- */
 /*-------------------------Etudiant--------------------------*/

@@ -128,7 +128,7 @@ class EtudiantsController extends Controller
     }
 
     /**
-     * Mise à jour de l'epreuve dans la base de données.
+     * Mise à jour de l'enseignant dans la base de données.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $idEtudiant

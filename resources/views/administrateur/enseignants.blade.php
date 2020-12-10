@@ -41,8 +41,8 @@
                             Supprimer du EC
                         </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-dark mr-3">Modifier</a>
-                            <a href="#" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a href="{{ route('editEnseignant',['idEnseignant'=>$enseignant->id]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
+                            <a href="{{ route('supprimerUser',['id'=>$enseignant->id]) }}" class="btn btn-sm btn-danger">Supprimer</a>
                         </td>
                 @endforeach
                 </tbody>
