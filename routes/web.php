@@ -148,9 +148,11 @@ Route::get('administrateur', function() {
 //Voir les utilisateurs
 Route::get('/administrateur/utilisateurs', function(){
     return view('administrateur/utilisateurs');
-});
+})->name('utilisateurs');
 //Voir les étudiants
 Route::get('/administrateur/utilisateurs/etudiants', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiants');
+//Voir les enseignants
+Route::get('/administrateur/utilisateurs/enseignants', 'App\Http\Controllers\EnseignantsController@listeEnseignants')->name('enseignants');
 /*---------------------------------------------------------- AUTRE ----------------------------------------------------------------- */
   
 Route::fallback(function () {

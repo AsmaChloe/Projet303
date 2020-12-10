@@ -30,7 +30,7 @@
 					<td>
 						<h2>Enseignants</h2>
 							<p>Ici vous pourrez créer, modifier et supprimer des enseignants</p>
-							<p><a class="btn" href="#">Voir les enseignants »</a></p>							
+							<p><a class="btn" href="{{ route('enseignants') }}">Voir les enseignants »</a></p>							
 					</td>
 				</tr>
 			</table>
@@ -40,4 +40,13 @@
         </div>
     </div>
 </div>
+
+<script>
+//Affichage d'une alerte lors de la suppression d'une note
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+</script>
 @endsection
