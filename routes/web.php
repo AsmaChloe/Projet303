@@ -29,6 +29,8 @@ Route::get('/etudiant/ajout-epreuve', '\App\Http\Controllers\EpreuvesController@
 Route::get('/enseignant/ajout-seance', '\App\Http\Controllers\SeancesController@ajoutSeance')->name('seance.ajout');
 //Diplome
 Route::get('/administrateur/ajout-diplome', '\App\Http\Controllers\DiplomesController@ajoutDiplome')->name('diplome.ajout');
+//Parcours
+Route::get('/administrateur/ajout-parcours', '\App\Http\Controllers\ParcoursController@ajoutParcours')->name('parcours.ajout');
 /*---------------------Les associations----------------------*/
 
 //EC-Groupes
@@ -143,7 +145,7 @@ Route::get('/etudiant/notes/{idEtudiant}', 'App\Http\Controllers\NotesController
 //Voir ses diplomes gérés
 Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes')->name('diplomesResponsable');
 //Voir les parcours et EC de ses diplomes
-Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\DiplomesController@listeParcours')->name('parcours');
+Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\ParcourssController@listeParcours')->name('parcours');
 //Voir les groupes des EC
 Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
 

@@ -9,7 +9,9 @@
 
         <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxx<br>
         </p>
-        <!--Bouton ajout-->
+        
+        <!--Boutons-->
+        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#parcoursmodal">Creer un nouveau parcours</a>
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#ecmodal">Associer un EC</a>
     </div>
 </div>
@@ -52,8 +54,8 @@
     </div>
 </div>
 
-
-<!-- Modal -->
+<!--------------------------------------------------------------------------- ZONE DES MODALS --------------------------------------------------------------->
+<!-- Associer un EC -->
 <div class="modal fade" id="ecmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -95,7 +97,45 @@
   </div>
 </div>
 
+<!--Creer un parcours-->
+<div class="modal fade" id="parcoursmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+        <!--Header du modal-->
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Creer un parcours</h5></div>
+      
+        <!--Corps du modal-->
+        <div class="modal-body">
+        
+        <!--Formulaire-->
+        <form id="parcoursform">
+            @csrf
+            
+            <div class="form-group">
+                <label for="nomParcours">Nom du parcours</label>
+                <input type="text" class="form-control" id="nomParcours" placeholder="Saisir le nom du parcours"/>
+            </div>
+
+            <div class="form-group">
+                <label for="sigleParcours">Sigle du parcours</label>
+                <input type="text" class="form-control" id="sigleParcours" placeholder="Saisir le sigle du parcours"/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Creer</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--------------------------------------------------------------------------ZONE DES SCRIPTS -------------------------------------------------------------->
 <script>
+
+//Script pour l'assocation d'un EC
     $("#ecform").submit(function(e){
         e.preventDefault();
         //Recupération des informations
@@ -126,11 +166,38 @@
         });
     });
 
-    //Affichage d'une alerte lors de la dissociation d'un ec et d'un parcours
-    var msg = '{{Session::get('alert')}}';
-    var exist = '{{Session::has('alert')}}';
-    if(exist){
-      alert(msg);
-    }
+    //Script pour creer un parcours
+    $("#parcoursform").submit(function(e){
+        e.preventDefault();
+        //Recupération des informations
+        let sigleParcours = $("#sigleParcours").val();
+        let nomParcours = $("#nomParcours").val();
+        let idDiplome={{$diplome->idDiplome}};
+        let _token = $("input[name=_token]").val();
+
+        //Transmission des valeurs pour lier l'EC et le parcours
+        $.ajax({
+            url: "{{route('parcours.ajout')}}",
+            type: "get",
+            data:{
+                sigleParcours : sigleParcours,
+                nomParcours : nomParcours,
+                idDiplome : idDiplome,
+                _token:_token
+            },
+            success:function(response){
+                if(response){
+                    alert("Création réussie. Relancez la page.");
+                    $("#parcoursform")[0].reset();
+                    $("#parcoursmodal").modal('hide');
+                }
+                
+            },
+            error:function(){
+                alert("Erreur lors de la création.")
+            }
+        });
+    });
+
 </script> 
 @endsection

@@ -38,28 +38,7 @@ class DiplomesController extends Controller
         } 
     }
 
-    /**
-     * Cette méthode permet d'afficher les parcours du diplome géré par le responsable
-     *
-     * @param int $idDiplome
-     * @return view('responsable/parcours',['parcours'=>$diplome->parcours,'allECS'=>$allECS]);
-     */
-    public function listeParcours($idDiplome)
-    {
-        if(Auth::check() && (Auth::user()->responsable)==1 ){
-            //On récupère le diplome
-            $diplome=\App\Models\Diplomes::find($idDiplome);
-            //Et tous les EC
-            $allECS=\App\Models\EC::all();
-
-            return view('responsable/parcours',['parcours'=>$diplome->parcours,'allECS'=>$allECS]);
-            
-        }
-        else{
-            return redirect('/');
-        } 
-    }
-
+    
     /**
      * Pour enregistrer un nouveau diplome dans la bdd.
      *
