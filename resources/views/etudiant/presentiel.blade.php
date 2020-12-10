@@ -23,69 +23,73 @@
     </div>
 </div>
 
-<div class="container">
-@foreach($user->parcoursEtu as $parcours)
-	@foreach($parcours->semestres as $semestre)
+<div class="container-fluid my-1">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+
+        <div class="col-md-8">
+        @foreach($user->parcoursEtu as $parcours)
+	        @foreach($parcours->semestres as $semestre)
   		
-		  <table id="presentielTable" class="table table-bordered table-striped text-center">
-    		<!--Semestre-->
-			<thead class="thead table-dark">
-      			<tr>
-        			<th colspan="5" class="policeTaille pt-3 pb-3">Semestre {{$semestre->idSemestre}} </th>
-      			</tr>
-    		</thead>
+		        <table id="presentielTable" class="table table-bordered table-striped text-center">
+    		        <!--Semestre-->
+			        <thead class="thead table-dark">
+      			        <tr><th colspan="5" class="policeTaille pt-3 pb-3">Semestre {{$semestre->idSemestre}} </th></tr>
+    		        </thead>
 			
-			<!--EC - Groupe - Seance - Presentiel -->
-			<tbody>
-        		@foreach($semestre->ecs as $ec)
-					<tr>
-          				<th colspan="5" class="table-primary"><a href="">{{$ec->sigleEC}}</a></th>
-        			</tr>
+        			<!--EC - Groupe - Seance - Presentiel -->
+		        	<tbody>
+        		        @foreach($semestre->ecs as $ec)
+					        <tr>
+          				        <th colspan="5" class="table-primary"><a href="">{{$ec->sigleEC}}</a></th>
+        			        </tr>
                     
 
-					@foreach($ec->ec_groupe as $groupe)
-						<!-- Si les différents groupes liés à l'EC sont parmi les groupes de l'etudiant, c'est valide-->
-						@if($user->groupesEtu->contains($groupe->idGroupe))
-                            <tr>
-	            				<th colspan="5" class="table-success">{{$groupe->nomGroupe}} ({{$groupe->typeGroupe}})</th>
-							</tr>
+					        @foreach($ec->ec_groupe as $groupe)
+						        <!-- Si les différents groupes liés à l'EC sont parmi les groupes de l'etudiant, c'est valide-->
+						        @if($user->groupesEtu->contains($groupe->idGroupe))
+                                    <tr>
+	            				        <th colspan="5" class="table-success">{{$groupe->nomGroupe}} ({{$groupe->typeGroupe}})</th>
+							        </tr>
 
-							@foreach($groupe->seances as $seance)
-								<!--Si l'EC de la séance est bien l'EC du tableau qu'on construit, c'est valide-->
-								@if($seance->idEC == $ec->idEC)
+							        @foreach($groupe->seances as $seance)
+								        <!--Si l'EC de la séance est bien l'EC du tableau qu'on construit, c'est valide-->
+                                        @if($seance->idEC == $ec->idEC)
 
-									@foreach($seance->presentiels as $presentiel)
-										<!--Si le présentiel appartient bien à l'etudiant, c'est ok-->
-										@if($presentiel->idEtudiant==$user->id)
-											
-											<tr>
-												<td> Séance n°{{$seance->numSeance}}</th>
-                                                <td> {{$seance->dateSeance}} </td>
-												<td> de {{$seance->debutSeance}} à {{$seance->finSeance}}</td>
-												<td><span class='badge badge-pill badge-dark'>{{$presentiel->type->valeurType}}</span></td>
-                                                @if(Auth::user()->id != 3)
-                                                <td>
-                                                    <a href="{{ route('editPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
-                                                    <a href="{{ route('supprimerPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-danger">Supprimer</a>
-                                                </td>
+                                            @foreach($seance->presentiels as $presentiel)
+                                            <!--Si le présentiel appartient bien à l'etudiant, c'est ok-->
+                                                @if($presentiel->idEtudiant==$user->id)
+                                        
+                                                    <tr>
+                                                        <td> Séance n°{{$seance->numSeance}}</th>
+                                                        <td> {{$seance->dateSeance}} </td>
+                                                        <td> de {{$seance->debutSeance}} à {{$seance->finSeance}}</td>
+                                                        <td><span class='badge badge-pill badge-dark'>{{$presentiel->type->valeurType}}</span></td>
+                                                        @if(Auth::user()->id != 3)
+                                                        <td>
+                                                            <a href="{{ route('editPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
+                                                            <a href="{{ route('supprimerPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-danger">Supprimer</a>
+                                                        </td>
+                                                        @endif
+                                                    </tr>
+                                                    <tr  id="insererIci"></tr>
                                                 @endif
-											</tr>
-											<tr  id="insererIci"></tr>
-										@endif
-									@endforeach
-								@endif
-                                
-							@endforeach
-						
-                        @endif
-                        
-					@endforeach
-                    
-				@endforeach
-			</tbody>
-		</table>
-	@endforeach
-@endforeach
+                                            @endforeach
+                                        @endif
+                                    @endforeach				
+                                @endif
+                            @endforeach
+                        @endforeach
+                    </tbody>
+		        </table>
+	        @endforeach
+        @endforeach
+    </div>
+    
+    <div class="col-md-2">
+    </div>
+</div>
 </div>
 
  

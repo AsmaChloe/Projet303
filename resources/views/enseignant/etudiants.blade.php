@@ -32,8 +32,9 @@
             <thead class="thead-dark">
                 <th>Etudiants du groupe</th>
                 <th colspan="2" class=" text-center ">Consulter</th>
+                @if(Auth::user()->responsable==1)
                 <th>Modification</th>
-                
+                @endif
             </thead>
     
             <tbody>
