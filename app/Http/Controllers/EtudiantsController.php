@@ -45,9 +45,11 @@ class EtudiantsController extends Controller
                     foreach($parcours as $par){
                     
                         
-                        //On récupère tous les étudiants des parcours
+                        //On récupère les étudiants des parcours qui ne sont pas encore dans le groupe
                         foreach($par->etudiants as $student){
-                            array_push($etudiants2parcours,$student);
+                            if(!($groupe->etudiants->contains($student))){
+                                array_push($etudiants2parcours,$student);
+                            }
                         }
 
                         //Maintenant on récupère tous les EC des parcours
