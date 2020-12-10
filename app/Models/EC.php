@@ -25,7 +25,7 @@ class EC extends Model
      * Obtenir les parcours contenant l'ec // ec->parcours()
      */
     public function parcours(){
-        return $this->semestre->parcours;
+        return $this->belongsToMany(Parcours::class,'parcours_ec','idEC','idParcours');
     }
 
     /**
