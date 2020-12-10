@@ -72,6 +72,10 @@ Route::post('/updatePresentiel/{idPresentiel}', 'App\Http\Controllers\Presentiel
 Route::get('/editNote/{idNote}', 'App\Http\Controllers\NotesController@editNote')->name('editNote');
 Route::post('/updateNote/{idNote}', 'App\Http\Controllers\NotesController@updateNote')->name('updateNote');
 
+//Modifier un etudiant
+Route::get('/editEtudiant/{idEtudiant}', 'App\Http\Controllers\EtudiantsController@editEtudiant')->name('editEtudiant');
+Route::post('/updateEtudiant/{idEtudiant}', 'App\Http\Controllers\EtudiantsController@updateEtudiant')->name('updateEtudiant');
+
 /*--------------------------------------------------------ROUTES VUES--------------------------------------------------------------- */
 /*-------------------------Etudiant--------------------------*/
 

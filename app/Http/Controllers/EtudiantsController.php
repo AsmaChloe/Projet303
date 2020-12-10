@@ -115,6 +115,36 @@ class EtudiantsController extends Controller
         } 
     }
 
+     /**
+     * Ouvre le formulaire pour modifier un etudiant
+     *
+     * @param  int  $idEtudiant
+     * @return  view('administrateur.editEtudiant',['etudiant'=>$etudiant]);
+     */
+    public function editEtudiant($idEtudiant){
+        $etudiant = \App\Models\User::find($idEtudiant);
+
+        return view('administrateur.editEtudiant',['etudiant'=>$etudiant]);
+    }
+
+    /**
+     * Mise à jour de l'epreuve dans la base de données.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idEtudiant
+     * @return redirect()->route('etudiants');
+     */
+    public function updateEtudiant(Request $request, $idEtudiant){
+        
+        $etudiant = \App\Models\User::findOrFail($idEtudiant);
+
+        $etudiant->fill($request->all());
+
+        $etudiant->save();
+
+        return redirect()->route('etudiants');
+    }
+
     /**
      * Supprimer définitivement une association etudiant - groupe
      *
