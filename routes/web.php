@@ -55,6 +55,9 @@ Route::get('/responsable/supprimerEpreuve/{idEpreuve}', 'App\Http\Controllers\Ep
 //Seance
 Route::get('/responsable/supprimerSeance/{idSeance}', 'App\Http\Controllers\SeancesController@deleteSeance')->name('supprimerSeance');
 
+//Seance
+Route::get('/administrateur/supprimerUser/{id}', 'App\Http\Controllers\EtudiantsController@softDeleteUser')->name('supprimerUser');
+
 /*---------------------Les modifications----------------------*/
 //Modifier une séance
 Route::get('/editSeance/{idSeance}', 'App\Http\Controllers\SeancesController@editSeance')->name('editSeance');

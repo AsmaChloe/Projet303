@@ -44,7 +44,7 @@
                         <td>Voir ses IP</td>
                         <td>
                         <a href="{{ route('editEtudiant',['idEtudiant'=>$etudiant->id]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
-                            <a href="#" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a href="{{ route('supprimerUser',['id'=>$etudiant->id]) }}" class="btn btn-sm btn-danger">Supprimer</a>
                         </td>
                 @endforeach
                 </tbody>

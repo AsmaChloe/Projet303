@@ -145,6 +145,27 @@ class EtudiantsController extends Controller
         return redirect()->route('etudiants');
     }
 
+     /**
+     * Pour definir un utilisateur comme supprimé. Il sera cependant toujours dans la BDD et recupérable.
+     *
+     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function softDeleteUser(Request $request, $id)
+    {
+        if(\App\Models\User::where('id',$id)->delete()){
+            
+            return redirect()->back()->with('alert','Utilisateur supprimée');
+        }
+        else{
+            
+            return redirect()->back()->with('alert',"Probleme lors de la suppresion de l'utilisateur");
+        }
+
+        
+    }
+
     /**
      * Supprimer définitivement une association etudiant - groupe
      *
