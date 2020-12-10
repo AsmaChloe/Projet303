@@ -79,6 +79,27 @@ class SeancesController extends Controller
                 return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
 
             }
+            else{
+                if(Auth::user()->role==1){
+                    
+                    $seances=array();
+
+                    //Toutes les seances de l'ec
+                    $seancesEC=$ec->seances;
+                    foreach($seancesEC as $seance){
+                        //On prend que les séances du groupe
+                        if($seance->idGroupe == $idGroupe){
+                            array_push($seances,$seance);
+                        }
+                    }
+
+                    return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
+                }
+                else{
+                    return redirect('/');
+                }
+
+            }
             
         }
         else{
