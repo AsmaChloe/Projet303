@@ -10,7 +10,7 @@ class EtudiantsController extends Controller
     /**
      * Cette méthode permet d'afficher tous les étudiants.
      *
-     * @return route('etudiants',['etudiants'=>$etudiants]);
+     * @return view('administrateur/etudiants',['etudiants'=>$etudiants]);
      */
     public function listeEtudiants(){
         $etudiants=\App\Models\User::where('role',3)->get();
