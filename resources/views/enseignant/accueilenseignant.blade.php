@@ -8,7 +8,7 @@
 	<h2 class="display-2 text-center mb-4">Mes informations</h2>
 
         <p class="lead text-center mb-4"> 
-		Bienvenue {{\Auth::user()->name}}.<br></p>
+		Bienvenue {{\Auth::user()->prenom}}.<br></p>
     </div>
 </div>
 

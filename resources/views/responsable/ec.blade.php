@@ -44,7 +44,7 @@
                         @foreach($ec->enseignants as $enseignant)
                             <!--On regarde s'il est professeur du groupe actuel-->
                             @if($groupe->enseignants->contains($enseignant))
-                                {{$enseignant->name}} - <a href="{{ route('supprimerEnsGroupe',['idEnseignant'=>$enseignant->id, 'idGroupe'=>$groupe->idGroupe])}}"><button type="submit" class="btn btn-sm btn-danger mb-1">Dissocier</button></a>
+                                {{$enseignant->nom}} - <a href="{{ route('supprimerEnsGroupe',['idEnseignant'=>$enseignant->id, 'idGroupe'=>$groupe->idGroupe])}}"><button type="submit" class="btn btn-sm btn-danger mb-1">Dissocier</button></a>
                             @endif  
                         @endforeach
                                 
@@ -133,7 +133,7 @@
                 <label for="enseignant">Enseignant du groupe</label>
                 <select class="form-control select2-multi" id="enseignant" name="enseignant" >
                     @foreach ($profs as $prof)
-                        <option value="{{ $prof->id }}">{{ $prof->name }}</option>
+                        <option value="{{ $prof->id }}">{{ $prof->nom }}</option>
                     @endforeach
                 </select>
             </div>

@@ -39,9 +39,9 @@
     
             <tbody>
                 <!--Affichage selon l'ordre alphabetique-->
-                @foreach($etudiants->sortBy('name') as $etudiant)
+                @foreach($etudiants->sortBy('nom') as $etudiant)
                     <tr>
-                        <td>{{$etudiant->name}}</td>
+                        <td>{{$etudiant->nom}} {{$etudiant->prenom}}</td>
                         <td><a class="btn btn-sm btn-dark" href= "{{ route('presentielEtudiant',['idEtudiant'=>$etudiant->id]) }}" >Presentiel</a></td>
                         <td><a class="btn btn-sm btn-dark" href= "{{ route('notesEtudiant',['idEtudiant'=>$etudiant->id]) }}" >Notes</a></td>
 
@@ -83,7 +83,7 @@
             <div class="form-group">
                 <select class="form-control select2-multi" id="etudiant2parcours" name="etudiant2parcours" >
                     @foreach ($etudiants2parcours as $etudiant2parcours)
-                        <option value="{{ $etudiant2parcours->id }}">{{ $etudiant2parcours->name }}</option>
+                        <option value="{{ $etudiant2parcours->id }}">{{ $etudiant2parcours->nom }} {{ $etudiant2parcours->prenom }}</option>
                     @endforeach
                 </select>
             </div>
