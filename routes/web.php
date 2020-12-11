@@ -20,11 +20,11 @@ Route::get('/', function () {
 /*------------------------------------------------------ROUTES GESTIONS------------------------------------------------------------- */
 /*------------------------Les ajouts-------------------------*/
 //Note
-Route::get('/enseignant/gererNotes/ajout-note', 'App\Http\Controllers\NotesController@store')->name('note.ajout');
+Route::get('/enseignant/gererNotes/ajout-note', 'App\Http\Controllers\NotesController@ajoutNote')->name('note.ajout');
 //Presentiel
-Route::get('/etudiant/ajout-presentiel', '\App\Http\Controllers\PresentielController@store')->name('presentiel.ajout');
+Route::get('/etudiant/ajout-presentiel', '\App\Http\Controllers\PresentielController@ajoutPresentiel')->name('presentiel.ajout');
 //Epreuve
-Route::get('/etudiant/ajout-epreuve', '\App\Http\Controllers\EpreuvesController@store')->name('epreuve.ajout');
+Route::get('/etudiant/ajout-epreuve', '\App\Http\Controllers\EpreuvesController@ajoutEpreuve')->name('epreuve.ajout');
 //Seance
 Route::get('/enseignant/ajout-seance', '\App\Http\Controllers\SeancesController@ajoutSeance')->name('seance.ajout');
 //Diplome
@@ -38,7 +38,7 @@ Route::get('/responsable/ajout-groupe', '\App\Http\Controllers\GroupesController
 //EC-Groupes
 Route::get('/responsable/linkGroupeEC', 'App\Http\Controllers\GroupesController@linkECGroupe')->name('linkGroupeEC');
 //Groupes-Enseignants
-Route::get('/responsable/ajout-enseignant', 'App\Http\Controllers\GroupesController@storeEnseignantGroupe')->name('enseignant.ajout');
+Route::get('/responsable/ajout-enseignant', 'App\Http\Controllers\EnseignantsController@linkEnseignantGroupe')->name('enseignant.ajout');
 //Groupe-Etudiants
 Route::get('/responsable/ajout-etudiant', 'App\Http\Controllers\EtudiantsController@linkEtGroupe')->name('etudiant.ajout');
 //Parcours-ec
@@ -52,7 +52,7 @@ Route::get('/administrateur/linkECEnseignant', 'App\Http\Controllers\Enseignants
 /*--------------------Les dissociations----------------------*/
 
 //Groupes-Enseignants
-Route::get('/responsable/supprimer-ensgroupe/{idEnseignant}/{idGroupe}', 'App\Http\Controllers\GroupesController@deleteEnsGroupe')->name('supprimerEnsGroupe');
+Route::get('/responsable/supprimer-ensgroupe/{idEnseignant}/{idGroupe}', 'App\Http\Controllers\EnseignantsController@deleteEnsGroupe')->name('supprimerEnsGroupe');
 //Groupe-Etudiants
 Route::get('/responsable/supprimer-etgroupe/{idEtudiant}/{idGroupe}', 'App\Http\Controllers\EtudiantsController@deleteEtGroupe')->name('supprimerEtGroupe');
 //EC-Groupe

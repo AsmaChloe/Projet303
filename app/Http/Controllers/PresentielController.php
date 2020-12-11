@@ -12,15 +12,16 @@ class PresentielController extends Controller
     /**
      * Cette méthode permet d'afficher son présentiel en tant qu'étudiant.
      * @param \Illuminate\Http\Request  $request
-     * @return view('etudiant/presentiel',compact('user'));
+     * @return view('etudiant/presentiel',compact('etudiant','ecs','seances','types'));
      */
     public function voirsonPresentiel(Request $request)
     {
         if(Auth::check() && Auth::user()->role==3){
-            $user=Auth::user();
+            $etudiant=Auth::user();
+            $ecs=$etudiant->ip;
             $seances=array();
             $types=array();
-            return view('etudiant/presentiel',compact('user','seances','types'));
+            return view('etudiant/presentiel',compact('etudiant','ecs','seances','types'));
         }
         else{
             return redirect('/');
@@ -38,10 +39,12 @@ class PresentielController extends Controller
         if ( Auth::check() ){
 
             $etudiant=\App\Models\User::find($id);
+            
             $types=\App\Models\TypePresentiel::all();
+            
             $ecs=$etudiant->ip;
+            
             $seances=array();
-            $TousLesPresentiels=Presentiel::all();
             foreach($ecs as $ec){
                 foreach($ec->seances as $seance){
                     if(Presentiel::where('idSeance',$seance->idSeance)->count()<=0){
@@ -55,7 +58,7 @@ class PresentielController extends Controller
             switch(Auth::user()->role) {
 
                 case 1 :
-                    return view('etudiant/presentiel',['user'=>$etudiant,'types'=>$types,'seances'=>$seances]);
+                    return view('etudiant/presentiel',['etudiant'=>$etudiant,'ecs'=>$ecs,'types'=>$types,'seances'=>$seances]);
                 break;
 
                 case 2 :
@@ -67,7 +70,7 @@ class PresentielController extends Controller
 
                             //Si c'est un etudiant du professeur, on peut voir son presentiel
                             if($groupeEns->etudiants->contains($etudiant)){
-                                return view('etudiant/presentiel',['user'=>$etudiant,'types'=>$types,'seances'=>$seances,'test'=>$groupeEns->etudiants]);
+                                return view('etudiant/presentiel',['etudiant'=>$etudiant,'ecs'=>$ecs,'types'=>$types,'seances'=>$seances]);
                             }
                         }
                         return redirect('/');
@@ -80,7 +83,7 @@ class PresentielController extends Controller
                         foreach($parcours as $par){
                             //Si parmis les etudiants du parcours se trouve l'étudiant actuel, c'est valide
                             if($par->etudiants->contains($etudiant)){
-                                return view('etudiant/presentiel',['user'=>$etudiant,'types'=>$types,'seances'=>$seances]);
+                                return view('etudiant/presentiel',['etudiant'=>$etudiant,'ecs'=>$ecs,'types'=>$types,'seances'=>$seances]);
                             }
                             else{
                                 return redirect('/');
@@ -107,7 +110,7 @@ class PresentielController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function ajoutPresentiel(Request $request)
     {
         $presentiel=new Presentiel();
         $presentiel->idEtudiant = $request->idEtudiant;

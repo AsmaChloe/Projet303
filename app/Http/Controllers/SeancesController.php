@@ -24,65 +24,10 @@ class SeancesController extends Controller
             //On récupère l'EC
             $ec=\App\Models\EC::where('idEC',$idEC)->get();
             $ec=$ec[0];
+            $seances=array();
 
-            //Pour un enseignant
-            if(Auth::user()->role==2){
-                $enseignant=\Auth::user();
-
-                //Non-responsable
-                if(Auth::user()->responsable==0){
-                    
-                    //Si l'ec ET le groupe sont des ec/groupe de l'enseignant c'est okay
-                    if($enseignant->ec_enseignant->contains($ec) && $enseignant->groupesEns->contains($groupe)){
-
-                    //Si l'EC est un EC du groupe c'est okay
-                        if($groupe->ec_groupe->contains($ec)){
-                            //
-                        }
-                        else{
-                            return redirect('/');
-                        }
-                    }
-                    else{
-                        return redirect('/');
-                    }   
-                }
-                //Responsable
-                else{
-                    
-                    //On récupère les EC du parcours
-                    $ecsparcID=array();
-                    foreach($enseignant->parcoursResp as $parc){
-                        foreach($parc->ecs as $ecParc){
-                            array_push($ecsparcID,$ecParc->idEC);
-                        }
-                        
-                    }
-                    
-                    //Si ce n'est pas un EC des parcours du responsable ou que le groupe ne se trouve pas dans l'ec, c'est invalide
-                    if(!in_array($ec->idEC,$ecsparcID) || !$ec->ec_groupe->contains($groupe)){
-                        return redirect('/');
-                    }
-                }
-
-                $seances=array();
-
-                //Toutes les seances de l'ec
-                $seancesEC=$ec->seances;
-                foreach($seancesEC as $seance){
-                    //On prend que les séances du groupe
-                    if($seance->idGroupe == $idGroupe){
-                        array_push($seances,$seance);
-                    }
-                }
-
-                return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
-
-            }
-            else{
-                if(Auth::user()->role==1){
-                    
-                    $seances=array();
+            switch(Auth::user()->role){
+                case 1 :
 
                     //Toutes les seances de l'ec
                     $seancesEC=$ec->seances;
@@ -93,13 +38,54 @@ class SeancesController extends Controller
                         }
                     }
 
-                    return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
-                }
-                else{
-                    return redirect('/');
-                }
+                break;
+                
+                case 2 :
+                    $enseignant=\Auth::user();
+                    if(Auth::user()->responsable==0){
+                        //Si l'ec n'est pas un ec de l'enseignant ou que le groupe n'est pas un groupe de l'enseignant, acces refusé
+                        if(!$enseignant->ec_enseignant->contains($ec) || !$enseignant->groupesEns->contains($groupe)){
+                            return redirect('/');
+                        }
+                        else{
+                             //Si l'EC n'est pas un EC du groupe, acces refusé
+                            if(!$groupe->ec_groupe->contains($ec)){
+                                return redirect('/');
+                            }
+                        }  
+                    }else{
+                        //On récupère les EC du parcours
+                        $ecsparcID=array();
+                        foreach($enseignant->parcoursResp as $parc){
+                            foreach($parc->ecs as $ecParc){
+                                array_push($ecsparcID,$ecParc->idEC);
+                            }
+                        }
 
+                         //Si ce n'est pas un EC des parcours du responsable ou que le groupe ne se trouve pas dans l'ec, c'est invalide
+                        if(!in_array($ec->idEC,$ecsparcID) || !$ec->ec_groupe->contains($groupe)){
+                            return redirect('/');
+                        }
+                    }
+
+                    
+
+                    //Toutes les seances de l'ec
+                    $seancesEC=$ec->seances;
+                    foreach($seancesEC as $seance){
+                        //On prend que les séances du groupe
+                        if($seance->idGroupe == $idGroupe){
+                            array_push($seances,$seance);
+                        }
+                    }
+                break;
+
+                default :
+                    return redirect('/');
             }
+
+            return view('enseignant/seances',['groupe'=>$groupe,'ec'=>$ec,'seances'=>$seances]);
+
             
         }
         else{

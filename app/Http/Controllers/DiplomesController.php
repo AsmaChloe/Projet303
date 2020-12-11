@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class DiplomesController extends Controller
 {
     /**
-     * Cette méthode permet d'afficher la liste des diplomes (pour un responsable)
+     * Cette méthode permet d'afficher la liste des diplomes
      *
      * @param  \Illuminate\Http\Request  $request
      * @return view('responsable/diplomes',['user' => $user,'diplomes'=>$diplomes,'enseignants'=>$enseignants]);
@@ -58,7 +58,7 @@ class DiplomesController extends Controller
      *
      * @param int $idDiplome
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return redirect()->back()->with('alert',"message");
      */
     public function softDeleteDiplome(Request $request, $idDiplome)
     {
@@ -82,10 +82,13 @@ class DiplomesController extends Controller
      */
     public function linkDiplomeResp(Request $request)
     {
-        //Creation de l'instance depuis le formulaire
-        $diplomeResp = \App\Models\Diplome_Responsable::make($request->all());
-        //Enregistrement 
-        $diplomeResp->save();
+        $test=\App\Models\Diplome_Responsable::where('idDiplome',$request->idDiplome)->where('idResponsable',$request->idResponsable)->get();
+        if(count($test)==0){
+            //Creation de l'instance depuis le formulaire
+            $diplomeResp = \App\Models\Diplome_Responsable::make($request->all());
+            //Enregistrement 
+            $diplomeResp->save();
+        }
         return response()->json($diplomeResp);
     }
 

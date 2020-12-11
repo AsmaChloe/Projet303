@@ -117,51 +117,13 @@ class GroupesController extends Controller
     {
         $ecGroupe=\App\Models\EC_Groupe::where('idGroupe',$idGroupe)->where('idEC',$idEC);
 
-        if($ecGroupe->forceDelete()){
+        if($ecGroupe->deletre()){
             
             return redirect()->back()->with('alert',"Dissociation effective");
         }
         else{
             
             return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'ec et du groupe ");
-        }
-
-        
-    }
-
-    /**
-     * Pour enregistrer une association groupe - enseignant
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function storeEnseignantGroupe(Request $request)
-    {
-        //Creation de l'instance depuis le formulaire
-        $groupeEns = \App\Models\Enseignant_Groupe::make($request->all());
-        //Enregistrement 
-        $groupeEns->save();
-        return response()->json($groupeEns);
-    }
-
-     /**
-     * Supprimer définitivement une association enseignant - groupe
-     *
-     * @param  int idEnseignant
-     * @param idGroupe
-     * @return redirect()->back()->with('alert',"message");
-     */
-    public function deleteEnsGroupe(int $idEnseignant, int $idGroupe)
-    {
-        $ensGroupe=\App\Models\Enseignant_Groupe::where('idGroupe',$idGroupe)->where('idEnseignant',$idEnseignant);
-
-        if($ensGroupe->forceDelete()){
-            
-            return redirect()->back()->with('alert',"Dissociation effective");
-        }
-        else{
-            
-            return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'enseignant et du groupe ");
         }
 
         

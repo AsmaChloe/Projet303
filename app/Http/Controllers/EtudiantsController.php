@@ -10,7 +10,7 @@ class EtudiantsController extends Controller
     /**
      * Cette méthode permet d'afficher tous les étudiants.
      *
-     * @return view('administrateur/etudiants',['etudiants'=>$etudiants]);
+     * @return view('administrateur/etudiants',['etudiants'=>$etudiants,'allParcours'=>$allParcours]);
      */
     public function listeEtudiants(){
         if(Auth::check() && Auth::user()->role==1){
@@ -197,8 +197,8 @@ class EtudiantsController extends Controller
     /**
      * Supprimer définitivement une association etudiant - groupe
      *
-     * @parem int $idGroupe
-     * @param  \Illuminate\Http\Request  $request
+     * @param int $idGroupe
+     * @param int $idEtudiant
      * @return redirect()->back()->with('alert',"message");
      */
     public function deleteEtGroupe(int $idEtudiant, int $idGroupe)

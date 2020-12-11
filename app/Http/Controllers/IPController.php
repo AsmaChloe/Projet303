@@ -10,6 +10,7 @@ class IPController extends Controller
     /**
      * Cette méthode permet d'afficher la liste des IP de l'étudiant
      *
+     * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function liste(Request $request)

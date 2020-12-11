@@ -16,7 +16,7 @@ class NotesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function ajoutNote(Request $request)
     {
         $note=new Notes();
         $note->idEtudiant = $request->idEtudiant;
@@ -31,7 +31,7 @@ class NotesController extends Controller
     /**
      * Cette méthode permet d'afficher la liste de ses notes, en tant qu'étudiant
      *
-     * @return \Illuminate\Http\Response
+     * @return view('etudiant/notes',['user' => Auth::user(),'ecs'=>$ecs,'epreuves'=>array()]);
      */
     public function voirSesNotes()
     {
@@ -50,7 +50,7 @@ class NotesController extends Controller
 
     /**
      * Cette méthode permet d'afficher les notes d'un étudiant (pour enseignant/responsable)
-     * @param int $id
+     * @param int $idEtudiant
      * @return view('etudiant/notes',['user' => $etudiant,'ecs'=>$ecs,'epreuves'=>$epreuves])
      */
     public function voirNotesEtudiant($idEtudiant)

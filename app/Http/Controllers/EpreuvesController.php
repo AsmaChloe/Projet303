@@ -11,7 +11,7 @@ class EpreuvesController extends Controller
     /**
      * Cette méthode permet d'afficher la liste de ses epreuves (spécial etudiant)
      *
-     * @return view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves]);
+     * @return view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves,'types'=>array(),'ec'=>$ec]);
      */
     public function voirMesEpreuves()
     {
@@ -30,16 +30,16 @@ class EpreuvesController extends Controller
     }
 
     /**
-     * Cette méthode permet d'afficher la liste des epreuves d'un EC particulier (By responsable)
-     * @param int $id
+     * Cette méthode permet d'afficher la liste des epreuves d'un EC particulier (special responsable)
+     * @param int $idEC
      * @return \view('etudiant/epreuves',['user' =>$user ,'epreuves'=>$epreuves,'types'=>$typesEpreuves,'ec'=>$ec]);
      */
-    public function voirEpreuvesEC($id)
+    public function voirEpreuvesEC($idEC)
     {
         $user=Auth::user();
         $typesEpreuves=\App\Models\TypeEpreuve::all();
         //On récupère l'EC en question
-        $ec=\App\Models\EC::where('idEC',$id)->get();
+        $ec=\App\Models\EC::where('idEC',$idEC)->get();
         $ec=$ec[0];
 
 
@@ -96,7 +96,7 @@ class EpreuvesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function ajoutEpreuve(Request $request)
     {
         $epreuve= Epreuve::make($request->all());
         $epreuve->save();
@@ -108,7 +108,7 @@ class EpreuvesController extends Controller
      * Ouvre le formulaire pour modifier l'epreuve
      *
      * @param  int  $idEpreuve
-     * @return  view('enseignant.editEpreuve',['epreuve'=>$epreuve]);
+     * @return  view('enseignant.editEpreuve',['epreuve'=>$epreuve,'typesEpreuve'=>$typesEpreuves]);
      */
     public function editEpreuve($idEpreuve){
         $epreuve = Epreuve::find($idEpreuve);
@@ -122,7 +122,7 @@ class EpreuvesController extends Controller
      * Mise à jour de l'epreuve dans la base de données.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $idSeance
+     * @param  int  $idEpreuve
      * @return redirect()->route('voirEpreuvesEC',[$request->idEC]);
      */
     public function updateEpreuve(Request $request, $idEpreuve){
@@ -146,7 +146,7 @@ class EpreuvesController extends Controller
     {
         $epreuve=\App\Models\Epreuve::where('idEpreuve',$idEpreuve);
 
-        if($epreuve->forceDelete()){
+        if($epreuve->delete()){
             
             return redirect()->back()->with('alert',"epreuve supprimé");
         }

@@ -10,7 +10,7 @@ class EnseignantsController extends Controller
     /**
      * Cette méthode permet d'afficher tous les enseignants.
      *
-     * @return view('administrateur/enseignants',['enseignants'=>$enseignants]);
+     * @return view('administrateur/enseignants',['enseignants'=>$enseignants,'ecs'=>$ecs]);
      */
     public function listeEnseignants(){
         
@@ -92,6 +92,44 @@ class EnseignantsController extends Controller
         else{
             
             return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'ec et de l'enseignant ");
+        }
+
+        
+    }
+
+    /**
+     * Pour enregistrer une association groupe - enseignant
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function linkEnseignantGroupe(Request $request)
+    {
+        //Creation de l'instance depuis le formulaire
+        $groupeEns = \App\Models\Enseignant_Groupe::make($request->all());
+        //Enregistrement 
+        $groupeEns->save();
+        return response()->json($groupeEns);
+    }
+
+     /**
+     * Supprimer définitivement une association enseignant - groupe
+     *
+     * @param  int idEnseignant
+     * @param int idGroupe
+     * @return redirect()->back()->with('alert',"message");
+     */
+    public function deleteEnsGroupe(int $idEnseignant, int $idGroupe)
+    {
+        $ensGroupe=\App\Models\Enseignant_Groupe::where('idGroupe',$idGroupe)->where('idEnseignant',$idEnseignant);
+
+        if($ensGroupe->delete()){
+            
+            return redirect()->back()->with('alert',"Dissociation effective");
+        }
+        else{
+            
+            return redirect()->back()->with('alert',"Probleme lors de la dissociation de l'enseignant et du groupe ");
         }
 
         
