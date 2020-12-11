@@ -8,7 +8,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Les etudiants</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxxxxx</p>
+        <p class="lead text-center mb-4">Retrouvez ici tous les étudiants.</p>
 
         <a href="{{ route('register')}}" class="btn btn-success">Creer un étudiant</a>
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#parcoursmodal">Ajouter un parcours à un étudiant</a>
@@ -76,18 +76,18 @@
             <div class="form-group"> 
 				<label for="idParcours">Parcours</label>
 				<select class="form-control select2-multi" id="idParcours" name="idParcours" >    
-                        @foreach($allParcours as $parc)
-                            <option value="{{$parc->idParcours}}">{{$parc->nomParcours}}</option>
-                        @endforeach
+                    @foreach($allParcours as $parc)
+                        <option value="{{$parc->idParcours}}">{{$parc->nomParcours}}</option>
+                    @endforeach
 				</select>
             </div>
 
             <div class="form-group"> 
 				<label for="idEtudiant">Etudiant</label>
 				<select class="form-control select2-multi" id="idEtudiant" name="idEtudiant" >    
-                        @foreach($etudiants as $etudiant)
-                            <option value="{{$etudiant->id}}">{{$etudiant->nom}} {{$etudiant->prenom}}</option>
-                        @endforeach
+                    @foreach($etudiants as $etudiant)
+                        <option value="{{$etudiant->id}}">{{$etudiant->nom}} {{$etudiant->prenom}}</option>
+                    @endforeach
 				</select>
             </div>
 

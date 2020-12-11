@@ -272,7 +272,7 @@ $("#groupeCreerForm").submit(function(e){
             },
             success:function(response){
                 if(response){
-                    alert("Ajout d'enseignant réussi");
+                    alert("Ajout d'enseignant réussi.Rafraichissez la page.");
                     $("#enseignantForm")[0].reset();
                     $("#enseignantModal").modal('hide');
                 }

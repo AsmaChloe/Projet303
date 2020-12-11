@@ -7,8 +7,7 @@
     <div class="container pt-5 pb-4" >
 	<h2 class="display-2 text-center mb-4">Parcours</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxx<br>
-        </p>
+        <p class="lead text-center mb-4">Retrouvez ici les parcours de vos diplomes et ses ECs.</p>
         
         <!--Boutons-->
         @if(Auth::user()->role==1)
@@ -159,7 +158,7 @@
             },
             success:function(response){
                 if(response){
-                    alert("Association réussie.");
+                    alert("Association réussie. Relancez la page.");
                     $("#ecform")[0].reset();
                     $("#ecmodal").modal('hide');
                 }
@@ -180,7 +179,7 @@
         let idDiplome={{$diplome->idDiplome}};
         let _token = $("input[name=_token]").val();
 
-        //Transmission des valeurs pour lier l'EC et le parcours
+        //Transmission des valeurs pour creer l'EC
         $.ajax({
             url: "{{route('parcours.ajout')}}",
             type: "get",

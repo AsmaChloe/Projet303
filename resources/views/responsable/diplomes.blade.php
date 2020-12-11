@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
 	<h2 class="display-2 text-center mb-4">Diplomes</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxx<br></p>
+        <p class="lead text-center mb-4">Retrouvez ici la liste de vos diplomes.</p>
 
         @if(Auth::user()->role==1)
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#diplomemodal">Creer un diplome</a>
@@ -28,8 +28,8 @@
                     <thead class="thead-dark">
                         <th>Type diplome</th>
                         <th>Nom diplome</th>
-                        <th>Responsable</th>
                         @if(Auth::user()->role==1)
+                        <th>Responsable</th>
                         <th>Modifications</th>
                         @endif
                     </thead>
@@ -43,22 +43,21 @@
                             <td>
                                 <a class="btn btn-sm  btn-dark" href= "{{ route('parcours',['idDiplome'=>$diplome->idDiplome]) }}" >{{$diplome->sigleDiplome}} - {{$diplome->nomDiplome}}</a>
                             </td>
-                            <td>
-                            <!--Si il existe un responsable on l'affiche-->
-                            @if($diplome->responsables->count()!=0)
-                                @foreach($diplome->responsables as $responsable)
-                                    {{$responsable->nom}}
-                                    @if(Auth::user()->role==1)
-                                        <a href="{{ route('supprimerDiplomeResp',['idDiplome'=>$diplome->idDiplome, 'idResponsable'=>$responsable->id])}}" class="btn btn-sm btn-outline-danger">Dissocier</a>
-                                    @endif
-                                @endforeach
-                            @else
-                                <!--Sinon on propose d'en associer un-->
-                                Il n'y a pas de responsable.
-                                <button class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#enseignantModal" id="ceDiplomeLa" value="{{ $diplome->idDiplome }}" >Associer</button>
-                            @endif
-                            </td>
+
                             @if(Auth::user()->role==1)
+                            <td>
+                                <!--Si il existe un responsable on l'affiche-->
+                                @if($diplome->responsables->count()!=0)
+                                    @foreach($diplome->responsables as $responsable)
+                                        {{$responsable->nom}}
+                                        <a href="{{ route('supprimerDiplomeResp',['idDiplome'=>$diplome->idDiplome, 'idResponsable'=>$responsable->id])}}" class="btn btn-sm btn-outline-danger">Dissocier</a>
+                                    @endforeach
+                                @else
+                                    <!--Sinon on propose d'en associer un-->
+                                    Il n'y a pas de responsable.
+                                    <button class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#enseignantModal" id="ceDiplomeLa" value="{{ $diplome->idDiplome }}" >Associer</button>
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('supprimerDiplome',['idDiplome'=>$diplome->idDiplome]) }}" class="btn btn-sm btn-danger mb-2">Supprimer</a>
                             </td>

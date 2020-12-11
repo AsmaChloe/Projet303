@@ -8,7 +8,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Les utilisateurs</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxxxxx</p>
+        <p class="lead text-center mb-4">Retrouvez ici tous les utilisateurs.</p>
     </div>
 </div>
 
@@ -22,15 +22,15 @@
 				<tr>
 					<td>
 						<h2>Etudiants</h2>
-							<p>Ici vous pourrez créer, modifier et supprimer des étudiants</p>
-							<p><a class="btn" href="{{ route('etudiants') }}">Voir les étudiants »</a></p>							
+                        <p>Ici vous pourrez créer, modifier et supprimer des étudiants</p>
+                        <p><a class="btn" href="{{ route('etudiants') }}">Voir les étudiants »</a></p>							
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<h2>Enseignants</h2>
-							<p>Ici vous pourrez créer, modifier et supprimer des enseignants</p>
-							<p><a class="btn" href="{{ route('enseignants') }}">Voir les enseignants »</a></p>							
+                        <p>Ici vous pourrez créer, modifier et supprimer des enseignants</p>
+                        <p><a class="btn" href="{{ route('enseignants') }}">Voir les enseignants »</a></p>							
 					</td>
 				</tr>
 			</table>

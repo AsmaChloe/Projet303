@@ -8,7 +8,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Les enseignants</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxxxxx</p>
+        <p class="lead text-center mb-4">Retrouvez ici tous les enseignants.</p>
 
         <a href="{{ route('register')}}" class="btn btn-success">Creer un enseignant</a>
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#ecmodal">Associer un EC et un enseignant</a>

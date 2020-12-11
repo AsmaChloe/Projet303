@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Modifier un enseignant</h2>
 
-        <p class="lead text-center mb-4">xxx</p>
+        <p class="lead text-center mb-4"></p>
 
     </div>
 </div>
