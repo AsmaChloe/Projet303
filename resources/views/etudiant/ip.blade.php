@@ -1,5 +1,5 @@
 @extends('template')
-@section('titre')Mes IP @endsection
+@section('titre')Mes IPs @endsection
     
 @section('contenu')
 
@@ -8,7 +8,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Inscriptions Pédagogiques</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxxxxx</p>
+        <p class="lead text-center mb-4">Retrouvez ici toutes vos IPs.</p>
     </div>
 </div>
 
@@ -17,7 +17,7 @@
         <div class="col-md-2">    
         </div>
         <div class="col-md-8">
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered">
                 <thead class="thead-dark"> 
                     <tr>
                         <th scope="col">Sigle</th>

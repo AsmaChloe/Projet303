@@ -7,10 +7,7 @@
     <div class="container pt-5 pb-4" >
 	<h2 class="display-2 text-center mb-4">Présentiel</h2>
 
-        <p class="lead text-center mb-4">
-			Résoudre l'affichage lors de l'ajoute :((( <br>
-			Apparance des semestres a modifier
-		</p>
+        <p class="lead text-center mb-4">Retrouvez ici vos justificatifs d'absence et votre présentiel pour tous les EC.</p>
 		<br>
             @if(Auth::user()->id != 3)
                 @if(count($seances)!=0)
@@ -29,62 +26,52 @@
         </div>
 
         <div class="col-md-8">
-        @foreach($user->parcoursEtu as $parcours)
-	        @foreach($parcours->semestres as $semestre)
+	        @foreach($ecs as $ec)
   		
 		        <table id="presentielTable" class="table table-bordered table-striped text-center">
     		        <!--Semestre-->
 			        <thead class="thead table-dark">
-      			        <tr><th colspan="5" class="policeTaille pt-3 pb-3">Semestre {{$semestre->idSemestre}} </th></tr>
+                        <th colspan="5">{{$ec->sigleEC}}</th>
     		        </thead>
 			
         			<!--EC - Groupe - Seance - Presentiel -->
 		        	<tbody>
-        		        @foreach($semestre->ecs as $ec)
-					        <tr>
-          				        <th colspan="5" class="table-primary"><a href="">{{$ec->sigleEC}}</a></th>
-        			        </tr>
-                    
 
-					        @foreach($ec->ec_groupe as $groupe)
-						        <!-- Si les différents groupes liés à l'EC sont parmi les groupes de l'etudiant, c'est valide-->
-						        @if($user->groupesEtu->contains($groupe->idGroupe))
-                                    <tr>
-	            				        <th colspan="5" class="table-success">{{$groupe->nomGroupe}} ({{$groupe->typeGroupe}})</th>
-							        </tr>
+                        @foreach($ec->ec_groupe as $groupe)
+                            <!-- Si les différents groupes liés à l'EC sont parmi les groupes de l'etudiant, c'est valide-->
+                            @if($etudiant->groupesEtu->contains($groupe->idGroupe))
+                                <tr>
+                                    <th colspan="5" class="table-success">{{$groupe->nomGroupe}} ({{$groupe->typeGroupe}})</th>
+                                </tr>
 
-							        @foreach($groupe->seances as $seance)
-								        <!--Si l'EC de la séance est bien l'EC du tableau qu'on construit, c'est valide-->
-                                        @if($seance->idEC == $ec->idEC)
+                                @foreach($groupe->seances as $seance)
+                                    <!--Si l'EC de la séance est bien l'EC du tableau qu'on construit, c'est valide-->
+                                    @if($seance->idEC == $ec->idEC)
 
-                                            @foreach($seance->presentiels as $presentiel)
-                                            <!--Si le présentiel appartient bien à l'etudiant, c'est ok-->
-                                                @if($presentiel->idEtudiant==$user->id)
-                                        
-                                                    <tr>
-                                                        <td> Séance n°{{$seance->numSeance}}</th>
-                                                        <td> {{$seance->dateSeance}} </td>
-                                                        <td> de {{$seance->debutSeance}} à {{$seance->finSeance}}</td>
-                                                        <td><span class='badge badge-pill badge-dark'>{{$presentiel->type->valeurType}}</span></td>
-                                                        @if(Auth::user()->id != 3)
-                                                        <td>
-                                                            <a href="{{ route('editPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
-                                                            <a href="{{ route('supprimerPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-danger">Supprimer</a>
-                                                        </td>
-                                                        @endif
-                                                    </tr>
-                                                    <tr  id="insererIci"></tr>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    @endforeach				
-                                @endif
-                            @endforeach
+                                        @foreach($seance->presentiels as $presentiel)
+                                        <!--Si le présentiel appartient bien à l'etudiant, c'est ok-->
+                                            @if($presentiel->idEtudiant==$etudiant->id)
+                                    
+                                                <tr>
+                                                    <td> Séance n°{{$seance->numSeance}}</th>
+                                                    <td> le {{ date('d/m/Y', strtotime($seance->dateSeance))}} de {{$seance->debutSeance}} à {{$seance->finSeance}}</td>
+                                                    <td><span class='badge badge-pill badge-dark'>{{$presentiel->type->valeurType}}</span></td>
+                                                    @if(Auth::user()->id != 3)
+                                                    <td>
+                                                        <a href="{{ route('editPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
+                                                        <a href="{{ route('supprimerPresentiel',['idPresentiel'=>$presentiel->idPresentiel]) }}" class="btn btn-sm btn-danger">Supprimer</a>
+                                                    </td>
+                                                    @endif
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach				
+                            @endif
                         @endforeach
                     </tbody>
 		        </table>
 	        @endforeach
-        @endforeach
     </div>
     
     <div class="col-md-2">
@@ -97,19 +84,18 @@
 <div class="modal fade" id="presentielModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+
+        <!--Header-->
       <div class="modal-header">
-        <!--Bouton-->
         <h5 class="modal-title" id="exampleModalLabel">Ajouter</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      
       </div>
       
+      <!--Corps-->
       <div class="modal-body">
         
         <!--Formulaire-->
         <form id="presentielForm">
+
             @csrf
             <div class="form-group">
                 <label for="idSeance">Seance</label>
@@ -142,12 +128,12 @@
     $("#presentielForm").submit(function(e){
         e.preventDefault();
         //Recupération des valeurs
-        let idEtudiant = {{$user->id}};
+        let idEtudiant = {{$etudiant->id}};
         let idSeance = document.getElementById("idSeance").value;
         let idType = document.getElementById("idType").value;
         let _token = $("input[name=_token]").val();
 
-        //Transmission des valeurs pour ajouter la note
+        //Transmission des valeurs pour ajouter le presentiel
         $.ajax({
             url: "{{route('presentiel.ajout')}}",
             type: "get",
@@ -158,11 +144,9 @@
                 _token:_token
             },
             success:function(response){
-                //Si c'est reussis : On affiche ->ici petit problème
+                //Si c'est reussi
                 if(response){
-                    $("#insererIci").prepend('<td scope="row">Séance</td><td scope="row">'+response.idSeance+'|'+response.idSeance+'</td><td scope="row"><span class="badge">'+response.idType+'</span></td>');
-					//$("#insererIci").prepend('<tr><td scope="row">Séance</th><td scope="row">'+(response.seance()).debutSeance+'|'+(response.seance()).finSeance+'</th><td scope="row"><span class="badge">'+response.type().valeurType+'</span></th></tr>');
-					alert("Présentiel ajouté, refresh pour le bon affichage.");
+					alert("Présentiel ajouté, rafraichissez la page pour le bon affichage.");
                     $("#presentielForm")[0].reset();
                     $("#presentielModal").modal('hide');
                 }

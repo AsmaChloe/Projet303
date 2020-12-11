@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Epreuves</h2>
 
-        <p class="lead text-center mb-4">Afficher correctement la date<br>Verifications</p>
+        <p class="lead text-center mb-4">Retrouvez ici la planification de vos épreuves.</p>
 
 		<!--Bouton ajout-->
         @if(Auth::user()->responsable==1)
@@ -28,11 +28,8 @@
 			<thead>
 				<tr class="thead-dark">
 					<th>EC</th>
-                    <th>Type</th>
-					<th>Date</th>
-					<th colspan="2">Duree</th>
-                    <th>Pourcentage</th>
-                    <th>Session</th>
+                    <th>Epreuve</th>
+					<th>Horaires</th>
                     @if(Auth::user()->responsable==1)
                     <th>Modification</th>
                     @endif
@@ -43,13 +40,9 @@
 			@foreach($epreuves as $epreuve)
 			<tbody>
 				<tr>
-					<td>{{$epreuve->ec->sigleEC}}</td>
+					<td>{{$epreuve->ec->sigleEC}} - {{$epreuve->ec->nomEC}}</td>
 					<td>{{$epreuve->type->valeurType}}</td>
-                    <td>le {{ $epreuve->dateEpreuve}}</td>
-					<td>{{ $epreuve->debutEpreuve }}</td>
-                    <td>{{ $epreuve->finEpreuve }}</td>
-                    <td>{{ $epreuve->pourcentage}}%</td>
-                    <td>{{$epreuve->numSession}}</td>
+                    <td>le {{ date('d/m/Y', strtotime($epreuve->dateEpreuve)) }} {{ $epreuve->debutEpreuve }} à {{ $epreuve->finEpreuve }}</td>
                     @if(Auth::user()->responsable==1)
                         <td >
                             <a href="{{ route('editEpreuve',['idEpreuve'=>$epreuve->idEpreuve]) }}" class="btn btn-sm btn-dark mr-3">Modifier</a>
@@ -129,7 +122,7 @@
 </div>
 
 <script>
-    //Script pour l'ajout de groupe
+    //Script pour l'ajout de l'epreuve
     $("#epreuveForm").submit(function(e){
         //On récupère les valeurs de plus haut
         e.preventDefault();
@@ -142,7 +135,7 @@
 		let idEC = {{$ec->idEC}};
         let _token = $("input[name=_token]").val();
 
-        //Transmission des valeurs pour ajouter le groupe.
+        //Transmission des valeurs pour ajouter l'epreuve.
         $.ajax({
             url: "{{route('epreuve.ajout')}}",
             type: "get",
@@ -158,8 +151,8 @@
             },
             success:function(response){
                 if(response){
-                    alert("Ajout de l'epreuve réussi");
-					$("#epreuveTable tbody").prepend('<tr><td>{{$ec->sigleEC}}</td><td>type</td><td> '+response.dateEpreuve+'</td><td>'+response.debutEpreuve+''+response.finEpreuve+'</td><td>'+response.pourcentage+'</td><td>'+response.numSession+'</td></tr>');
+                    alert("Ajout de l'epreuve réussi. Rafraichissez la page.");
+					$("#epreuveTable tbody").prepend('<tr><td>{{$ec->sigleEC}} - {{$ec->nomEC}} </td><td>Epreuve</td><td> '+response.dateEpreuve+''+response.debutEpreuve+' à '+response.finEpreuve+'</td></tr>');
                     $("#epreuveForm")[0].reset();
                     $("#epreuveModal").modal('hide');
                 }

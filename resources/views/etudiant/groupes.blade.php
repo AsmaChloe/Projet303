@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Groupes</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxxxxx</p>
+        <p class="lead text-center mb-4">Retrouvez ici vos groupes dans vos formations et dans chaque EC.</p>
     </div>
 </div>
 
@@ -40,12 +40,14 @@
                         <td>{{$groupe->nomGroupe}}({{$groupe->typeGroupe}})</td>
 
                         <!--Pour chacun des enseignants de l'EC-->
-                        <td>@foreach($ec->enseignants as $enseignant)
+                        <td>
+                        @foreach($ec->enseignants as $enseignant)
                             <!--On regarde s'il est professeur du groupe actuel-->
                             @if($groupe->enseignants->contains($enseignant))
                                 {{$enseignant->name}}
                             @endif
-                        @endforeach</td>
+                        @endforeach
+                        </td>
                     </tr>
                 @endif
             @endforeach

@@ -7,10 +7,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Notes</h2>
 
-        <p class="lead text-center mb-4">
-                - faire le calcul des totaux <br>
-                - vérifier que note est valide
-        </p>
+        <p class="lead text-center mb-4">Retrouvez ici toutes vos notes.</p>
         <br>
         @if(Auth::user()->id != 3)
             @if(count($epreuves)!=0)
@@ -67,13 +64,6 @@
                 @endif
             @endforeach
             @endforeach
-                        
-            <!--Total-->
-            <tr>
-                <th>Total</th>
-                <td colspan='2'>A</td>
-                <td colspan='3'>A</td>
-            </tr>
         </tbody>
     </table>
     @endforeach
@@ -151,9 +141,10 @@
                 _token:_token
             },
             success:function(response){
-                //Si c'est reussis : On affiche ->ici petit problème
+                //Si c'est reussis : On affiche
                 if(response){
                     $("#noteTable tbody").prepend('<tr><th>Type Epreuve</th><td>'+response.valeurNote+'/ '+response.maxNote+'</td><td>%</td><td></td><td></td></tr>');
+                    alert("Notes ajoutée. Rafraichissez la page");
                     $("#noteForm")[0].reset();
                     $("#noteModal").modal('hide');
                 }
