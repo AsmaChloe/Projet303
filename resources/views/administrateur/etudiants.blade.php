@@ -11,6 +11,7 @@
         <p class="lead text-center mb-4">xxxxxxxxxxxxxxxxxxxxxxx</p>
 
         <a href="{{ route('register')}}" class="btn btn-success">Creer un étudiant</a>
+        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#parcoursmodal">Ajouter un parcours à un étudiant</a>
     </div>
 </div>
 
@@ -39,7 +40,6 @@
                                 <a href="{{ route('supprimerParcoursEt',['idParcours'=>$par->idParcours,'idEtudiant'=>$etudiant->id]) }}" class="btn btn-sm btn-outline-danger mb-1">Retirer</a>
                                 <br>
                             @endforeach
-                            <button id="cetEtudiant" value="{{$etudiant->id}}" href="#" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#parcoursmodal">Ajouter</a>
                             
                         </td>
                         <td>
@@ -82,6 +82,15 @@
 				</select>
             </div>
 
+            <div class="form-group"> 
+				<label for="idEtudiant">Etudiant</label>
+				<select class="form-control select2-multi" id="idEtudiant" name="idEtudiant" >    
+                        @foreach($etudiants as $etudiant)
+                            <option value="{{$etudiant->id}}">{{$etudiant->nom}} {{$etudiant->prenom}}</option>
+                        @endforeach
+				</select>
+            </div>
+
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>
 
@@ -95,7 +104,7 @@
     $("#parcoursform").submit(function(e){
         e.preventDefault();
         //Recupération des informations
-        let idEtudiant = document.getElementById("cetEtudiant").value;
+        let idEtudiant = document.getElementById("idEtudiant").value;
         let idParcours = document.getElementById("idParcours").value;
         let _token = $("input[name=_token]").val();
 
