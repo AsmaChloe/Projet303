@@ -13,8 +13,14 @@ class EnseignantsController extends Controller
      * @return view('administrateur/enseignants',['enseignants'=>$enseignants]);
      */
     public function listeEnseignants(){
-        $enseignants=\App\Models\User::where('role',2)->get();
-        return view('administrateur/enseignants',['enseignants'=>$enseignants]);
+        
+        if(Auth::check() && Auth::user()->role==1){
+            $enseignants=\App\Models\User::where('role',2)->get();
+            return view('administrateur/enseignants',['enseignants'=>$enseignants]);
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**

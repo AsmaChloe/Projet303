@@ -61,18 +61,17 @@ class PresentielController extends Controller
                 case 2 :
                     //Si c'est un enseignant non-respnsable
                     if(Auth::user()->responsable==0){
-                        $ecsEns=(Auth::user())->ec_enseignant; //Les EC de l'enseignant
+                        $groupesEns=(Auth::user())->groupesEns; //Les groupes de l'enseignant
                     
-                        foreach($ecsEns as $ecEns){
+                        foreach($groupesEns as $groupeEns){
 
                             //Si c'est un etudiant du professeur, on peut voir son presentiel
-                            if($ecEns->etudiants->contains($etudiant)){
-                                return view('etudiant/presentiel',['user'=>$etudiant,'types'=>$types,'seances'=>$seances]);
-                            }
-                            else{
-                                return redirect('/');
+                            if($groupeEns->etudiants->contains($etudiant)){
+                                return view('etudiant/presentiel',['user'=>$etudiant,'types'=>$types,'seances'=>$seances,'test'=>$groupeEns->etudiants]);
                             }
                         }
+                        return redirect('/');
+                        
                     }
                     //Si il est responsable il a acces aux etudiants de son parcours
                     else{

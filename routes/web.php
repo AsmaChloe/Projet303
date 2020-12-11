@@ -166,7 +166,11 @@ Route::get('administrateur', function() {
 });
 //Voir les utilisateurs
 Route::get('/administrateur/utilisateurs', function(){
-    return view('administrateur/utilisateurs');
+    if(Auth::check() && Auth::user()->role==1){
+        return view('administrateur/utilisateurs');
+    }else{
+        return redirect('/');
+    }
 })->name('utilisateurs');
 //Voir les étudiants
 Route::get('/administrateur/utilisateurs/etudiants', 'App\Http\Controllers\EtudiantsController@listeEtudiants')->name('etudiants');
@@ -177,11 +181,5 @@ Route::get('/administrateur/utilisateurs/enseignants', 'App\Http\Controllers\Ens
 Route::fallback(function () {
     return view('erreur', ['logged' => Auth::check()]);
 });
-
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
 
 

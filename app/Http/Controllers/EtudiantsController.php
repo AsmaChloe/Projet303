@@ -13,9 +13,13 @@ class EtudiantsController extends Controller
      * @return view('administrateur/etudiants',['etudiants'=>$etudiants]);
      */
     public function listeEtudiants(){
-        $etudiants=\App\Models\User::where('role',3)->get();
-        $allParcours=\App\Models\Parcours::all();
-        return view('administrateur/etudiants',['etudiants'=>$etudiants,'allParcours'=>$allParcours]);
+        if(Auth::check() && Auth::user()->role==1){
+            $etudiants=\App\Models\User::where('role',3)->get();
+            $allParcours=\App\Models\Parcours::all();
+            return view('administrateur/etudiants',['etudiants'=>$etudiants,'allParcours'=>$allParcours]);
+        }else{
+            return redirect('/');
+        }
     }
 
 
