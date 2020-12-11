@@ -47,6 +47,8 @@ Route::get('/administrateur/linkParcoursEC', 'App\Http\Controllers\ECController@
 Route::get('/administrateur/linkDiplomeResp', 'App\Http\Controllers\DiplomesController@linkDiplomeResp')->name('linkDiplomeResp');
 //PArcours-etudiant
 Route::get('/administrateur/linkParcoursEt', 'App\Http\Controllers\ParcoursController@linkParcoursEt')->name('linkParcoursEt');
+//EC-Enseignant
+Route::get('/administrateur/linkECEnseignant', 'App\Http\Controllers\EnseignantsController@linkECEnseignant')->name('linkECEnseignant');
 /*--------------------Les dissociations----------------------*/
 
 //Groupes-Enseignants
@@ -61,6 +63,8 @@ Route::get('/administrateur/supprimer-parcoursec/{idParcours}/{idEC}', 'App\Http
 Route::get('/administrateur/supprimer-diplomeresp/{idDiplome}/{idResponsable}', 'App\Http\Controllers\DiplomesController@deleteDiplomesResp')->name('supprimerDiplomeResp');
 //Diplome-Responsable
 Route::get('/administrateur/supprimer-parcourset/{idParcours}/{idEtudiant}', 'App\Http\Controllers\ParcoursController@deleteParcoursEt')->name('supprimerParcoursEt');
+//EC-Enseignant
+Route::get('/administrateur/supprimer-ecenseignant/{idEC}/{idEnseignant}', 'App\Http\Controllers\EnseignantsController@deleteECEnseignant')->name('supprimerECEnseignant');
 
 /*---------------------Les suppressions----------------------*/
 //Note
