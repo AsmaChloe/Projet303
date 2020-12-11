@@ -14,7 +14,8 @@ class EtudiantsController extends Controller
      */
     public function listeEtudiants(){
         $etudiants=\App\Models\User::where('role',3)->get();
-        return view('administrateur/etudiants',['etudiants'=>$etudiants]);
+        $allParcours=\App\Models\Parcours::all();
+        return view('administrateur/etudiants',['etudiants'=>$etudiants,'allParcours'=>$allParcours]);
     }
 
 
