@@ -9,7 +9,9 @@
 
         <p class="lead text-center mb-4">xxxxxxxxxxxxxx<br></p>
 
+        @if(Auth::user()->role==1)
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#diplomemodal">Creer un diplome</a>
+        @endif
     </div>
 </div>
 
@@ -27,7 +29,9 @@
                         <th>Type diplome</th>
                         <th>Nom diplome</th>
                         <th>Responsable</th>
+                        @if(Auth::user()->role==1)
                         <th>Modifications</th>
+                        @endif
                     </thead>
 
                     <tbody>
@@ -44,7 +48,9 @@
                             @if($diplome->responsables->count()!=0)
                                 @foreach($diplome->responsables as $responsable)
                                     {{$responsable->nom}}
-                                    <a href="{{ route('supprimerDiplomeResp',['idDiplome'=>$diplome->idDiplome, 'idResponsable'=>$responsable->id])}}" class="btn btn-sm btn-outline-danger">Dissocier</a>
+                                    @if(Auth::user()->role==1)
+                                        <a href="{{ route('supprimerDiplomeResp',['idDiplome'=>$diplome->idDiplome, 'idResponsable'=>$responsable->id])}}" class="btn btn-sm btn-outline-danger">Dissocier</a>
+                                    @endif
                                 @endforeach
                             @else
                                 <!--Sinon on propose d'en associer un-->
@@ -52,9 +58,11 @@
                                 <button class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#enseignantModal" id="ceDiplomeLa" value="{{ $diplome->idDiplome }}" >Associer</button>
                             @endif
                             </td>
+                            @if(Auth::user()->role==1)
                             <td>
                                 <a href="{{ route('supprimerDiplome',['idDiplome'=>$diplome->idDiplome]) }}" class="btn btn-sm btn-danger mb-2">Supprimer</a>
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>    

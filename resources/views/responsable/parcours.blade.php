@@ -11,8 +11,11 @@
         </p>
         
         <!--Boutons-->
+        @if(Auth::user()->role==1)
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#parcoursmodal">Creer un nouveau parcours</a>
+        
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#ecmodal">Associer un EC</a>
+        @endif
     </div>
 </div>
 
@@ -39,7 +42,9 @@
                             </td>
                             <td>@foreach($parc->ecs as $ec)
                                 <a class="btn btn-sm btn-outline-dark mb-2" href= "{{ route('groupesEC',['idEC'=>$ec->idEC]) }}" >{{$ec->sigleEC}} - {{$ec->nomEC}}</a>
-                                - <a href="{{ route('supprimerParcoursEC',['idParcours'=>$parc->idParcours,'idEC'=>$ec->idEC]) }}" class="btn btn-sm btn-danger mb-2">Dissocier</a>
+                                @if(Auth::user()->role==1)- 
+                                <a href="{{ route('supprimerParcoursEC',['idParcours'=>$parc->idParcours,'idEC'=>$ec->idEC]) }}" class="btn btn-sm btn-danger mb-2">Dissocier</a>
+                                @endif
                                 <br>
                                 @endforeach 
                             </td>
