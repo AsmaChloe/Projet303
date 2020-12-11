@@ -50,18 +50,18 @@ class SeancesController extends Controller
                 //Responsable
                 else{
                     
-                    //On récupère les parcours du responsable
-                    $parcours=$enseignant->parcoursResp;
-
-                    foreach($parcours as $parc){
+                    //On récupère les EC du parcours
+                    $ecsparcID=array();
+                    foreach($enseignant->parcoursResp as $parc){
+                        foreach($parc->ecs as $ecParc){
+                            array_push($ecsparcID,$ecParc->idEC);
+                        }
                         
-                        //Si l'EC actuel est un ec du parcours ET est lié au groupe actuel, c'est valide.
-                        if($parc->ecs->contains($ec) && $ec->ec_groupe->contains($groupe)){
-                            //
-                        }
-                        else{
-                            return redirect('/');
-                        }
+                    }
+                    
+                    //Si ce n'est pas un EC des parcours du responsable ou que le groupe ne se trouve pas dans l'ec, c'est invalide
+                    if(!in_array($ec->idEC,$ecsparcID) || !$ec->ec_groupe->contains($groupe)){
+                        return redirect('/');
                     }
                 }
 
