@@ -34,7 +34,7 @@
                 @foreach($seances as $seance)
                 <tr>
                     <td>{{$seance->numSeance}}</td>
-                    <td>{{$seance->dateSeance}}</td>
+                    <td> {{date('d/m/Y', strtotime($seance->dateSeance)) }}</td>
                     <td>{{$seance->debutSeance}}</td>
                     <td>{{$seance->finSeance}}</td>
                     @if(Auth::user()->responsable==1)
