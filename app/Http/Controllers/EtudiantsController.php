@@ -26,7 +26,8 @@ class EtudiantsController extends Controller
     /**
      * Cette méthode permet d'afficher les groupes de l'étudiant ou les étudiants d'une groupe depuis un statut autre que ce dernier
      *
-     * @return \Illuminate\Http\Response
+     * @param int idGroupe
+     * @return return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'etudiants2parcours'=>array()]);
      */
     public function listeEtudiantsGroupe($idGroupe)
     {
@@ -36,84 +37,84 @@ class EtudiantsController extends Controller
             //Les etudiants du groupe
             $etudiants=$groupe->etudiants;
 
-            if((Auth::user()->role)==2 ){ //Si c'est un enseignant 
+            switch(Auth::user()->role){
+                case 1 : //Admin
+                     //On récupère le(s) parcours des élèves déjà inscrit
+                     $parcours=array();
+                     $parcoursID=array(); 
+ 
+                     foreach($etudiants as $etudiant){
+                         foreach($etudiant->parcoursEtu as $parc){
+                             if(!in_array($parc->id,$parcoursID)){
+                                 array_push($parcoursID,$parc->id);
+                                 array_push($parcours,$parc);
+                             }
+                         }
+                     }
+ 
+                     //Maintenant on récupère les étudiants étant dans le(s) parcours MAIS pas dans le groupe
+                     $etudiants2parcours=array();
+                     foreach($parcours as $par){
+                         foreach($par->etudiants as $etudiant){
+                             if(!($groupe->etudiants->contains($etudiant))){
+                                 array_push($etudiants2parcours,$etudiant);
+                             }
+                         }
+                     }
 
-                if( (Auth::user()->responsable)==0 ){ //Non responsable
-                    $prof=Auth::user();
-                    $groupesEns=$prof->groupesEns;
-                
-                    if($groupesEns->contains($groupe)){ //Si c'est un groupe de l'enseignant
+                break;
+
+                case 2 : //Enseignant
+
+                    if( (Auth::user()->responsable)==0 ){ //Non responsable
+                        $prof=Auth::user();
+                        $groupesEns=$prof->groupesEns;
+                        $etudiants2parcours=array();
+                    
+                        if(!($groupesEns->contains($groupe))){ //Si ce n'est pas un groupe de l'enseignant, il n'a pas le droit d'y acceder
+                            return redirect('/');
+                        }
+                    }
+                    
+                    //Enseignant responsable
+                    else{
+                        $parcours=Auth::user()->parcoursResp;
                         
-                        return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'etudiants2parcours'=>array()]);
-                    }
-                    else{ //Ce n'est pas un groupe de l'enseignant, il n'a pas le droit d'y acceder
-                        return redirect('/');
-                    }
-                }
-                 //Enseignant responsable
-                else{
-                    $parcours=Auth::user()->parcoursResp;
-                    //Tableau des etudiants du parcours
-                    $etudiants2parcours=array();
-
-                    //Pour tous les parcours du responsable
-                    foreach($parcours as $par){
-                    
+                        //Tableau des etudiants du parcours
+                        $etudiants2parcours=array();
+    
+                        //Pour tous les parcours du responsable
+                        foreach($parcours as $par){
                         
-                        //On récupère les étudiants des parcours qui ne sont pas encore dans le groupe
-                        foreach($par->etudiants as $student){
-                            if(!($groupe->etudiants->contains($student))){
-                                array_push($etudiants2parcours,$student);
+                            //On récupère les étudiants des parcours qui ne sont pas encore dans le groupe
+                            foreach($par->etudiants as $student){
+                                if(!($groupe->etudiants->contains($student))){
+                                    array_push($etudiants2parcours,$student);
+                                }
                             }
+    
+                            //Maintenant on récupère tous les EC des parcours
+                            foreach($par->ecs as $ec){
+                                //Si le groupe actuel se trouve parmi les EC des parcours du responsable, il peut y acceder
+                                if($ec->ec_groupe->contains($groupe)){
+                                    return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'etudiants2parcours'=>$etudiants2parcours]);
+                                }
+                                else{
+                                    return redirect('/');
+                                }
+                            }   
                         }
-
-                        //Maintenant on récupère tous les EC des parcours
-                        foreach($par->ecs as $ec){
-                            //Si le groupe actuel se trouve parmi les EC des parcours du responsable, il peut y acceder
-                            if($ec->ec_groupe->contains($groupe)){
-                                return view('enseignant/etudiants',['groupe'=>$groupe,'etudiants'=>$etudiants, 'etudiants2parcours'=>$etudiants2parcours]);
-                            }
-                            else{
-                                return redirect('/');
-                            }
-                        }   
-                    }
-                    
-                }
-            }
-        
-            else{
-                if( Auth::user()->role==1 ){ //Si c'est un admin
-                    
-                    //On récupère le(s) parcours des élèves déjà inscrit
-                    $parcours=array();
-                    $parcoursID=array(); 
-
-                    foreach($etudiants as $etudiant){
-                        foreach($etudiant->parcoursEtu as $parc){
-                            if(!in_array($parc->id,$parcoursID)){
-                                array_push($parcoursID,$parc->id);
-                                array_push($parcours,$parc);
-                            }
-                        }
+                        
                     }
 
-                    //Maintenant on récupère les étudiants étant dans le(s) parcours MAIS pas dans le groupe
-                    $etudiants2parcours=array();
-                    foreach($parcours as $par){
-                        foreach($par->etudiants as $etudiant){
-                            if(!($groupe->etudiants->contains($etudiant))){
-                                array_push($etudiants2parcours,$etudiant);
-                            }
-                        }
-                    }
-                    
-                    return view('enseignant/etudiants',['groupe'=>$groupe, 'etudiants'=>$etudiants, 'etudiants2parcours'=>$etudiants2parcours]);
-                }
-                else{
+                break;
+
+                default :
                     return redirect('/');
-                }
+
             }
+
+            return view('enseignant/etudiants',['groupe'=>$groupe, 'etudiants'=>$etudiants, 'etudiants2parcours'=>$etudiants2parcours]);
         }
         else{
             return redirect('/');
@@ -155,7 +156,7 @@ class EtudiantsController extends Controller
      *
      * @param int $id
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return redirect()->back()->with('alert',"message");
      */
     public function softDeleteUser(Request $request, $id)
     {
@@ -171,11 +172,34 @@ class EtudiantsController extends Controller
         
     }
 
+    
+
     /**
-     * Supprimer définitivement une association etudiant - groupe
+     * Pour enregistrer une association groupe - etudiant
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     */
+    public function linkEtGroupe(Request $request)
+    {
+        $test=\App\Models\Groupe_Etudiants::where('idEtudiant',$request->idEtudiant)->where('idGroupe',$request->idGroupe)->get();
+        
+        if(count($test)==0){
+            //Creation de l'instance depuis le formulaire
+            $groupeEtudiant = \App\Models\Groupe_Etudiants::make($request->all());
+            //Enregistrement 
+            $groupeEtudiant->save();
+        }
+
+        return response()->json($groupeEtudiant);
+    }
+
+    /**
+     * Supprimer définitivement une association etudiant - groupe
+     *
+     * @parem int $idGroupe
+     * @param  \Illuminate\Http\Request  $request
+     * @return redirect()->back()->with('alert',"message");
      */
     public function deleteEtGroupe(int $idEtudiant, int $idGroupe)
     {
@@ -191,21 +215,6 @@ class EtudiantsController extends Controller
         }
 
         
-    }
-
-    /**
-     * Pour enregistrer une association groupe - etudiant
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function linkEtGroupe(Request $request)
-    {
-        //Creation de l'instance depuis le formulaire
-        $groupeEtudiant = \App\Models\Groupe_Etudiants::make($request->all());
-        //Enregistrement 
-        $groupeEtudiant->save();
-        return response()->json($groupeEtudiant);
     }
 
 }
