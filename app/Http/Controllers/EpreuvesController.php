@@ -41,23 +41,28 @@ class EpreuvesController extends Controller
         //On récupère l'EC en question
         $ec=\App\Models\EC::where('idEC',$id)->get();
         $ec=$ec[0];
+
+
         if(Auth::check()){
             
             if($user->role==2){
                 //Si c'est un professeur responsable : il peut voir tous les EC de ses parcours
                 if($user->responsable==1){
-                        
-                    //On prend ses parcours
-                    $parcours=$user->parcoursResp;
-                    foreach($parcours as $par){
-                        //Si l'EC actuel fait partie d'un parcours du responsable
-                        if($par->ecs->contains($ec)){
-                            //
+                     
+                    //On récupère les EC du parcours
+                    $ecsparcID=array();
+                    foreach($user->parcoursResp as $parc){
+                        foreach($parc->ecs as $ecParc){
+                            array_push($ecsparcID,$ecParc->idEC);
                         }
-                        else{
-                            return redirect('/');
-                        } 
+                        
                     }
+                    
+                    //Si ce n'est pas un EC des parcours du responsable ou que le groupe ne se trouve pas dans l'ec, c'est invalide
+                    if(!in_array($ec->idEC,$ecsparcID)){
+                        return redirect('/');
+                    }
+
                 }
                 //Sinon il voit que ses EC à lui
                 else{
