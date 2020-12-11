@@ -33,7 +33,7 @@ class CreateNewUser implements CreatesNewUsers
             'prenom' => $input['prenom'],
             'email' => $input['email'],
             'role' => $input['role'],
-            'resopnsable' => $input['responsable'],
+            'responsable' => $input['responsable'],
             'password' => Hash::make($input['password']),
         ]);
     }

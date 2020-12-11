@@ -48,8 +48,8 @@
             <div class="mt-4">
                 <label for="responsable">Est-il un responsable ?</label>
                 <select id="responsable" class="form-control" type="responsable" name="responsable" :value="old('responsable')" required>
-                    <option value="1">Responsable</option>
-                    <option value="0">Non responsable</option>
+                    <option value=0>Non responsable</option>
+                    <option value=1>Responsable</option>
                 </select>
                 <small id="blabla" class="form-text text-muted">Seulement un enseignant peut être désigné responsable !</small>
             </div>
