@@ -18,8 +18,9 @@
         </div>
         
         <div class="col-md-8">
-            <form method="post" action="{{ route('updatePresentiel',['idPresentiel'=>$presentiel->idPresentiel])}}" >@csrf
-
+            <form method="post" action="{{ route('updatePresentiel',['idPresentiel'=>$presentiel->idPresentiel])}}" >
+            @csrf
+            Ici on peut seulement changer la nature du présentiel.
             <input type="hidden" name="idEtudiant" value="{{$presentiel['idEtudiant']}}"/>
             <input type="hidden" name="idSeance" value="{{$presentiel['idSeance']}}"/>
 

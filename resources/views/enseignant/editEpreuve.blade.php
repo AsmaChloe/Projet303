@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Modifier l'épreuve</h2>
 
-        <p class="lead text-center mb-4">Modifiez vos épreuves ici</p>
+        <p class="lead text-center mb-4">Modifiez les épreuves ici.</p>
 
     </div>
 </div>

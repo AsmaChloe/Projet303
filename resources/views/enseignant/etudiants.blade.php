@@ -104,7 +104,7 @@
         let idGroupe = {{ $groupe->idGroupe }};
         let _token = $("input[name=_token]").val();
 
-        //Transmission des valeurs pour ajouter le groupe.
+        //Transmission des valeurs pour ajouter l'etudiant.
         $.ajax({
             url: "{{route('etudiant.ajout')}}",
             type: "get",
@@ -115,7 +115,7 @@
             },
             success:function(response){
                 if(response){
-                    alert("Ajout de l'étudiant réussi.");
+                    alert("Ajout de l'étudiant réussi. Rafraichissez la page.");
                     $("#etudiantForm")[0].reset();
                     $("#etudiantModal").modal('hide');
                 }

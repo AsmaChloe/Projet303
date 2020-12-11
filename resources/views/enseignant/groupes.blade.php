@@ -7,7 +7,7 @@
     <div class="container pt-5 pb-4" >
         <h2 class="display-2 text-center mb-4">Mes Groupes</h2>
 
-        <p class="lead text-center mb-4">xxxxxxxxxxxxxxxx</p>
+        <p class="lead text-center mb-4">Retrouvez ici vos groupes dans chaque EC que vous enseignez.</p>
     </div>
 </div>
 
