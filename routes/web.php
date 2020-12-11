@@ -31,10 +31,12 @@ Route::get('/enseignant/ajout-seance', '\App\Http\Controllers\SeancesController@
 Route::get('/administrateur/ajout-diplome', '\App\Http\Controllers\DiplomesController@ajoutDiplome')->name('diplome.ajout');
 //Parcours
 Route::get('/administrateur/ajout-parcours', '\App\Http\Controllers\ParcoursController@ajoutParcours')->name('parcours.ajout');
+//Groupe
+Route::get('/responsable/ajout-groupe', '\App\Http\Controllers\GroupesController@ajoutGroupe')->name('groupe.ajout');
 /*---------------------Les associations----------------------*/
 
 //EC-Groupes
-Route::get('/responsable/ajout-groupe', 'App\Http\Controllers\GroupesController@storeECGroupe')->name('groupe.ajout');
+Route::get('/responsable/linkGroupeEC', 'App\Http\Controllers\GroupesController@linkECGroupe')->name('linkGroupeEC');
 //Groupes-Enseignants
 Route::get('/responsable/ajout-enseignant', 'App\Http\Controllers\GroupesController@storeEnseignantGroupe')->name('enseignant.ajout');
 //Groupe-Etudiants

@@ -9,7 +9,10 @@
 
         <p class="lead text-center mb-4"><br></p>
 
-        <!--Bouton ajout-->
+        <!--Bouton creation groupe-->
+        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#groupeCrereModal">Creer un groupe </a>
+        
+        <!--Bouton ajout groupe-->
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#groupeModal">Ajouter un groupe existant </a>
         
         <!--Bouton voir les epreuves-->
@@ -75,6 +78,43 @@
 </div>
 
 <!----------------------------------------------------------ZONE DES MODALS -------------------------------------------------------------->
+
+<!-- Modal pour creer groupe -->
+<div class="modal fade" id="groupeCrereModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <!--Header du modal-->
+      <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Creer un groupe</h5>
+        </div>
+      
+      <!--Corps du modal-->
+      <div class="modal-body">
+        
+        <!--Formulaire-->
+        <form id="groupeCreerForm">
+            @csrf
+
+
+                <div class="form-group">
+                <label for="nomGroupe">Nom du groupe</label>
+                <input type="text" class="form-control" id="nomGroupe" placeholder="Saisir le nom du groupe"/>
+            </div>
+
+
+                <div class="form-group">
+                <label for="typeGroupe">Type du groupe</label>
+                <input type="text" class="form-control" id="typeGroupe" placeholder="Saisir le type du groupe"/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Creer</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Celui pour l'ajout du groupe -->
 <div class="modal fade" id="groupeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -150,6 +190,38 @@
 
 <!------------------------------------------------------------------PARTIE JAVASCRIPT----------------------------------------------------------->
 <script>
+
+//Script pour la creation du groupe
+$("#groupeCreerForm").submit(function(e){
+        //On récupère les valeurs de plus haut
+        e.preventDefault();
+        let nomGroupe = document.getElementById("nomGroupe").value;
+        let typeGroupe = document.getElementById("typeGroupe").value;
+        let _token = $("input[name=_token]").val();
+
+        //Transmission des valeurs pour creer le groupe.
+        $.ajax({
+            url: "{{route('groupe.ajout')}}",
+            type: "get",
+            data:{
+                nomGroupe : nomGroupe,
+                typeGroupe : typeGroupe,
+                _token:_token
+            },
+            success:function(response){
+                if(response){
+                    alert("Création de groupe réussie. N'oubliez pas de l'ajouter dans un EC, d'y ajouter un enseignant et des étudiants. Rafraichissez la page.");
+                    $("#groupeCreerForm")[0].reset();
+                    $("#groupeCreerModal").modal('hide');
+                }
+                
+            },
+            error:function(){
+                alert("Erreur lors de la création du groupe. Existe-t-il déjà ?");
+            }
+        });
+    });
+    
     //Script pour l'ajout de groupe
     $("#groupeForm").submit(function(e){
         //On récupère les valeurs de plus haut
@@ -160,7 +232,7 @@
 
         //Transmission des valeurs pour ajouter le groupe.
         $.ajax({
-            url: "{{route('groupe.ajout')}}",
+            url: "{{route('linkGroupeEC')}}",
             type: "get",
             data:{
                 idGroupe : idGroupe,
@@ -176,7 +248,7 @@
                 
             },
             error:function(){
-                alert("Erreur lors de l'ajour du groupe réussi. Le groupe est peut-être déjà dans l'EC ?");
+                alert("Erreur lors de l'ajout du groupe réussi. Le groupe est peut-être déjà dans l'EC ?");
             }
         });
     });

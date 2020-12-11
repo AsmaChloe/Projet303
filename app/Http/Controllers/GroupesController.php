@@ -38,6 +38,27 @@ class GroupesController extends Controller
         } 
     }
 
+    /**
+     * Cette fonction permet d'enregistrer un nouveau groupe dans la bdd
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function ajoutGroupe(Request $request)
+    {
+        //On regarde si l'instance existe déjà.
+        $test=\App\Models\Groupes::where('nomGroupe',$request->nomGroupe)->where('typeGroupe',$request->typeGroupe)->get();
+        
+        if(count($test)==0){
+            //Creation de l'instance depuis le formulaire
+            $groupe = \App\Models\Groupes::make($request->all());
+            //Enregistrement 
+            $groupe->save();
+        }
+        
+        return response()->json($groupe);
+    }
+
     
 
     /**
@@ -70,7 +91,7 @@ class GroupesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeECGroupe(Request $request)
+    public function linkECGroupe(Request $request)
     {
         //On regarde si l'association existe déjà dans la table avant de l'ajouter
         $test=\App\Models\Ec_Groupe::where('idEC',$request->idEC)->where('idGroupe',$request->idGroupe)->get();
