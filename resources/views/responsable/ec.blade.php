@@ -169,11 +169,14 @@
             },
             success:function(response){
                 if(response){
-                    alert("Ajout de groupe réussi");
+                    alert("Ajout de groupe réussi. Rafraichissez la page.");
                     $("#groupeForm")[0].reset();
                     $("#groupeModal").modal('hide');
                 }
                 
+            },
+            error:function(){
+                alert("Erreur lors de l'ajour du groupe réussi. Le groupe est peut-être déjà dans l'EC ?");
             }
         });
     });

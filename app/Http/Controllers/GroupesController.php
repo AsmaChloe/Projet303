@@ -72,10 +72,16 @@ class GroupesController extends Controller
      */
     public function storeECGroupe(Request $request)
     {
-        //Creation de l'instance depuis le formulaire
-        $ecgroupe = \App\Models\Ec_Groupe::make($request->all());
-        //Enregistrement 
-        $ecgroupe->save();
+        //On regarde si l'association existe déjà dans la table avant de l'ajouter
+        $test=\App\Models\Ec_Groupe::where('idEC',$request->idEC)->where('idGroupe',$request->idGroupe)->get();
+        
+        if(count($test)==0){
+            //Creation de l'instance depuis le formulaire
+            $ecgroupe = \App\Models\Ec_Groupe::make($request->all());
+            //Enregistrement 
+            $ecgroupe->save();
+        }
+        
         return response()->json($ecgroupe);
     }
 
