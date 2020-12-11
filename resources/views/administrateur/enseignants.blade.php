@@ -19,7 +19,7 @@
         <div class="col-md-2">    
         </div>
         <div class="col-md-8">
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered">
                 <thead class="thead-dark"> 
                     <tr>
                         <th>Nom</th>
