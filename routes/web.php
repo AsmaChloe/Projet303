@@ -149,7 +149,7 @@ Route::get('/etudiant/notes/{idEtudiant}', 'App\Http\Controllers\NotesController
 //Voir ses diplomes gérés
 Route::get('/responsable/diplomes', 'App\Http\Controllers\DiplomesController@voirDiplomes')->name('diplomesResponsable');
 //Voir les parcours et EC de ses diplomes
-Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\ParcourssController@listeParcours')->name('parcours');
+Route::get('/responsable/diplomes/parcours/{idDiplome}', 'App\Http\Controllers\ParcoursController@listeParcours')->name('parcours');
 //Voir les groupes des EC
 Route::get('/responsable/diplomes/parcours/ec/{idEC}', 'App\Http\Controllers\GroupesController@voirGroupesEC')->name('groupesEC');
 
