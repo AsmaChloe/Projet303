@@ -10,7 +10,7 @@
         <p class="lead text-center mb-4">Retrouvez ici vos séances de cours de l'EC.</p>
 
         <!--Bouton ajout-->
-        @if(Auth::user()->responnsable==1)
+        @if(Auth::user()->responsable==1)
             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#seanceModal">Ajouter une séance</a>
         @endif
     </div>
