@@ -41,11 +41,8 @@
 
                         <!--Pour chacun des enseignants de l'EC-->
                         <td>
-                        @foreach($ec->enseignants as $enseignant)
-                            <!--On regarde s'il est professeur du groupe actuel-->
-                            @if($groupe->enseignants->contains($enseignant))
-                                {{$enseignant->name}}
-                            @endif
+                        @foreach($groupe->enseignants as $enseignant)
+                            {{$enseignant->nom}}
                         @endforeach
                         </td>
                     </tr>
