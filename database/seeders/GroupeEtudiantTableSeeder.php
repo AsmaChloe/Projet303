@@ -35,29 +35,26 @@ class GroupeEtudiantTableSeeder extends Seeder
                 'idEtudiant' => $i
             ]);
         }
-        for($i=6;$i<=7;$i++){
-            Groupe_Etudiants::create([
-                'idGroupe' => 3, //3 = S3F4, groupe de TD
-                'idEtudiant' => $i
-            ]);
-        }
+
         //TP
         for($i=3;$i<=4;$i++){
             Groupe_Etudiants::create([
-                'idGroupe' => 4, //4 = S3F3A, groupe de TP
+                'idGroupe' => 3, //3 = S3F3A, groupe de TP
                 'idEtudiant' => $i
             ]);
         }
-        Groupe_Etudiants::create(['idGroupe' => 5, 'idEtudiant' => 5]); //5 = S3F3B, groupe de TP
-        Groupe_Etudiants::create(['idGroupe' => 6, 'idEtudiant' => 6]); //6 = S3F4A, groupe de TP
-        Groupe_Etudiants::create(['idGroupe' => 6, 'idEtudiant' => 7]); //6 = S3F4A, groupe de TP
+        
+            Groupe_Etudiants::create([
+                'idGroupe' => 4, //4 = S3F3B, groupe de TP
+                'idEtudiant' => 5
+            ]);
 
 
         //Mathematiques
         //CM
         for($i=8;$i<=12;$i++){
             Groupe_Etudiants::create([
-                'idGroupe' => 7, //7 = B1F, groupe de CM
+                'idGroupe' => 5, //5 = B1F, groupe de CM
                 'idEtudiant' => $i
             ]);
         }
@@ -65,13 +62,7 @@ class GroupeEtudiantTableSeeder extends Seeder
         //TD
         for($i=8;$i<=10;$i++){
             Groupe_Etudiants::create([
-                'idGroupe' => 8, //8 = B1F1, groupe de TD
-                'idEtudiant' => $i
-            ]);
-        }
-        for($i=11;$i<=12;$i++){
-            Groupe_Etudiants::create([
-                'idGroupe' => 9, //9 = B1F2, groupe de TD
+                'idGroupe' => 6, //6 = B1F1, groupe de TD
                 'idEtudiant' => $i
             ]);
         }
@@ -79,12 +70,14 @@ class GroupeEtudiantTableSeeder extends Seeder
         //TP
         for($i=8;$i<=9;$i++){
             Groupe_Etudiants::create([
-                'idGroupe' => 10, //10 = B1F1A, groupe de TP
+                'idGroupe' => 7, //7 = B1F1A, groupe de TP
                 'idEtudiant' => $i
             ]);
         }
-        Groupe_Etudiants::create(['idGroupe' => 11, 'idEtudiant' => 10]); //11 = B1F1B, groupe de TP
-        Groupe_Etudiants::create(['idGroupe' => 12, 'idEtudiant' => 11]); //12 = B1F2A, groupe de TP
-        Groupe_Etudiants::create(['idGroupe' => 12, 'idEtudiant' => 12]); //12 = B1F2A, groupe de TP
+
+        Groupe_Etudiants::create([
+            'idGroupe' => 8, //8 = B1F1B, groupe de TP
+            'idEtudiant' => 10
+        ]);
     }
 }

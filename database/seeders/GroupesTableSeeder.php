@@ -28,22 +28,12 @@ class GroupesTableSeeder extends Seeder
         ]);
 
         Groupes::create([
-            'nomGroupe' => "S3F4",
-            'typeGroupe' => "TD"
-        ]);
-
-        Groupes::create([
             'nomGroupe' => "S3F3A",
             'typeGroupe' => "TP"
         ]);
 
         Groupes::create([
             'nomGroupe' => "S3F3B",
-            'typeGroupe' => "TP"
-        ]);
-
-        Groupes::create([
-            'nomGroupe' => "S3F4A",
             'typeGroupe' => "TP"
         ]);
 
@@ -59,22 +49,12 @@ class GroupesTableSeeder extends Seeder
         ]);
 
         Groupes::create([
-            'nomGroupe' => "B1F2",
-            'typeGroupe' => "TD"
-        ]);
-
-        Groupes::create([
             'nomGroupe' => "B1F1A",
             'typeGroupe' => "TP"
         ]);
 
         Groupes::create([
             'nomGroupe' => "B1F1B",
-            'typeGroupe' => "TP"
-        ]);
-
-        Groupes::create([
-            'nomGroupe' => "B1F2A",
             'typeGroupe' => "TP"
         ]);
     }

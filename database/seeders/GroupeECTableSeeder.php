@@ -17,76 +17,56 @@ class GroupeECTableSeeder extends Seeder
     {
         EC_Groupe::truncate();
 
-        //Test sur une partie seulement
+        //INFORMATIQUE
 
         //Les CM
         EC_Groupe::create([
             'idEC' => 1, //1 : INFO0301
             'idGroupe' => 1 //1 : S3F CM
         ]);
-        EC_Groupe::create([
-            'idEC' => 3, //3 : INFO0303
-            'idGroupe' => 1 //1 : S3F CM
-        ]);
-        EC_Groupe::create([
-            'idEC' => 4, //4 : INFO0304
-            'idGroupe' => 1 //1 : S3F CM
-        ]);
-        EC_Groupe::create([
-            'idEC' => 5, //5 : INFO0305
-            'idGroupe' => 1 //1 : S3F CM
-        ]);
-        EC_Groupe::create([
-            'idEC' => 6, //6 : INFO0306
-            'idGroupe' => 1 //1 : S3F CM
-        ]);
+
+        for($i=3;$i<=6;$i++){
+            EC_Groupe::create([
+                'idEC' => $i, //INFO030?
+                'idGroupe' => 1 //1 : S3F CM
+            ]);
+        }
 
         //Les TD
+
+        //Les TD de S3F3
         EC_Groupe::create([
             'idEC' => 1, //1 : INFO0301
-            'idGroupe' => 2 //2 : S3F3 TD
-        ]);
-        EC_Groupe::create([
-            'idEC' => 3, //3 : INFO0303
-            'idGroupe' => 2 //2 : S3F3 TD
-        ]);
-        EC_Groupe::create([
-            'idEC' => 4, //4 : INFO0304
-            'idGroupe' => 2 //2 : S3F3 TD
-        ]);
-        EC_Groupe::create([
-            'idEC' => 5, //5 : INFO0305
-            'idGroupe' => 2 //2 : S3F3 TD
-        ]);
-        EC_Groupe::create([
-            'idEC' => 6, //6 : INFO0306
             'idGroupe' => 2 //2 : S3F3 TD
         ]);
 
-        //Les TP
-        EC_Groupe::create([
-            'idEC' => 1, //1 : INFO0301
-            'idGroupe' => 3 //3 : S3F3A TP
-        ]);
-        EC_Groupe::create([
-            'idEC' => 2, //2 : INFO0302
-            'idGroupe' => 3 //3 : S3F3A TP
-        ]);
-        EC_Groupe::create([
-            'idEC' => 3, //3 : INFO0303
-            'idGroupe' => 3 //3 : S3F3A TP
-        ]);
-        EC_Groupe::create([
-            'idEC' => 4, //4 : INFO0304
-            'idGroupe' => 3 //3 : S3F3A TP
-        ]);
-        EC_Groupe::create([
-            'idEC' => 5, //5 : INFO0305
-            'idGroupe' => 3 //3 : S3F3A TP
-        ]);
-        EC_Groupe::create([
-            'idEC' => 6, //6 : INFO0306
-            'idGroupe' => 3 //3 : S3F3A TP
-        ]);
+        for($i=3;$i<=6;$i++){
+            EC_Groupe::create([
+                'idEC' => $i, //INFO030?
+                'idGroupe' => 2 //2 : S3F3 TD
+            ]);
+        }
+
+        //Les TP de S3F3A & S3F3B
+        for($j=3;$j<=4;$j++){
+            for($i=1;$i<=6;$i++){
+                EC_Groupe::create([
+                    'idEC' => $i, 
+                    'idGroupe' => $j
+                ]);
+            }
+        }
+        
+        //MATHS
+
+        for($i=5;$i<=8;$i++){
+            for($j=7;$j<=11;$j++){
+                EC_Groupe::create([
+                    'idEC' => $j, //MA70?
+                    'idGroupe' => $i //Les groupes
+                ]);
+            }
+        }
     }
 }
+

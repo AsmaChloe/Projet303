@@ -19,7 +19,7 @@ class IPTableSeeder extends Seeder
         //Pour le test
 
         //Etudiants infos
-        for($i=3;$i<=5;$i++){
+        for($i=3;$i<=7;$i++){
             //Matiere d'info
             for($j=1;$j<=6;$j++){
                 IP::create(['idEC'=>$j,'idEtudiant'=>$i]);

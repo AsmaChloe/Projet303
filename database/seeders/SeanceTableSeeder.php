@@ -19,63 +19,35 @@ class SeanceTableSeeder extends Seeder
         Seance::truncate();
         
         $faker = \Faker\Factory::create();
-        $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
-
-        //Les CM de 301,303,304,305,306
-        Seance::create([
-            'numSeance'=>1,
-            'dateSeance'=>$temp->format('Y-m-d'),
-            'debutSeance'=> '14:00:00', 
-            'finSeance'=> '16:00:00',
-            'idGroupe' => 1,
-            'idEC' => 1
-        ]);
-
-        for($i=3;$i<=6;$i++){
-            $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
-            Seance::create([
-                'numSeance'=>1,
-                'dateSeance'=>$temp->format('Y-m-d'),
-                'debutSeance'=> '14:00:00', 
-                'finSeance'=> '16:00:00',
-                'idGroupe' => 1,
-                'idEC' => $i
-            ]);
-        }
-
-        //Les TD pour le groupe S3F3 de 301 à 306
-        Seance::create([
-            'numSeance'=>1,
-            'dateSeance'=>$temp->format('Y-m-d'),
-            'debutSeance'=> '14:00:00', 
-            'finSeance'=> '16:00:00',
-            'idGroupe' => 2,
-            'idEC' => 1
-        ]);
-
-        for($i=3;$i<=6;$i++){
-            $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
-            Seance::create([
-                'numSeance'=>1,
-                'dateSeance'=>$temp->format('Y-m-d'),
-                'debutSeance'=> '14:00:00', 
-                'finSeance'=> '16:00:00',
-                'idGroupe' => 2,
-                'idEC' => $i
-            ]);
-        }
-
-        //Les TP pour le groupe S3F3A de 301 à 306
+        
+        
         for($i=1;$i<=6;$i++){
-            $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
-            Seance::create([
-                'numSeance'=>1,
-                'dateSeance'=>$temp->format('Y-m-d'),
-                'debutSeance'=> '14:00:00', 
-                'finSeance'=> '16:00:00',
-                'idGroupe' => 4,
-                'idEC' => $i
-            ]);
+            for($j=1;$j<=4;$j++){
+                $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
+                Seance::create([
+                    'numSeance'=>1,
+                    'dateSeance'=>$temp->format('Y-m-d'),
+                    'debutSeance'=> '14:00:00', 
+                    'finSeance'=> '16:00:00',
+                    'idGroupe' => $j,
+                    'idEC' => $i
+                ]);
+            }
+        }
+
+
+        for($i=7;$i<=11;$i++){
+            for($j=5;$j<=8;$j++){
+                $temp=$faker->dateTimeBetween('now',"+6 months","Europe/Paris");
+                Seance::create([
+                    'numSeance'=>1,
+                    'dateSeance'=>$temp->format('Y-m-d'),
+                    'debutSeance'=> '14:00:00', 
+                    'finSeance'=> '16:00:00',
+                    'idGroupe' => $j,
+                    'idEC' => $i
+                ]);
+            }
         }
     }
 }

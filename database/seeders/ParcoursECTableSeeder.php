@@ -16,19 +16,20 @@ class ParcoursECTableSeeder extends Seeder
     {
         Parcours_EC::truncate();
 
-        Parcours_EC::create([
-            'idParcours' => 1,
-            'idEC'=> 1
-        ]);
-
-        Parcours_EC::create([
-            'idParcours' =>1,
-            'idEC'=> 2
-        ]);
-
-        Parcours_EC::create([
-            'idParcours' =>1,
-            'idEC'=> 2
-        ]);
+        //LES EC DU PARCOURS 1
+        for($i=1;$i<=6;$i++){
+            Parcours_EC::create([
+                'idParcours' => 1,
+                'idEC'=>$i
+            ]);
+        }
+        
+        //LES EC DU PARCOURS 2
+        for($i=7;$i<=11;$i++){
+            Parcours_EC::create([
+                'idParcours' => 2,
+                'idEC'=>$i
+            ]);
+        }
     }
 }

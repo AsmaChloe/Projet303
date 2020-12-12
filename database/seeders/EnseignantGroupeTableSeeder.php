@@ -17,32 +17,50 @@ class EnseignantGroupeTableSeeder extends Seeder
      */
     public function run()
     {
-        //test pour les groupes de CM
+
         Enseignant_Groupe::truncate();
         
         Enseignant_Groupe::create([
-            'idEnseignant'=> 13,
+            'idEnseignant'=> 18,
            'idGroupe'=> 1
-        ]); //CM(S3F) de 301 avec Enseignant 1
+        ]); //S3F avec Enseignant 6
 
+        Enseignant_Groupe::create([
+            'idEnseignant'=> 13,
+           'idGroupe'=> 2
+        ]); //S3F3 avec Enseignant 1
+
+        Enseignant_Groupe::create([
+            'idEnseignant'=> 14,
+           'idGroupe'=> 3
+        ]); //S3F3A avec Enseignant 2
+
+        
         Enseignant_Groupe::create([
             'idEnseignant'=> 15,
-           'idGroupe'=> 1
-        ]); //CM(S3F) de 303 avec Enseignant 3
+           'idGroupe'=> 4
+        ]); //S3F3B avec Enseignant 3
 
+        
         Enseignant_Groupe::create([
             'idEnseignant'=> 16,
-           'idGroupe'=> 1
-        ]); //CM(S3F) de 304 avec Enseignant 4
+           'idGroupe'=> 5
+        ]); //B1F avec Enseignant 4
 
         Enseignant_Groupe::create([
             'idEnseignant'=> 17,
-           'idGroupe'=> 1
-        ]); //CM(S3F) de 305 avec Enseignant 5
+           'idGroupe'=> 6
+        ]); //B1F1 avec Enseignant 5
 
         Enseignant_Groupe::create([
-            'idEnseignant'=> 18,
-           'idGroupe'=> 1
-        ]); //CM(S3F) de 306 avec Enseignant 6
+            'idEnseignant'=> 19,
+           'idGroupe'=> 7
+        ]); //B1F1A avec Enseignant 7
+
+        Enseignant_Groupe::create([
+            'idEnseignant'=> 19,
+           'idGroupe'=> 8
+        ]); //B1F1B avec Enseignant 7
+
     }
 }
