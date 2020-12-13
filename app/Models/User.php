@@ -129,21 +129,21 @@ class User extends Authenticatable
      * Obtenir le(s) epreuves(s) de l'étudiant user->epreuves()
      */
     public function epreuves(){
-        return $this->hasManyThrough(Epreuve::class,IP::class,'idEtudiant','idEC','id','idEC');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo dans pivot
+        return $this->hasManyThrough(Epreuve::class,IP::class,'idEtudiant','idEC','id','idEC');
     }
 
     /**
      * Obtenir le(s) seance(s) de l'etudiant user->seancesEtu()
      */
     public function seancesEtu(){
-        return $this->hasManyThrough(Seance::class,Groupe_Etudiants::class,'idEtudiant','idGroupe','id','idGroupe');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo du pivot
+        return $this->hasManyThrough(Seance::class,Groupe_Etudiants::class,'idEtudiant','idGroupe','id','idGroupe');
     }
 
     /**
      * Obtenir le(s) seance(s) de l'enseignant user->seancesEns()
      */
     public function seancesEns(){
-        return $this->hasManyThrough(Seance::class,Enseignant_Groupe::class,'idEnseignant','idGroupe','id','idGroupe');//Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo du pivot
+        return $this->hasManyThrough(Seance::class,Enseignant_Groupe::class,'idEnseignant','idGroupe','id','idGroupe');
     }
 
     /**

@@ -29,7 +29,7 @@ class EC extends Model
     }
 
     /**
-     * 
+     * Obtenir les epreuves de l'EC
      */
     public function epreuves(){
         return $this->hasMany(Epreuve::class,'idEC');
@@ -80,4 +80,4 @@ class EC extends Model
         
     }
     
-}?>
+}
