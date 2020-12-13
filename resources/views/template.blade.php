@@ -60,7 +60,7 @@
           @if(Auth::user()->role==1)
           
             <div class="dropdown-menu">
-              <a class="dropdown-item" href=" {{ route('accueimAdmin') }}">Informations</a>
+              <a class="dropdown-item" href=" {{ route('accueilAdmin') }}">Informations</a>
               <a class="dropdown-item" href="{{ route('diplomesResponsable') }}">Diplomes</a>
               <a class="dropdown-item" href="{{ route('utilisateurs') }}">Utilisateurs</a>
             </div>
