@@ -151,6 +151,9 @@
                     $("#presentielModal").modal('hide');
                 }
                 
+            },
+            error : function(){
+                alert("Erreur lors de l'ajout du presentiel. Il existe peut être déjà ?");
             }
         });
     });

@@ -47,10 +47,13 @@ class PresentielController extends Controller
             $seances=array();
             foreach($ecs as $ec){
                 foreach($ec->seances as $seance){
-                    if(Presentiel::where('idSeance',$seance->idSeance)->count()<=0){
-                        array_push($seances,$seance);
+                    foreach($etudiant->groupesEtu as $groupeEtu){
+                        if($groupeEtu->idGroupe==$seance->idGroupe){
+                            if(Presentiel::where('idSeance',$seance->idSeance)->where('idEtudiant',$id)->count()<=0){
+                                array_push($seances,$seance);
+                            }
+                        }
                     }
-                    
                 }
                 
             }
@@ -112,11 +115,11 @@ class PresentielController extends Controller
      */
     public function ajoutPresentiel(Request $request)
     {
-        $presentiel=new Presentiel();
-        $presentiel->idEtudiant = $request->idEtudiant;
-        $presentiel->idSeance = $request->idSeance;
-        $presentiel->idType = $request->idType;
-        $presentiel->save();
+        $test=Presentiel::where('idEtudiant',$request->idEtudiant)->where('idSeance',$request->idSeance)->get();
+        if(count($test)==0){
+            $presentiel= Presentiel::make($request->all());
+            $presentiel->save();
+        }
 
         return response()->json($presentiel);
     }
