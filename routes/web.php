@@ -115,17 +115,17 @@ Route::get('etudiant', function() {
     else{
         return redirect('/');
     }
-});
+})->name('accueilEtudiant');
 //Voir ses notes
-Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@voirSesNotes');
+Route::get('/etudiant/notes', 'App\Http\Controllers\NotesController@voirSesNotes')->name('voirNotes');
 //Voir ses groupes
-Route::get('/etudiant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
+Route::get('/etudiant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe')->name('voirGroupes');
 //Voir ses epreuves
 Route::get('/etudiant/epreuves', 'App\Http\Controllers\EpreuvesController@voirMesEpreuves')->name('voirEpreuves');
 //Voir ses IP
-Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste');
+Route::get('/etudiant/ip', 'App\Http\Controllers\IPController@liste')->name('voirIPs');
 //Voir son presentiel
-Route::get('/etudiant/presentiel', 'App\Http\Controllers\PresentielController@voirsonPresentiel');
+Route::get('/etudiant/presentiel', 'App\Http\Controllers\PresentielController@voirsonPresentiel')->name('voirPresentiel');
 
 /*------------------------Enseignant-------------------------*/
 
@@ -137,9 +137,9 @@ Route::get('enseignant', function() {
     else{
         return redirect('/');
     }
-});
+})->name('accueilEnseignant');
 //Ses groupes
-Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe');
+Route::get('/enseignant/groupes', 'App\Http\Controllers\GroupesController@listeGroupe')->name('groupesEnseignant');
 //Voir les seances de son groupe dans son ec
 Route::get('/enseignant/seances/{idGroupe}/{idEC}', 'App\Http\Controllers\SeancesController@voirSeancesGroupe')->name('seances');
 //Ses etudiants selon le groupe
@@ -169,7 +169,7 @@ Route::get('administrateur', function() {
     else{
         return redirect('/');
     }
-});
+})->name("accueimAdmin");
 //Voir les utilisateurs
 Route::get('/administrateur/utilisateurs', function(){
     if(Auth::check() && Auth::user()->role==1){

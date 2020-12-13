@@ -33,12 +33,12 @@
           
             
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/Projet303/public/etudiant">Informations</a>
-              <a class="dropdown-item" href="/Projet303/public/etudiant/notes">Notes</a>
-              <a class="dropdown-item" href="/Projet303/public/etudiant/presentiel">Présentiel</a>
-              <a class="dropdown-item" href="/Projet303/public/etudiant/groupes">Groupes</a>
-              <a class="dropdown-item" href="/Projet303/public/etudiant/epreuves">Epreuves</a>
-              <a class="dropdown-item" href="/Projet303/public/etudiant/ip">IP</a>
+              <a class="dropdown-item" href="{{ route('accueilEtudiant') }}">Informations</a>
+              <a class="dropdown-item" href="{{ route('voirNotes') }}">Notes</a>
+              <a class="dropdown-item" href="{{ route('voirPresentiel') }}">Présentiel</a>
+              <a class="dropdown-item" href="{{ route('voirGroupes') }}">Groupes</a>
+              <a class="dropdown-item" href=" {{ route('voirEpreuves') }}">Epreuves</a>
+              <a class="dropdown-item" href="{{ route('voirIPs') }}">IP</a>
             </div>
           </li>
           @endif
@@ -47,10 +47,10 @@
           @if(Auth::user()->role==2)
           
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/Projet303/public/enseignant">Informations</a>
-              <a class="dropdown-item" href="/Projet303/public/enseignant/groupes">Groupes</a>
+              <a class="dropdown-item" href="{{ route('accueilEnseignant') }}">Informations</a>
+              <a class="dropdown-item" href="{{ route('groupesEnseignant') }}">Groupes</a>
               @if(Auth::user()->responsable==1)
-              <a class="dropdown-item" href="/Projet303/public/responsable/diplomes">Diplomes</a>
+              <a class="dropdown-item" href="{{ route('diplomesResponsable') }}">Diplomes</a>
               @endif
             </div>
           </li>
@@ -60,7 +60,7 @@
           @if(Auth::user()->role==1)
           
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/Projet303/public/administrateur">Informations</a>
+              <a class="dropdown-item" href=" {{ route('accueimAdmin') }}">Informations</a>
               <a class="dropdown-item" href="{{ route('diplomesResponsable') }}">Diplomes</a>
               <a class="dropdown-item" href="{{ route('utilisateurs') }}">Utilisateurs</a>
             </div>
@@ -74,11 +74,11 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           @if(Auth::check())
-            <form method="POST" action="/Projet303/public/logout">@csrf
-              <a class="btn btn-danger" href="/Projet303/public/logout" onclick="event.preventDefault();this.closest('form').submit();">Deconnexion</a>
+            <form method="POST" action="logout">@csrf
+              <a class="btn btn-danger" href="logout" onclick="event.preventDefault();this.closest('form').submit();">Deconnexion</a>
             </form> 
           @else
-            <a class="btn btn-outline-light" href="/Projet303/public/login"><span class="glyphicon glyphicon-log-in"></span>Connexion</a>
+            <a class="btn btn-outline-light" href="login"><span class="glyphicon glyphicon-log-in"></span>Connexion</a>
           @endif
         </li>
       </ul>
