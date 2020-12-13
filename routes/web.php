@@ -33,6 +33,8 @@ Route::get('/administrateur/ajout-diplome', '\App\Http\Controllers\DiplomesContr
 Route::get('/administrateur/ajout-parcours', '\App\Http\Controllers\ParcoursController@ajoutParcours')->name('parcours.ajout');
 //Groupe
 Route::get('/responsable/ajout-groupe', '\App\Http\Controllers\GroupesController@ajoutGroupe')->name('groupe.ajout');
+//Utilisateurs
+Route::post('/responsable/ajout-user', '\App\Http\Controllers\EtudiantsController@ajoutUser')->name('user.ajout');
 /*---------------------Les associations----------------------*/
 
 //EC-Groupes
@@ -169,7 +171,18 @@ Route::get('administrateur', function() {
     else{
         return redirect('/');
     }
-})->name("accueimAdmin");
+})->name("accueilAdmin");
+
+Route::get('/administrateur/register', function() {
+    if(Auth::check() && Auth::user()->role==1){
+        return view('administrateur.register');
+    }
+    else{
+        return redirect('/');
+    }
+})->name("registerUser");
+
+
 //Voir les utilisateurs
 Route::get('/administrateur/utilisateurs', function(){
     if(Auth::check() && Auth::user()->role==1){

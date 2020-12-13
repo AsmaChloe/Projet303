@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class EtudiantsController extends Controller
 {
@@ -154,6 +155,38 @@ class EtudiantsController extends Controller
         $etudiant->save();
 
         return redirect()->route('etudiants');
+    }
+
+    /**
+     * Pour enregistrer un nouvel user dans la bdd.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function ajoutUser(Request $request)
+    {
+
+        $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'email' => 'required',
+            'role' => 'required',
+            'responsable' => 'required',
+            'password' => 'required'
+        ]);
+
+        
+        \App\Models\User::create([
+            'nom' => $request['nom'],
+            'prenom' => $request['prenom'],
+            'email' => $request['email'],
+            'role' => $request['role'],
+            'resopnsable' => $request['responsable'],
+            'password' => Hash::make($request['password']),
+        ]);
+
+
+        return redirect()->route('utilisateurs');
     }
 
      /**

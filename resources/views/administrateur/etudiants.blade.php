@@ -10,7 +10,7 @@
 
         <p class="lead text-center mb-4">Retrouvez ici tous les étudiants.</p>
 
-        <a href="{{ route('register')}}" class="btn btn-success">Creer un étudiant</a>
+        <a href=" {{ route('registerUser') }}" class="btn btn-success">Creer un étudiant</a>
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#parcoursmodal">Ajouter un parcours à un étudiant</a>
     </div>
 </div>
