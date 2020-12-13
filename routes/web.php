@@ -205,6 +205,14 @@ Route::get('logout',function(){
 	return redirect('logout');
 })->name('deconnexion');
 
+
+//Ouverture du formulaire login
+Route::get('login',function(){
+	return view('login');
+})->name('login');
+//Verification des informations
+Route::post('/loginVerif','App\Http\Controllers\LoginController@login')->name('verifLogin');
+
 Route::get('accueil',function(){
 	return redirect('/');
 })->name('accueil');

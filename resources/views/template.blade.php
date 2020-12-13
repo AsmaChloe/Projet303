@@ -78,7 +78,7 @@
               <a class="btn btn-danger" href="{{ route('deconnexion') }}" onclick="event.preventDefault();this.closest('form').submit();">Deconnexion</a>
             </form> 
           @else
-            <a class="btn btn-outline-light" href="login"><span class="glyphicon glyphicon-log-in"></span>Connexion</a>
+            <a class="btn btn-outline-light" href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span>Connexion</a>
           @endif
         </li>
       </ul>
