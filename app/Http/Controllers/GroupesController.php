@@ -94,7 +94,7 @@ class GroupesController extends Controller
     public function linkECGroupe(Request $request)
     {
         //On regarde si l'association existe déjà dans la table avant de l'ajouter
-        $test=\App\Models\Ec_Groupe::where('idEC',$request->idEC)->where('idGroupe',$request->idGroupe)->get();
+        $test=\App\Models\EC_Groupe::where('idEC',$request->idEC)->where('idGroupe',$request->idGroupe)->get();
         
         if(count($test)==0){
             //Creation de l'instance depuis le formulaire

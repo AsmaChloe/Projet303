@@ -46,7 +46,7 @@ class EC extends Model
      * Liste de(s) l'enseignant(s) d'un EC
      */
     public function enseignants(){
-        return $this->belongsToMany(User::class,'EC_Enseignant','idEC','idEnseignant');
+        return $this->belongsToMany(User::class,'ec_enseignant','idEC','idEnseignant');
     }
     
      /**

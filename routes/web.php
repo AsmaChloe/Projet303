@@ -188,4 +188,10 @@ Route::fallback(function () {
     return view('erreur', ['logged' => Auth::check()]);
 });
 
+Route::get('logout',function(){
+	return redirect('logout');
+})->name('deconnexion');
 
+Route::get('accueil',function(){
+	return redirect('/');
+})->name('accueil');

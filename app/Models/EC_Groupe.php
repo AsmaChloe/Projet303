@@ -10,7 +10,7 @@ class EC_Groupe extends Pivot
 {
     use HasFactory;
 
-    protected $table = 'EC_Groupe';
+    protected $table = 'ec_groupe';
     protected $primaryKey = 'idECGroupe';
 
     protected $fillable = ['idEC','idGroupe'];

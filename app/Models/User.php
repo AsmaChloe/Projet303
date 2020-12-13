@@ -71,7 +71,7 @@ class User extends Authenticatable
      * Obtenir le(s) diplome(s) que dirige le responsable 
      */
     public function diplomes(){
-        return $this->belongsToMany(Diplomes::class,'Diplome_Responsables','idResponsable','idDiplome');
+        return $this->belongsToMany(Diplomes::class,'diplome_responsables','idResponsable','idDiplome');
     }
 
     /**
@@ -79,7 +79,7 @@ class User extends Authenticatable
      */
     public function parcoursResp(){
         return $this->hasManyThrough(Parcours::class,Diplome_Responsable::class,'idResponsable','idDiplome','id','idDiplome');
-        //Has many parcours / pivot / id actuel via pivot / id du duo via le 3e / id actuel / id duo dans pivot
+        
     }
 
     /**
@@ -93,7 +93,7 @@ class User extends Authenticatable
      * Obtenir les EC d'un enseignant
      */
     public function ec_enseignant(){
-        return $this->belongsToMany(EC::class,'EC_Enseignant','idEnseignant','idEC');
+        return $this->belongsToMany(EC::class,'ec_enseignant','idEnseignant','idEC');
     }
 
     /**

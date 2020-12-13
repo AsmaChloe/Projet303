@@ -13,7 +13,7 @@
 
     <!-- MENU -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-      <a class="nav-link" href="/Projet303/public"><div class="navbar-brand">Hveorungr</div></a>
+      <a class="nav-link" href="{{ route('accueil')}}"><div class="navbar-brand">Hveorungr</div></a>
       
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -74,8 +74,8 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           @if(Auth::check())
-            <form method="POST" action="logout">@csrf
-              <a class="btn btn-danger" href="logout" onclick="event.preventDefault();this.closest('form').submit();">Deconnexion</a>
+            <form method="POST" action="{{ route('deconnexion') }}">@csrf
+              <a class="btn btn-danger" href="{{ route('deconnexion') }}" onclick="event.preventDefault();this.closest('form').submit();">Deconnexion</a>
             </form> 
           @else
             <a class="btn btn-outline-light" href="login"><span class="glyphicon glyphicon-log-in"></span>Connexion</a>
