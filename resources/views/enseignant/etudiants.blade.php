@@ -11,15 +11,14 @@
 
         <!--Bouton ajout-->
         @if(Auth::user()->responsable==1)
-            @if(count($etudiants2parcours)==0)
-                <div class="alert alert-danger" role="alert">Tous les étudiants sont déjà dans le groupe. Vous ne pouvez pas en rajouter</div>
-            @else
+            @if(count($etudiants2parcours)!=0)
                 <a href="#" class="btn btn-success" data-toggle="modal" data-target="#etudiantModal">Ajouter un etudiant au groupe {{$groupe->nomGroupe}}</a>
+            @else
+            <div class="alert alert-danger" role="alert">Tous les étudiants sont déjà dans le groupe. Vous ne pouvez pas en rajouter</div>
             @endif
         @endif
     </div>
 </div>
-
 
 <div class="container-fluid my-1">
     <div class="row">
@@ -120,6 +119,9 @@
                     $("#etudiantModal").modal('hide');
                 }
                 
+            },
+            error:function(){
+                alrt("Erreur lors de l'association de l'etudiant et l'ec. L'etudiant est déjà dans le groupe peut etre ?");
             }
         });
     });

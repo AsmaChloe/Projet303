@@ -42,7 +42,11 @@ class EtudiantsController extends Controller
                      //On récupère le(s) parcours des élèves déjà inscrit
                      $parcours=array();
                      $parcoursID=array(); 
- 
+                    
+                     if(count($etudiants)==0){
+                        $parcours=\App\Models\Parcours::all();
+                     }
+                     else{
                      foreach($etudiants as $etudiant){
                          foreach($etudiant->parcoursEtu as $parc){
                              if(!in_array($parc->id,$parcoursID)){
@@ -51,7 +55,8 @@ class EtudiantsController extends Controller
                              }
                          }
                      }
- 
+                    }
+
                      //Maintenant on récupère les étudiants étant dans le(s) parcours MAIS pas dans le groupe
                      $etudiants2parcours=array();
                      foreach($parcours as $par){
