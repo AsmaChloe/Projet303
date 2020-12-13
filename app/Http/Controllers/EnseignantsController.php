@@ -31,9 +31,14 @@ class EnseignantsController extends Controller
      * @return view('administrateur.editEnseignant',['enseignant'=>$enseignant]);s
      */
     public function editEnseignant($idEnseignant){
-        $enseignant = \App\Models\User::find($idEnseignant);
+        if(Auth::check() && Auth::user()->role==1){
+            $enseignant = \App\Models\User::find($idEnseignant);
 
-        return view('administrateur.editEnseignant',['enseignant'=>$enseignant]);
+            return view('administrateur.editEnseignant',['enseignant'=>$enseignant]);
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**

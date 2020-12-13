@@ -132,10 +132,16 @@ class PresentielController extends Controller
      * @return  view('enseignant.editPresentiel',['presentiel'=>$presentiel]);
      */
     public function editPresentiel($idPresentiel){
+        if(Auth::check() && Auth::user()->role!=3){
+            
         $presentiel = Presentiel::find($idPresentiel);
         
         $types=\App\Models\TypePresentiel::all();
         return view('enseignant.editPresentiel',['presentiel'=>$presentiel,'types'=>$types]);
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**

@@ -131,8 +131,13 @@ class NotesController extends Controller
      * @return  view('enseignant.editNote',['note'=>$note]);
      */
     public function editNote($idNote){
-        $note = Notes::find($idNote);
-        return view('enseignant.editNote',['note'=>$note]);
+        if(Auth::check() && Auth::user()->role!=3){
+            $note = Notes::find($idNote);
+            return view('enseignant.editNote',['note'=>$note]);
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**

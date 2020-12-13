@@ -134,8 +134,13 @@ class SeancesController extends Controller
      * @return  view('enseignant.editSeance',['seance'=>$seance]);
      */
     public function editSeance($idSeance){
-        $seance = Seance::find($idSeance);
-        return view('enseignant.editSeance',['seance'=>$seance]);
+        if(Auth::check() && Auth::user()->responsable==1){
+            $seance = Seance::find($idSeance);
+            return view('enseignant.editSeance',['seance'=>$seance]);
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**

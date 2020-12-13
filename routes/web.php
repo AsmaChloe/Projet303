@@ -83,6 +83,7 @@ Route::get('/administrateur/supprimerUser/{id}', 'App\Http\Controllers\Etudiants
 Route::get('/administrateur/supprimerDiplome/{idDiplome}', 'App\Http\Controllers\DiplomesController@softDeleteDiplome')->name('supprimerDiplome');
 /*---------------------Les modifications----------------------*/
 //Modifier une séance
+
 Route::get('/editSeance/{idSeance}', 'App\Http\Controllers\SeancesController@editSeance')->name('editSeance');
 Route::post('/updateSeance/{idSeance}', 'App\Http\Controllers\SeancesController@updateSeance')->name('updateSeance');
 
@@ -196,7 +197,10 @@ Route::get('/administrateur/utilisateurs/etudiants', 'App\Http\Controllers\Etudi
 //Voir les enseignants
 Route::get('/administrateur/utilisateurs/enseignants', 'App\Http\Controllers\EnseignantsController@listeEnseignants')->name('enseignants');
 /*---------------------------------------------------------- AUTRE ----------------------------------------------------------------- */
-  
+Route::get('register', function(){
+    return redirect('/');
+});
+
 Route::fallback(function () {
     return view('erreur', ['logged' => Auth::check()]);
 });
@@ -212,6 +216,7 @@ Route::get('login',function(){
 })->name('login');
 //Verification des informations
 Route::post('/loginVerif','App\Http\Controllers\LoginController@login')->name('verifLogin');
+
 
 Route::get('accueil',function(){
 	return redirect('/');

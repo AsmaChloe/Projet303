@@ -117,7 +117,7 @@ class GroupesController extends Controller
     {
         $ecGroupe=\App\Models\EC_Groupe::where('idGroupe',$idGroupe)->where('idEC',$idEC);
 
-        if($ecGroupe->deletre()){
+        if($ecGroupe->delete()){
             
             return redirect()->back()->with('alert',"Dissociation effective");
         }

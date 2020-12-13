@@ -134,9 +134,14 @@ class EtudiantsController extends Controller
      * @return  view('administrateur.editEtudiant',['etudiant'=>$etudiant]);
      */
     public function editEtudiant($idEtudiant){
-        $etudiant = \App\Models\User::find($idEtudiant);
+        if(Auth::check() && Auth::user()->role==1){
+            $etudiant = \App\Models\User::find($idEtudiant);
 
-        return view('administrateur.editEtudiant',['etudiant'=>$etudiant]);
+            return view('administrateur.editEtudiant',['etudiant'=>$etudiant]);
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**

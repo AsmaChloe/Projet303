@@ -111,11 +111,16 @@ class EpreuvesController extends Controller
      * @return  view('enseignant.editEpreuve',['epreuve'=>$epreuve,'typesEpreuve'=>$typesEpreuves]);
      */
     public function editEpreuve($idEpreuve){
-        $epreuve = Epreuve::find($idEpreuve);
+        if(Auth::check() && Auth::user()->responsable==1){
+            $epreuve = Epreuve::find($idEpreuve);
         
-        //Pour la liste des types d'epreuve
-        $typesEpreuves=\App\Models\TypeEpreuve::all();
-        return view('enseignant.editEpreuve',['epreuve'=>$epreuve,'typesEpreuve'=>$typesEpreuves]);
+            //Pour la liste des types d'epreuve
+            $typesEpreuves=\App\Models\TypeEpreuve::all();
+            return view('enseignant.editEpreuve',['epreuve'=>$epreuve,'typesEpreuve'=>$typesEpreuves]);
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**
